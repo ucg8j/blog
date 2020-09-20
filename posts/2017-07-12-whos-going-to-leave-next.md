@@ -4,6 +4,7 @@ slug: whos-going-to-leave-next
 date_published: 2017-07-12T10:41:53.000Z
 date_updated: 2019-08-04T12:12:11.000Z
 tags: python, machine-learning, viz
+layout: post.njk
 ---
 
 This post goes through a binary classification problem with Python's machine learning library [scikit-learn](http://scikit-learn.org/).

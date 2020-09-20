@@ -3,6 +3,7 @@ title: A Review and Summary of the Javascript30 Course
 slug: summary-of-javascript30
 date_published: 2020-05-06T21:13:40.000Z
 date_updated: 2020-06-03T20:31:11.000Z
+layout: post.njk
 ---
 
 📚Course: [Javascript30](https://javascript30.com/)
@@ -652,4 +653,3 @@ N.b. - Firefox wasn't returning the voice objects from `speechSynthesis.getVoice
 
     // <li data-time="5:23"> Video 26</li>
     document.querySelectorAll('[data-time]')
-    

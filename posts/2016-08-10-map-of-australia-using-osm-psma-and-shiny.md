@@ -4,6 +4,7 @@ slug: map-of-australia-using-osm-psma-and-shiny
 date_published: 2016-08-10T04:35:16.000Z
 date_updated: 2020-04-21T20:22:32.000Z
 tags: r, viz, javascript, geospatial, leaflet.js
+layout: post.njk
 ---
 
 **Aim:** To use GNAF (Geocoded National Address File) data to display the adminstrative boundaries (e.g. States) on top of Open Street Maps. Additionally, I want the user when hovering over a state to see summary statistics. I want an Australian version of [this](#leafletjs).

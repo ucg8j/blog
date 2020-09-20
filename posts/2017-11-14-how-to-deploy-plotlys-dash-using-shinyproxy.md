@@ -4,6 +4,7 @@ slug: how-to-deploy-plotlys-dash-using-shinyproxy
 date_published: 2017-11-14T13:44:50.000Z
 date_updated: 2019-08-04T12:16:05.000Z
 tags: python, docker, dash.py, shinyproxy
+layout: post.njk
 ---
 
 In a [previous post](/shiny-containers-with-shinyproxy/#addingadditionalnonshinyapps) I established that I could easily deploy a 'Hello World' [flask.py](http://flask.pocoo.org/) web application using [Shinyproxy](https://www.shinyproxy.io/). Therefore, I thought it would be straightforward to deploy a [Dash](https://plot.ly/dash/) app which is built on top of [flask.py](http://flask.pocoo.org/). However, it proved to be a little more difficult than that. This blog post runs through the errors and eventual solution to deploying a Dash app on Shinyproxy.

@@ -4,6 +4,7 @@ slug: benchmarking-the-performance-of-r-code
 date_published: 2017-06-18T02:19:21.000Z
 date_updated: 2019-08-04T12:07:08.000Z
 tags: r, microbenchmark, make-it-fast
+layout: post.njk
 ---
 
 To assess the performance  of R code there's a great little package called [microbenchmark](https://cran.r-project.org/web/packages/microbenchmark/index.html).

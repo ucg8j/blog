@@ -4,6 +4,7 @@ slug: dual-booting-ubuntu-and-windows-10-on-a-dell-xps
 date_published: 2017-09-20T15:13:08.000Z
 date_updated: 2019-08-04T12:14:04.000Z
 tags: windows, ubuntu, os
+layout: post.njk
 ---
 
 **My Setup**: [Dell XPS 13-9360](http://www.dell.com/en-uk/shop/laptop-and-2-in-1-pcs/xps-13/spd/xps-13-9360-laptop) + Windows 10

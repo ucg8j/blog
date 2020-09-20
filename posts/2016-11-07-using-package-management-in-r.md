@@ -4,6 +4,7 @@ slug: using-package-management-in-r
 date_published: 2016-11-07T23:17:25.000Z
 date_updated: 2019-08-04T12:07:36.000Z
 tags: r, packrat, package-management
+layout: post.njk
 ---
 
 *A how-to in getting started with Package Management in R*

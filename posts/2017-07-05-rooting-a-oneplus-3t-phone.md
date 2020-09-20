@@ -4,6 +4,7 @@ slug: rooting-a-oneplus-3t-phone
 date_published: 2017-07-05T12:46:57.000Z
 date_updated: 2019-08-04T12:06:46.000Z
 tags: android
+layout: post.njk
 ---
 
 I recently rooted my Oneplus 3T phone on Android 7.1.1. Finding the right information was not as easy as I thought it might be, so here's my summary. I used my macbook, you will need your USB cord to connect the phone. **Warning** - you will end up wiping your phone during this process, I'd recommend performing a backup prior. I didn't as I figured most app data are synced to the cloud, the only things I noticed missing was SMSs and things like numbers and Whatsapp history where a sync to the cloud occurred on a weekly basis.
