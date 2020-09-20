@@ -4,6 +4,7 @@ slug: shiny-containers-with-shinyproxy
 date_published: 2017-10-11T12:07:06.000Z
 date_updated: 2020-02-29T22:46:57.000Z
 tags: python, r, shiny, docker, nginx, deployment, springboot
+layout: layouts/post.njk
 ---
 
 **Aim**: Setup [shinyproxy](https://www.shinyproxy.io) as a production level way of deploying multiple containerised shiny apps with authentication. Additionally I'll demonstrate how to incorporate containerised python web apps and deploy this behind a reverse proxy using Nginx.

@@ -4,6 +4,7 @@ slug: how-to-make-a-word-cloud-using-r
 date_published: 2015-04-24T00:57:57.000Z
 date_updated: 2019-08-04T12:09:09.000Z
 tags: r, viz, text-mining
+layout: layouts/post.njk
 ---
 
 *Written about a year ago and reposted here...*

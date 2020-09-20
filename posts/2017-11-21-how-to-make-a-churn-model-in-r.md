@@ -4,6 +4,7 @@ slug: how-to-make-a-churn-model-in-r
 date_published: 2017-11-21T11:11:24.000Z
 date_updated: 2020-01-02T13:57:13.000Z
 tags: machine-learning, r
+layout: layouts/post.njk
 ---
 
 The following post details how to make a churn model in R. It was part of an interview process for which a take home assignment was one of the stages. The company stated this should take 2hrs, which is entirely unrealistic. To minimise the time cost, my analysis is very succinct and short on the exploratory analysis and amount of models compared. The churn model got me to the final stage, however little in the way of feedback was offered. There is considerable debate in the tech industry as to whether take home exams are a fair assessment or even a reasonable ask on an individual. My assessment is that this is a lazy way to interview and a very high cost on the interviewee. If you really want to work for a particular company, then sure you might be prepared to do what it takes. I doubt I will do another take home assignment.

@@ -5,6 +5,7 @@ date_published: 2020-05-17T21:10:47.000Z
 date_updated: 2020-05-17T21:10:47.000Z
 tags: network, wifi
 excerpt: How to setup a Ubiquiti Access Point to resolve Wifi deadzones. And, how to avoid some mistakes in setting it up.
+layout: layouts/post.njk
 ---
 
 **Aim**: Have strong WiFi across a property. In other words elimate the deadzone.

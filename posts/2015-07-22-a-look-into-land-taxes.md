@@ -4,6 +4,7 @@ slug: a-look-into-land-taxes
 date_published: 2015-07-22T10:40:06.000Z
 date_updated: 2019-09-22T18:11:57.000Z
 tags: economics, australia, tax, politics
+layout: layouts/post.njk
 ---
 
 ### Stamp Duties
