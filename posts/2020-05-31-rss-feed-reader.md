@@ -9,11 +9,11 @@ layout: layouts/post.njk
 
 ## What is [RSS](https://en.wikipedia.org/wiki/RSS)?
 
-It aims to be an open standard for the open web, where applications can get updates from websites. This runs against the current closed off portions of the web like Facebook that keep content behind their account login - i.e. the internet's ['walled gardens'](https://en.wikipedia.org/wiki/Closed_platform). For a while, a lot of people used the popular [Google Reader](https://en.wikipedia.org/wiki/Google_Reader) RSS application - unfortunately, as with many loved Google projects it got killed off because of declining usage and it didn't generate revenue. 
+It aims to be an open standard for the open web, where applications can get updates from websites. This runs against the current closed off portions of the web like Facebook that keep content behind their account login - i.e. the internet's ['walled gardens'](https://en.wikipedia.org/wiki/Closed_platform). For a while, a lot of people used the popular [Google Reader](https://en.wikipedia.org/wiki/Google_Reader) RSS application - unfortunately, as with many loved Google projects it got killed off because of declining usage and it didn't generate revenue.
 
-So why get one now? 
+So why get one now?
 
-- Ideals of an open web. I don't have a Facebook account. I believe there are interesting blogs out there that I don't necessarily see unless they surfaced through the front page of search results or aggregators like Hacker News or Reddit. 
+- Ideals of an open web. I don't have a Facebook account. I believe there are interesting blogs out there that I don't necessarily see unless they surfaced through the front page of search results or aggregators like Hacker News or Reddit.
 - Solve the problem of - *huh this blog/site was really interesting. How do I keep track of new content without signing up to a thousand newsletters or entering a walled garden?*
 
 ## My Starting Point
@@ -25,7 +25,7 @@ There's a bunch of open source Feed Readers listed on the [Feed Reader section o
 
 This is what I was left with. Which I then filtered based on my UI and tech preferences i.e. don't be ugly and don't use PHP/Java.
 
-## 👨‍👩‍👧‍👧 The Contenders 
+## 👨‍👩‍👧‍👧 The Contenders
 
 ### [Winds](https://getstream.io/winds/)
 
@@ -74,21 +74,21 @@ Features:
 - Dark theme (otherwise kind of ugly)
 - Optional keyboard shortcuts
 
-## [[FreshRSS](https://github.com/FreshRSS/FreshRSS)](https://github.com/FreshRSS/FreshRSS)
+## [FreshRSS](https://github.com/FreshRSS/FreshRSS)
 
 *Like Selfoss - Didn't look further at this one PHP+ugly =* 😱🏃‍♂️.
 Github Stars: 2.3k
 Built With: PHP
 Test website: [Yes](https://demo.freshrss.org/i/)
 
-## [[feedbin](https://github.com/feedbin/feedbin)](https://github.com/feedbin/feedbin)
+## [feedbin](https://github.com/feedbin/feedbin)
 
 *Didn't look further as the app tech + ui wasn't appealing to me*.
 Github Stars: 2.5k
 Built With: Ruby on Rails
 Test Website: No - but free trial
 
-## [C[ommafeed](https://github.com/Athou/commafeed)](https://github.com/Athou/commafeed)
+## [Commafeed](https://github.com/Athou/commafeed)
 
 *Github at the time had a **🛑build error** + Java turned me away*
 Github Stars: 1.7k
@@ -97,16 +97,16 @@ Test Website: no - but free trial
 
 **Final round contenders: Miniflux, Stringer and Winds**
 
-## 🏁 Top 3 contenders - Install and Review 
+## 🏁 Top 3 contenders - Install and Review
 
 N.B. I'm running these locally to assess before deploying to my server.
 
 ### [Stringer](https://github.com/swanson/stringer)
+```bash
+$ docker run --rm -it -e DATABASE_URL="sqlite3:':memory:'" -p 8080:8080 mdswanson/stringer
+```
 
-    docker run --rm -it -e DATABASE_URL="sqlite3:':memory:'" -p 8080:8080 mdswanson/stringer
-    
-
-Opened on `localhost:8080` - Simple as that. UI feels nice and simple. Unfortunately, the only import methods are from the long defunct Google Reader or with one URL at a time. 
+Opened on `localhost:8080` - Simple as that. UI feels nice and simple. Unfortunately, the only import methods are from the long defunct Google Reader or with one URL at a time.
 ![](/content/images/2020/05/image.png)
 I tried importing the OPML file through this method but that seemed to crash the application - poor error handling?
 ![](/content/images/2020/05/image-1.png)
@@ -125,34 +125,34 @@ So whilst the UI is nice and the setup is incredibly easy. The active developmen
 ### [Miniflux](https://github.com/miniflux/miniflux)
 
 1. You need postgres which I had not setup on my mac. I recommend doing this the easy way with [postgres.app](https://postgresapp.com/).
-2. The [instructions ](https://miniflux.app/docs/installation.html#docker)here are a little hairy. I went with saving the following to a `docker-compose.yml`. I couldn't get it working on port 80 so switched the port to 8050. 
-
-    version: '3'
-    services:
-      miniflux:
-        image: miniflux/miniflux:latest
-        ports:
-          - "8050:8080"
-        depends_on:
-          - db
-        environment:
-          - DATABASE_URL=postgres://miniflux:secret@db/miniflux?sslmode=disable
-          - RUN_MIGRATIONS=1
-          - CREATE_ADMIN=1
-          - ADMIN_USERNAME=admin
-          - ADMIN_PASSWORD=test123
-      db:
-        image: postgres:latest
-        environment:
-          - POSTGRES_USER=miniflux
-          - POSTGRES_PASSWORD=secret
-        volumes:
-          - miniflux-db:/var/lib/postgresql/data
+2. The [instructions ](https://miniflux.app/docs/installation.html#docker)here are a little hairy. I went with saving the following to a `docker-compose.yml`. I couldn't get it working on port 80 so switched the port to 8050.
+```docker
+version: '3'
+services:
+  miniflux:
+    image: miniflux/miniflux:latest
+    ports:
+      - "8050:8080"
+    depends_on:
+      - db
+    environment:
+      - DATABASE_URL=postgres://miniflux:secret@db/miniflux?sslmode=disable
+      - RUN_MIGRATIONS=1
+      - CREATE_ADMIN=1
+      - ADMIN_USERNAME=admin
+      - ADMIN_PASSWORD=test123
+  db:
+    image: postgres:latest
+    environment:
+      - POSTGRES_USER=miniflux
+      - POSTGRES_PASSWORD=secret
     volumes:
-      miniflux-db:  
-    
+      - miniflux-db:/var/lib/postgresql/data
+volumes:
+  miniflux-db:
+```
 
-Then run the following commands and go to `localhost:8050` once the containers have finished booting: 
+Then run the following commands and go to `localhost:8050` once the containers have finished booting:
 
     $ docker-compose up -d db
     $ docker-compose up miniflux
@@ -167,7 +167,7 @@ There are several integrations to apps like Pocket, Instapaper and Wallabag. And
 
 The install is relatively long particularly with the external dependencies which include:
 
-- [Stream](https://getstream.io/) - an API for building activity feeds + handle personalization (machine learning). 
+- [Stream](https://getstream.io/) - an API for building activity feeds + handle personalization (machine learning).
 - [Algolia](https://www.algolia.com/) - for search
 - [MongoDB Atlas](https://www.mongodb.com/cloud/atlas) - a DB as a service (DBaaS)
 
@@ -190,7 +190,7 @@ Do you have a list of websites you want to follow?
 
     const urls = document.querySelectorAll('.blogUrl');
     const url_list = [];
-    
+
     urls.forEach(url => {
       url_list.push(url.innerText);
     });
@@ -198,6 +198,6 @@ Do you have a list of websites you want to follow?
 
 ## Related Interesting Projects
 
-- [RSS-Bridge](https://github.com/RSS-Bridge/rss-bridge) - Create RSS feeds for websites without a feed. 
+- [RSS-Bridge](https://github.com/RSS-Bridge/rss-bridge) - Create RSS feeds for websites without a feed.
 - [Wallabag](https://github.com/wallabag/wallabag) - Save articles from RSS feeds.
 - [Archivebox](https://archivebox.io/) - Save all content e.g. videos, entire web pages and configure that save in multiple format. Solves link rot issues.
