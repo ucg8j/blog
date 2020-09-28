@@ -126,6 +126,7 @@ So whilst the UI is nice and the setup is incredibly easy. The active developmen
 
 1. You need postgres which I had not setup on my mac. I recommend doing this the easy way with [postgres.app](https://postgresapp.com/).
 2. The [instructions ](https://miniflux.app/docs/installation.html#docker)here are a little hairy. I went with saving the following to a `docker-compose.yml`. I couldn't get it working on port 80 so switched the port to 8050.
+
 ```docker
 version: '3'
 services:
@@ -188,13 +189,15 @@ Do you have a list of websites you want to follow?
 - I used [this site](https://opml-gen.ovh/) to convert a list feeds into an OPML file I could mass import to the various RSS feed reader apps.
 - About a decade ago I used blogspot/blogger. It had a feed reader, but no export facility. Nostagilically, I thought I'd get the list from there. Here's a hack to export the list. First navigate to '[Manage blogs I'm following](https://www.blogger.com/manage-blogs-following.g)', then open your browser dev tools and run the following JavaScript to get a list of the links.
 
-    const urls = document.querySelectorAll('.blogUrl');
-    const url_list = [];
+```js
+const urls = document.querySelectorAll('.blogUrl');
+const url_list = [];
 
-    urls.forEach(url => {
-      url_list.push(url.innerText);
-    });
-    console.log(url_list);
+urls.forEach(url => {
+  url_list.push(url.innerText);
+});
+console.log(url_list);
+```
 
 ## Related Interesting Projects
 

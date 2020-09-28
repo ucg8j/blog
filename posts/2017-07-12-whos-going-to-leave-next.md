@@ -177,8 +177,6 @@ To avoid the dummy variable trap in the Kaggle HR dataset, I'm dropping the colu
     df = df.drop(['salary', 'sales', '$_low', 'sales_IT'], axis=1)
     
 
-If you're finding this content helpful why not...
-.bmc-button img{width: 27px !important;margin-bottom: 1px !important;box-shadow: none !important;border: none !important;vertical-align: middle !important;}.bmc-button{line-height: 36px !important;height:37px !important;text-decoration: none !important;display:inline-flex !important;color:#000000 !important;background-color:#FFDD00 !important;border-radius: 3px !important;border: 1px solid transparent !important;padding: 1px 9px !important;font-size: 22px !important;letter-spacing: 0.6px !important;box-shadow: 0px 1px 2px rgba(190, 190, 190, 0.5) !important;-webkit-box-shadow: 0px 1px 2px 2px rgba(190, 190, 190, 0.5) !important;margin: 0 auto !important;font-family:'Cookie', cursive !important;-webkit-box-sizing: border-box !important;box-sizing: border-box !important;-o-transition: 0.3s all linear !important;-webkit-transition: 0.3s all linear !important;-moz-transition: 0.3s all linear !important;-ms-transition: 0.3s all linear !important;transition: 0.3s all linear !important;}.bmc-button:hover, .bmc-button:active, .bmc-button:focus {-webkit-box-shadow: 0px 1px 2px 2px rgba(190, 190, 190, 0.5) !important;text-decoration: none !important;box-shadow: 0px 1px 2px 2px rgba(190, 190, 190, 0.5) !important;opacity: 0.85 !important;color:#000000 !important;}[buy me a coffee](https://www.buymeacoffee.com/6uRXFwMJD)
 ## Split Into Test and Training Sets
 
 Now to split the dataset up into our training, testing and *optionally* our validation sets. This is best done randomly to avoid having one subgroup of the data overrepresented in either our training or testing datasets, hence `df.sample()`.
@@ -504,8 +502,6 @@ To use the trained model later, it's first best practice to re-train on the enti
 
 The unabridged version of the above code can be found [here on github](https://github.com/ucg8j/kaggle_HR).
 
-If you've found this content helpful why not...
-[buy me a coffee](https://www.buymeacoffee.com/6uRXFwMJD)
 ## Good Resources
 
 - 
