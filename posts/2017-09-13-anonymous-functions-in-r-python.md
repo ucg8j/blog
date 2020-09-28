@@ -4,7 +4,7 @@ slug: anonymous-functions-in-r-python
 date_published: 2017-09-13T20:30:00.000Z
 date_updated: 2020-01-10T08:27:06.000Z
 tags: python, r
-layout: post.njk
+layout: layouts/post.njk
 ---
 
 > What's in a name? That which we call a rose by any other name would smell as sweet.

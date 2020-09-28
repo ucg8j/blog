@@ -4,7 +4,7 @@ slug: using-package-management-in-r
 date_published: 2016-11-07T23:17:25.000Z
 date_updated: 2019-08-04T12:07:36.000Z
 tags: r, packrat, package-management
-layout: post.njk
+layout: layouts/post.njk
 ---
 
 *A how-to in getting started with Package Management in R*
@@ -184,8 +184,6 @@ So it seems packrat auto snapshots the project, such that I couldn't run `restor
     Replacing lubridate (downgrade 1.6.0 to 1.5.6) ... 	OK (built source)
     
 
-If you've found this content helpful why not...
-.bmc-button img{width: 27px !important;margin-bottom: 1px !important;box-shadow: none !important;border: none !important;vertical-align: middle !important;}.bmc-button{line-height: 36px !important;height:37px !important;text-decoration: none !important;display:inline-flex !important;color:#000000 !important;background-color:#FFDD00 !important;border-radius: 3px !important;border: 1px solid transparent !important;padding: 1px 9px !important;font-size: 22px !important;letter-spacing: 0.6px !important;box-shadow: 0px 1px 2px rgba(190, 190, 190, 0.5) !important;-webkit-box-shadow: 0px 1px 2px 2px rgba(190, 190, 190, 0.5) !important;margin: 0 auto !important;font-family:'Cookie', cursive !important;-webkit-box-sizing: border-box !important;box-sizing: border-box !important;-o-transition: 0.3s all linear !important;-webkit-transition: 0.3s all linear !important;-moz-transition: 0.3s all linear !important;-ms-transition: 0.3s all linear !important;transition: 0.3s all linear !important;}.bmc-button:hover, .bmc-button:active, .bmc-button:focus {-webkit-box-shadow: 0px 1px 2px 2px rgba(190, 190, 190, 0.5) !important;text-decoration: none !important;box-shadow: 0px 1px 2px 2px rgba(190, 190, 190, 0.5) !important;opacity: 0.85 !important;color:#000000 !important;}[buy me a coffee](https://www.buymeacoffee.com/6uRXFwMJD)
 ## Conclusion
 
 By default packrat `auto.snapshot` my project when I updated a package. Crucially, this meant I could not use `packrat::restore()` because I was `already up to date`. Of course, if I had been using `git` and making commits before and after, then there wouldn't have been a problem. However, without `git`, running `packrat::restore()` to downgrade a package requires the `overwrite.dirty=TRUE` option and only seems possible if you switched off `auto.snapshot`. I'd highly recommend turning it off anyway, as the manual update will allow for a better understanding and control over packrat.

@@ -4,7 +4,7 @@ slug: how-to-deploy-plotlys-dash-using-shinyproxy
 date_published: 2017-11-14T13:44:50.000Z
 date_updated: 2019-08-04T12:16:05.000Z
 tags: python, docker, dash.py, shinyproxy
-layout: post.njk
+layout: layouts/post.njk
 ---
 
 In a [previous post](/shiny-containers-with-shinyproxy/#addingadditionalnonshinyapps) I established that I could easily deploy a 'Hello World' [flask.py](http://flask.pocoo.org/) web application using [Shinyproxy](https://www.shinyproxy.io/). Therefore, I thought it would be straightforward to deploy a [Dash](https://plot.ly/dash/) app which is built on top of [flask.py](http://flask.pocoo.org/). However, it proved to be a little more difficult than that. This blog post runs through the errors and eventual solution to deploying a Dash app on Shinyproxy.
@@ -127,7 +127,3 @@ As Frederick said, the request should not have the `'/'` prefix in the GET reque
         # remove the default of '/'
         'requests_pathname_prefix': ''
     })
-    
-
-If you've found this content helpful why not...
-.bmc-button img{width: 27px !important;margin-bottom: 1px !important;box-shadow: none !important;border: none !important;vertical-align: middle !important;}.bmc-button{line-height: 36px !important;height:37px !important;text-decoration: none !important;display:inline-flex !important;color:#000000 !important;background-color:#FFDD00 !important;border-radius: 3px !important;border: 1px solid transparent !important;padding: 1px 9px !important;font-size: 22px !important;letter-spacing: 0.6px !important;box-shadow: 0px 1px 2px rgba(190, 190, 190, 0.5) !important;-webkit-box-shadow: 0px 1px 2px 2px rgba(190, 190, 190, 0.5) !important;margin: 0 auto !important;font-family:'Cookie', cursive !important;-webkit-box-sizing: border-box !important;box-sizing: border-box !important;-o-transition: 0.3s all linear !important;-webkit-transition: 0.3s all linear !important;-moz-transition: 0.3s all linear !important;-ms-transition: 0.3s all linear !important;transition: 0.3s all linear !important;}.bmc-button:hover, .bmc-button:active, .bmc-button:focus {-webkit-box-shadow: 0px 1px 2px 2px rgba(190, 190, 190, 0.5) !important;text-decoration: none !important;box-shadow: 0px 1px 2px 2px rgba(190, 190, 190, 0.5) !important;opacity: 0.85 !important;color:#000000 !important;}[buy me a coffee](https://www.buymeacoffee.com/6uRXFwMJD)

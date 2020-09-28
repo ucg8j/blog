@@ -4,7 +4,7 @@ slug: how-to-make-a-churn-model-in-r
 date_published: 2017-11-21T11:11:24.000Z
 date_updated: 2020-01-02T13:57:13.000Z
 tags: machine-learning, r
-layout: post.njk
+layout: layouts/post.njk
 ---
 
 The following post details how to make a churn model in R. It was part of an interview process for which a take home assignment was one of the stages. The company stated this should take 2hrs, which is entirely unrealistic. To minimise the time cost, my analysis is very succinct and short on the exploratory analysis and amount of models compared. The churn model got me to the final stage, however little in the way of feedback was offered. There is considerable debate in the tech industry as to whether take home exams are a fair assessment or even a reasonable ask on an individual. My assessment is that this is a lazy way to interview and a very high cost on the interviewee. If you really want to work for a particular company, then sure you might be prepared to do what it takes. I doubt I will do another take home assignment.
@@ -425,10 +425,6 @@ Generally, it is best to minimise the `AIC`. The `Logistic.model` model AIC is 8
     
     save(final.model, file = "model.rda")
     
-
-If you've found this content helpful why not...
-
-.bmc-button img{width: 27px !important;margin-bottom: 1px !important;box-shadow: none !important;border: none !important;vertical-align: middle !important;}.bmc-button{line-height: 36px !important;height:37px !important;text-decoration: none !important;display:inline-flex !important;color:#000000 !important;background-color:#FFDD00 !important;border-radius: 3px !important;border: 1px solid transparent !important;padding: 1px 9px !important;font-size: 22px !important;letter-spacing: 0.6px !important;box-shadow: 0px 1px 2px rgba(190, 190, 190, 0.5) !important;-webkit-box-shadow: 0px 1px 2px 2px rgba(190, 190, 190, 0.5) !important;margin: 0 auto !important;font-family:'Cookie', cursive !important;-webkit-box-sizing: border-box !important;box-sizing: border-box !important;-o-transition: 0.3s all linear !important;-webkit-transition: 0.3s all linear !important;-moz-transition: 0.3s all linear !important;-ms-transition: 0.3s all linear !important;transition: 0.3s all linear !important;}.bmc-button:hover, .bmc-button:active, .bmc-button:focus {-webkit-box-shadow: 0px 1px 2px 2px rgba(190, 190, 190, 0.5) !important;text-decoration: none !important;box-shadow: 0px 1px 2px 2px rgba(190, 190, 190, 0.5) !important;opacity: 0.85 !important;color:#000000 !important;}[buy me a coffee](https://www.buymeacoffee.com/6uRXFwMJD)
 
 ## Recommendations for further investigation/Comments
 

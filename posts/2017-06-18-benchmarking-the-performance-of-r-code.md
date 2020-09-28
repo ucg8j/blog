@@ -4,7 +4,7 @@ slug: benchmarking-the-performance-of-r-code
 date_published: 2017-06-18T02:19:21.000Z
 date_updated: 2019-08-04T12:07:08.000Z
 tags: r, microbenchmark, make-it-fast
-layout: post.njk
+layout: layouts/post.njk
 ---
 
 To assess the performance  of R code there's a great little package called [microbenchmark](https://cran.r-project.org/web/packages/microbenchmark/index.html).
@@ -81,6 +81,4 @@ I use the microbenchmark package whenever I am concerned about speeding up an ap
 
 Knuth goes on to say in [his paper](http://web.archive.org/web/20130731202547/http://pplab.snu.ac.kr/courses/adv_pl05/papers/p261-knuth.pdf), *'It is often a mistake to make a priori judgments about what parts of a program are really critical'*. Which is why you should first profile your code to identify where your efforts are best spent.
 
-If you've found this content helpful why not...
-.bmc-button img{width: 27px !important;margin-bottom: 1px !important;box-shadow: none !important;border: none !important;vertical-align: middle !important;}.bmc-button{line-height: 36px !important;height:37px !important;text-decoration: none !important;display:inline-flex !important;color:#000000 !important;background-color:#FFDD00 !important;border-radius: 3px !important;border: 1px solid transparent !important;padding: 1px 9px !important;font-size: 22px !important;letter-spacing: 0.6px !important;box-shadow: 0px 1px 2px rgba(190, 190, 190, 0.5) !important;-webkit-box-shadow: 0px 1px 2px 2px rgba(190, 190, 190, 0.5) !important;margin: 0 auto !important;font-family:'Cookie', cursive !important;-webkit-box-sizing: border-box !important;box-sizing: border-box !important;-o-transition: 0.3s all linear !important;-webkit-transition: 0.3s all linear !important;-moz-transition: 0.3s all linear !important;-ms-transition: 0.3s all linear !important;transition: 0.3s all linear !important;}.bmc-button:hover, .bmc-button:active, .bmc-button:focus {-webkit-box-shadow: 0px 1px 2px 2px rgba(190, 190, 190, 0.5) !important;text-decoration: none !important;box-shadow: 0px 1px 2px 2px rgba(190, 190, 190, 0.5) !important;opacity: 0.85 !important;color:#000000 !important;}[buy me a coffee](https://www.buymeacoffee.com/6uRXFwMJD)
 **Postscript** - [After a few nights of sleep I realised](https://m.signalvnoise.com/cant-crack-that-programming-problem-go-to-sleep-or-take-a-walk-930c767e1119) why the compiled vs. non-compiled functions had the distributions they did. [Version 3.4 of R](https://stat.ethz.ch/pipermail/r-announce/2017/000612.html) has [Just-In-Time (JIT) compiling](https://en.wikipedia.org/wiki/Just-in-time_compilation) at level 3 by default. The function I was comparing contains a `for` loop. Therefore, the plots show the difference between the new `JIT(3)` speed of R vs pre-compiling your functions that contain for loops. The first run of the non-compiled function is not byte-compiled, however all subsequent runs are byte-compiled. Hence one outlier but otherwise very similar distributions.

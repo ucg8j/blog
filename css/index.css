@@ -14,10 +14,21 @@
 html,
 body {
   padding: 0;
-  margin: 0;
+  margin: 0 auto;
+  max-width: 50em;
+  color: #566b78;
+  line-height: 1.25;
   font-family: system-ui, sans-serif;
-  color: var(--darkgray);
+  color: #555;
   background-color: var(--white);
+  font-size: 20px;
+}
+h2 {
+  margin-top: 1em;
+  padding-top: 1em;
+}
+strong {
+  color: #333;
 }
 p:last-child {
   margin-bottom: 0;
@@ -31,12 +42,15 @@ p,
 .tmpl-post li {
   line-height: 1.45;
 }
-a[href] {
+a {
+  color: #00786c;
+}
+/* a[href] {
   color: var(--blue);
 }
 a[href]:visited {
   color: var(--navy);
-}
+} */
 main {
   padding: 1rem;
 }
@@ -44,7 +58,7 @@ main :first-child {
   margin-top: 0;
 }
 header {
-  border-bottom: 1px dashed var(--lightgray);
+  background-color: #eef2f1;
 }
 header:after {
   content: "";
@@ -79,9 +93,10 @@ pre {
   -moz-hyphens: none;
   -ms-hyphens: none;
   hyphens: none;
-  padding: 1em;
+  padding: 1em 1em;
   margin: .5em 0;
   background-color: #f6f6f6;
+
 }
 .highlight-line {
   display: block;
