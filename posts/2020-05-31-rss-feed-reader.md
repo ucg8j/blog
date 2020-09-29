@@ -5,6 +5,7 @@ date_published: 2020-05-31T14:06:00.000Z
 date_updated: 2020-05-31T15:32:54.000Z
 tags: rss, foss, tech, self-host
 layout: layouts/post.njk
+excerpt: "test"
 ---
 
 ## What is [RSS](https://en.wikipedia.org/wiki/RSS)?
