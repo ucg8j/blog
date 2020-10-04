@@ -36,11 +36,16 @@ p:last-child {
 p,
 .tmpl-post li,
 img {
-  max-width: 37.5em; /* 600px /16 */
+  /* max-width: 37.5em; */
+  display: block;
+  margin: 1.5em auto;
+  max-width: 1040px;
+  height: auto;
 }
-p,
+/* p, */
 .tmpl-post li {
-  line-height: 1.45;
+  line-height: 1;
+  display: list-item
 }
 a {
   color: #00786c;
@@ -184,7 +189,7 @@ pre {
 }
 .postlist-link {
   display: inline-block;
-  /* padding: 0.25em 0.1875em; 
+  /* padding: 0.25em 0.1875em;
 }
 .postlist-item-active .postlist-link {
   font-weight: bold;
