@@ -1,6 +1,7 @@
 ---
 title: How to Deploy Plotly's Dash using Shinyproxy
 slug: how-to-deploy-plotlys-dash-using-shinyproxy
+permalink: "/how-to-deploy-plotlys-dash-using-shinyproxy/"
 feature_image: /content/images/2017/11/background-horses.jpg
 excerpt: "In a previous post I established that I could easily deploy a 'Hello World' flask.py web application using Shinyproxy. Therefore, I thought"
 date_published: 2017-11-14T13:44:50.000Z
@@ -130,4 +131,3 @@ app.config.update({
     'requests_pathname_prefix': ''
 })
 ```
-
