@@ -1,5 +1,6 @@
 ---
 title: The Best Self-Hosted RSS Feed Readers
+# permalink: "rss-feed-reader"
 slug: rss-feed-reader
 date_published: 2020-05-31T14:06:00.000Z
 date_updated: 2020-05-31T15:32:54.000Z
