@@ -1,6 +1,7 @@
 ---
 title: How to setup a Ubiquiti Access Point
 slug: ubiquiti-ap-setup
+permalink: /ubiquiti-ap-setup/
 date_published: 2020-05-17T21:10:47.000Z
 date_updated: 2020-05-17T21:10:47.000Z
 tags: network, wifi
@@ -32,16 +33,10 @@ The instructions that come with it don't help. Next stop, interwebs. I start to 
 
 🛑 Mistake 2 - This is not the [UniFi software controller](https://play.google.com/store/apps/details?id=com.ubnt.unifi.edu) you are looking for. This android app was the first UniFi app to come up and was a pure dead end.
 
-🛑 Mistake 3 - [N](https://play.google.com/store/apps/details?id=com.ubnt.unifi.edu)ext attempt was the OSX software controller. Run for the hills if you see this error:
+🛑 Mistake 3 - Next attempt was the [OSX software controller](https://www.ui.com/download/unifi/). Run for the hills if you see this error:
 ![](/content/images/2020/05/Screen-Shot-2020-05-17-at-22.02.26.png)
-I messed around with some open JDKs but ultimately was entering a rabbit hole. Seems like others have shared this 'nightmare' and didn't come up with much in the way of solution. 
+I messed around with some open JDKs but ultimately was entering a rabbit hole. Seems like [others have shared this 'nightmare'](https://tongfamily.com/2019/10/08/ubiquiti-unifi-controller-4-11-47-and-java-runtime-nightmare/) and didn't come up with much in the way of solution.
 
-> [Ubiquiti Unifi Controller 4.11.47 and Java Runtime nightmare](https://tongfamily.com/2019/10/08/ubiquiti-unifi-controller-4-11-47-and-java-runtime-nightmare/)
-
-<!--//--><![CDATA[//><!--
-		/*! This file is auto-generated */
-		!function(d,l){"use strict";var e=!1,o=!1;if(l.querySelector)if(d.addEventListener)e=!0;if(d.wp=d.wp||{},!d.wp.receiveEmbedMessage)if(d.wp.receiveEmbedMessage=function(e){var t=e.data;if(t)if(t.secret||t.message||t.value)if(!/[^a-zA-Z0-9]/.test(t.secret)){var r,a,i,s,n,o=l.querySelectorAll('iframe[data-secret="'+t.secret+'"]'),c=l.querySelectorAll('blockquote[data-secret="'+t.secret+'"]');for(r=0;r<c.length;r++)c[r].style.display="none";for(r=0;r<o.length;r++)if(a=o[r],e.source===a.contentWindow){if(a.removeAttribute("style"),"height"===t.message){if(1e3<(i=parseInt(t.value,10)))i=1e3;else if(~~i<200)i=200;a.height=i}if("link"===t.message)if(s=l.createElement("a"),n=l.createElement("a"),s.href=a.getAttribute("src"),n.href=t.value,n.host===s.host)if(l.activeElement===a)d.top.location.href=t.value}}},e)d.addEventListener("message",d.wp.receiveEmbedMessage,!1),l.addEventListener("DOMContentLoaded",t,!1),d.addEventListener("load",t,!1);function t(){if(!o){o=!0;var e,t,r,a,i=-1!==navigator.appVersion.indexOf("MSIE 10"),s=!!navigator.userAgent.match(/Trident.*rv:11\./),n=l.querySelectorAll("iframe.wp-embedded-content");for(t=0;t<n.length;t++){if(!(r=n[t]).getAttribute("data-secret"))a=Math.random().toString(36).substr(2,10),r.src+="#?secret="+a,r.setAttribute("data-secret",a);if(i||s)(e=r.cloneNode(!0)).removeAttribute("security"),r.parentNode.replaceChild(e,r)}}}}(window,document);
-//--><!]]>
 
 I started to think I needed a physical controller since most of the docs are oriented around his setup. However, I revisted the Android options and downloaded the [Unifi Network app](https://play.google.com/store/apps/details?id=com.ubnt.easyunifi&amp;hl=en). Upon opening you get the following screen:
 ![](/content/images/2020/05/Screenshot_20200517-223735-1.png)
@@ -55,13 +50,4 @@ I had installed the access point right next to the router. I experienced immedia
 I decided to run a 10m cable between the router and the Unifi AP such that the Unifi device sits right at the window onlooking the garden. Now getting very strong signal across the garden - significant drop off ~80% once inside the shed, but at least it was a consistent connection. Based on several speed tests, I was getting 3mbs - 13mbs. That'll do pig. 👍
 
 ### Semi-helpful docs
-[
-
-UniFi - Device Adoption Methods for Remote UniFi Controllers
-
-Overview This article describes several different layer-3 methods for adopting and deploying UniFi devices remotely. Our recommended methods are found below under the Chrome Web Browser and Mobile...
-
-![](https://theme.zdassets.com/theme_assets/77613/9582a1ec2edfbb499a97e723894d2e9a4d8c66dd.png)Ubiquiti Networks Support and Help Center
-
-![](https://theme.zdassets.com/theme_assets/77613/ff7ff89edfceb228b54443702ffba57c08d686fc.png)
-](http://help.ui.com/hc/en-us/articles/204909754)
+- [UniFi - Device Adoption Methods for Remote UniFi Controllers](help.ui.com/hc/en-us/articles/204909754)
