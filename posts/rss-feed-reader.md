@@ -1,6 +1,6 @@
 ---
 title: The Best Self-Hosted RSS Feed Readers
-# permalink: "rss-feed-reader"
+permalink: "/rss-feed-reader/"
 slug: rss-feed-reader
 date_published: 2020-05-31T14:06:00.000Z
 date_updated: 2020-05-31T15:32:54.000Z
@@ -52,14 +52,14 @@ Features:
 - Simple and nice UI
 - Keyboard shortcuts (I use [Vimium](https://vimium.github.io/) so not sold on this)
 
-## [selfoss](https://selfoss.aditu.de/)
+### [selfoss](https://selfoss.aditu.de/)
 
 *Didn't look further at this one PHP+ugly =* 😱🏃‍♂️.
 Github Stars: 1.9k
 Built With: PHP
 Test Website: No
 
-## [Miniflux](https://github.com/miniflux/miniflux)
+### [Miniflux](https://github.com/miniflux/miniflux)
 
 *Ultra simplicity in terms of stack and UI. Slightly ugly, but I agree with the software philosophy of keeping it simple.*
 Github Stars: 1.9k
@@ -76,21 +76,21 @@ Features:
 - Dark theme (otherwise kind of ugly)
 - Optional keyboard shortcuts
 
-## [FreshRSS](https://github.com/FreshRSS/FreshRSS)
+### [FreshRSS](https://github.com/FreshRSS/FreshRSS)
 
 *Like Selfoss - Didn't look further at this one PHP+ugly =* 😱🏃‍♂️.
 Github Stars: 2.3k
 Built With: PHP
 Test website: [Yes](https://demo.freshrss.org/i/)
 
-## [feedbin](https://github.com/feedbin/feedbin)
+### [feedbin](https://github.com/feedbin/feedbin)
 
 *Didn't look further as the app tech + ui wasn't appealing to me*.
 Github Stars: 2.5k
 Built With: Ruby on Rails
 Test Website: No - but free trial
 
-## [Commafeed](https://github.com/Athou/commafeed)
+### [Commafeed](https://github.com/Athou/commafeed)
 
 *Github at the time had a **🛑build error** + Java turned me away*
 Github Stars: 1.7k
@@ -156,10 +156,10 @@ volumes:
 ```
 
 Then run the following commands and go to `localhost:8050` once the containers have finished booting:
-
-    $ docker-compose up -d db
-    $ docker-compose up miniflux
-
+```bash
+$ docker-compose up -d db
+$ docker-compose up miniflux
+```
 Firstly, the initial UI is *very *simple, whilst incredibly plain is very functional. Navigating the app is explicit with text whereas Stringer you had to poke around using icons without text descriptions.
 ![](/content/images/2020/05/Screen-Shot-2020-05-31-at-09.46.28.png)
 There are several integrations to apps like Pocket, Instapaper and Wallabag. And after changing the theme. the reader is quite nice. Albeit, I do notice the entire page refresh from the server side oriented app - but I have to tell myself that the simplicity philosophy trumps the complexity of introducing a frontend framework.
