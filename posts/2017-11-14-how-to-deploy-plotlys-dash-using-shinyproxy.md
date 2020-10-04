@@ -1,6 +1,8 @@
 ---
 title: How to Deploy Plotly's Dash using Shinyproxy
 slug: how-to-deploy-plotlys-dash-using-shinyproxy
+feature_image: /content/images/2017/11/background-horses.jpg
+excerpt: "In a previous post I established that I could easily deploy a 'Hello World' flask.py web application using Shinyproxy. Therefore, I thought"
 date_published: 2017-11-14T13:44:50.000Z
 date_updated: 2019-08-04T12:16:05.000Z
 tags: python, docker, dash.py, shinyproxy
@@ -9,27 +11,24 @@ layout: layouts/post.njk
 
 In a [previous post](/shiny-containers-with-shinyproxy/#addingadditionalnonshinyapps) I established that I could easily deploy a 'Hello World' [flask.py](http://flask.pocoo.org/) web application using [Shinyproxy](https://www.shinyproxy.io/). Therefore, I thought it would be straightforward to deploy a [Dash](https://plot.ly/dash/) app which is built on top of [flask.py](http://flask.pocoo.org/). However, it proved to be a little more difficult than that. This blog post runs through the errors and eventual solution to deploying a Dash app on Shinyproxy.
 
-##### The Issue
+### The Issue
 
-Dash apps, like most web apps, load additional static resources, but upon deploying on Shinyproxy these aren't being delivered to the client (browser) as the URL path is wrong. This results in the all too familiar **404 Not Found**. *Disclaimer*: I haven't programmed in Java or SpringBoot (yet!). However, as far as I can see from looking at [Chrome dev tools](https://developer.chrome.com/devtools) there are two ways Shinyproxy delivers static files to the client. I'm taking a look first at how it works with a [Shiny](https://shiny.rstudio.com/) app.
+Dash apps, like most web apps, load additional static resources, but upon deploying on Shinyproxy these aren't being delivered to the client (browser) as the URL path is wrong. This results in the all too familiar **404 Not Found**. _Disclaimer_: I haven't programmed in Java or SpringBoot (yet!). However, as far as I can see from looking at [Chrome dev tools](https://developer.chrome.com/devtools) there are two ways Shinyproxy delivers static files to the client. I'm taking a look first at how it works with a [Shiny](https://shiny.rstudio.com/) app.
 
-1. 
-**Webjars** - I can see that the [main template of shinyproxy](https://github.com/openanalytics/shinyproxy/blob/master/src/main/resources/templates/app.html) loads the bootstrap CSS which also gets utilised by each Shiny app.
+1. **Webjars** - I can see that the [main template of shinyproxy](https://github.com/openanalytics/shinyproxy/blob/master/src/main/resources/templates/app.html) loads the bootstrap CSS which also gets utilised by each Shiny app.
 
-2. 
-**Load from the container** - Additional static content for shiny apps is requested by using the container name, in this case `peaceful_jepsen` e.g.:
+2. **Load from the container** - Additional static content for shiny apps is requested by using the container name, in this case `peaceful_jepsen` e.g.:
 
-    Request URL:http://<my-ip-address>/peaceful_jepsen/dt-core-1.10.12/css/jquery.dataTables.min.css
-    
+```bash
+Request URL:http://<my-ip-address>/peaceful_jepsen/dt-core-1.10.12/css/jquery.dataTables.min.css
+```
 
 Now let's move on to it not working with Dash...
 
 ## Deploying a Dash App on Shinyproxy
-
 Using `react.min.js` as an example, I'm going to contrast how the app fetches static content on my local machine in a container vs Shinyproxy on a remote server. I'll do this by inspecting the path for the `GET` requests using [Chrome dev tools](https://developer.chrome.com/devtools). Firstly, what is the default behaviour of Dash.
 
 > By default, dash serves the JavaScript and CSS resources from the online CDNs.
-> 
 > Source: [Dash Docs](https://plot.ly/dash/external-resources)
 
 **Dash Container on my Local Machine**
@@ -44,20 +43,19 @@ On Shinyproxy `react.min.js` gets loaded however `_dash-layout` and `_dash-depen
 
 The [Dash Docs](https://plot.ly/dash/external-resources) have the following lines of code to serve content locally.
 
-    app.css.config.serve_locally = True
-    app.scripts.config.serve_locally = True
-    
+```python
+app.css.config.serve_locally = True
+app.scripts.config.serve_locally = True
+```
 
 Let's see how that changes the behaviour.
 
 **Dash Container on my Local Machine**
 ![local-dash-serve-local-get](/content/images/2017/11/local-dash-serve-local-get.png)
-
 Since all static content is now requested from Dash this is probably going to prevent all content from being loaded on Shinyproxy.
 
 **Dash Container on Shinyproxy**
 ![shinyproxy-dash-serve-local-get](/content/images/2017/11/shinyproxy-dash-serve-local-get.png)
-
 Yup! A whole lot of red 404s.
 
 Essentially it doesn't matter if you configure Dash to serve static files locally, the underlying issue is the relative URL route prefix. We know from the [Dash source code](https://github.com/plotly/dash/blob/master/dash/dash.py#L50) how we could prefix the URL route. However, Shinyproxy is already doing this for Shiny apps, what's different for the requests from Dash?
@@ -66,12 +64,13 @@ I started scouring the Shinyproxy Java code base. I found the construction of th
 
 Another approach I thought of was obtaining the container name from within the Dash application and appending that to the GET URL requests initiated Dash. Alas, Docker doesn't allow that. You can access the ContainerID but not the ContainerName. There is a [3 year old open issue regarding this](https://github.com/moby/moby/issues/8427). I then started looking for an easy way to pass into the container the containerName but I couldn't find a non-hacky way to do that either.
 
-**Sidenote** - I was wondering what the logic was on the container name generation e.g. `adorin_raman`. If you look at the docker source code you will find [some go-lang code called `names-generator.go`.](https://github.com/moby/moby/blob/master/pkg/namesgenerator/names-generator.go) This contains two lists, a list of adjectives and a list of "notable scientists and hackers". The function that randomly combines these into a container name formatted as "adjective_surname" has one funny exception:
+**Sidenote** - I was wondering what the logic was on the container name generation e.g. `adorin_raman`. If you look at the docker source code you will find [some go-lang code called `names-generator.go`.](https://github.com/moby/moby/blob/master/pkg/namesgenerator/names-generator.go) This contains two lists, a list of adjectives and a list of "notable scientists and hackers". The function that randomly combines these into a container name formatted as "adjective\_surname" has one funny exception:
 
-    if name == "boring_wozniak" /* Steve Wozniak is not boring */ {
-    	goto begin
-    }
-    
+```go
+if name == "boring_wozniak" /* Steve Wozniak is not boring */ {
+ goto begin
+}
+```
 
 Two other approaches that weren't very appealing would have been managing the resources as [webjars](https://www.webjars.org/) or an [Nginx](https://nginx.org/en/) redirect.
 
@@ -80,50 +79,55 @@ Two other approaches that weren't very appealing would have been managing the re
 I posted [a question to the shinyproxy forum](https://support.openanalytics.eu/t/what-is-the-best-way-of-delivering-static-assets-to-the-client-for-custom-apps/363/5), [Frederick](http://www.fcm-consulting.be/resume.html) one of the main authors responded with:
 
 > Then that means the href being used was `/_dash-layout` and not `_dash-layout`.
-> 
 > Do you control the hrefs? If so, removing the slash may solve your issue. If not, it becomes trickier… you could use javascript and extract the correct URL from window.location.
 
-If we dig into the [dash.py code](https://github.com/plotly/dash/blob/master/dash/dash.py) We can see the construction of the URL paths for `_dash-layout``_dash-dependencies` occurs on lines 73-80:
+If we dig into the [dash.py code](https://github.com/plotly/dash/blob/master/dash/dash.py) We can see the construction of the URL paths for `_dash-layout` `_dash-dependencies` occurs on lines 73-80:
 
-    add_url(
-        '{}_dash-layout'.format(self.config['routes_pathname_prefix']),
-        self.serve_layout)
-    
-    add_url(
-    	'{}_dash-dependencies'.format(self.config['routes_pathname_prefix']), self.dependencies)
-    
+```python
+add_url(
+    '{}_dash-layout'.format(self.config['routes_pathname_prefix']),
+    self.serve_layout)
+
+add_url(
+ '{}_dash-dependencies'.format(self.config['routes_pathname_prefix']), self.dependencies)
+```
 
 The next question is, where is `routes_pathname_prefix` defined? On lines 46-51 `routes_pathname_prefix` is mapped to `url_base_pathname`:
 
-    self.url_base_pathname = url_base_pathname
-    self.config = _AttributeDict({
-        'suppress_callback_exceptions': False,
-        'routes_pathname_prefix': url_base_pathname,
-        'requests_pathname_prefix': url_base_pathname
-    })
-    
+```python
+self.url_base_pathname = url_base_pathname
+self.config = _AttributeDict({
+    'suppress_callback_exceptions': False,
+    'routes_pathname_prefix': url_base_pathname,
+    'requests_pathname_prefix': url_base_pathname
+})
+```
 
 Which begs the question, where is url `url_base_pathname` defined... on lines 20-28:
 
-    class Dash(object):
-        def __init__(
-            self,
-            name=None,
-            server=None,
-            static_folder=None,
-            url_base_pathname='/',
-            **kwargs
-        ):
-    
+```python
+class Dash(object):
+    def __init__(
+        self,
+        name=None,
+        server=None,
+        static_folder=None,
+        url_base_pathname='/',
+        **kwargs
+    ):
+```
 
 As Frederick said, the request should not have the `'/'` prefix in the GET request. Unsurprisingly, having `'//'` in your request paths is not good practice (see this [SO answer](https://stackoverflow.com/a/20524044/3691003) and [this one](https://stackoverflow.com/a/10161264/3691003)) as it can cause problems depending on how requests are handled. The [software layers of Shinyproxy](/shiny-containers-with-shinyproxy/#post-content) are reasonably complex with requests being handled my multiple technologies. The best solution after this trouble-shooting exercise is to use the following code in your Dash app.
 
-    # In order to work on shinyproxy (and perhaps other middleware)
-    app.config.supress_callback_exceptions = True
-    app.config.update({
-        # remove the default of '/'
-        'routes_pathname_prefix': '',
-    
-        # remove the default of '/'
-        'requests_pathname_prefix': ''
-    })
+```python
+# In order to work on shinyproxy (and perhaps other middleware)
+app.config.supress_callback_exceptions = True
+app.config.update({
+    # remove the default of '/'
+    'routes_pathname_prefix': '',
+
+    # remove the default of '/'
+    'requests_pathname_prefix': ''
+})
+```
+
