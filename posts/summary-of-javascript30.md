@@ -5,6 +5,7 @@ slug: summary-of-javascript30
 date_published: 2020-05-06T21:13:40.000Z
 date_updated: 2020-06-03T20:31:11.000Z
 layout: layouts/post.njk
+excerpt: "For someone with some programming experience and understanding who wants to focus on improving JavaScript skills, working with the APIs and developing with the browser this is a fantastic course."
 ---
 
 📚Course: [Javascript30](https://javascript30.com/)
@@ -13,7 +14,7 @@ layout: layouts/post.njk
 
 ## Review
 
-What could be better? Not a lot. I think Wes (the instructor) could have thought harder about prompting learners to pause the video and trying solo for themselves. He does once or twice somewhere in the first 10 lessons. But didn't do it after, which meant I tended to follow along waiting for the prompt. There are a couple of mistakes here and there - one was on a resource Wes was hosting returning a `404` for one of the lessons, but after emailing Wes fixed it about a week later. I thought some items could have been explained better e.g. CSS query selectors and the different syntax to use.For someone with some programming experience and understanding who wants to focus on improving JavaScript skills, working with the APIs and developing with the browser this is a fantastic course. A couple of lessons are out-of-date however the finished solutions available in the repo are mostly up-to-date. I really like the honesty in the mistakes and even debugging his lesson code on video - it gives a much more honest representation of what programming is like. If a JavaScript jedi like Wes makes mistakes and spends time debugging so too will you.
+What could be better? Not a lot. I think Wes (the instructor) could have thought harder about prompting learners to pause the video and trying solo for themselves. He does once or twice somewhere in the first 10 lessons. But didn't do it after, which meant I tended to follow along waiting for the prompt. There are a couple of mistakes here and there - one was on a resource Wes was hosting returning a `404` for one of the lessons, but after emailing Wes fixed it about a week later. I thought some items could have been explained better e.g. CSS query selectors and the different syntax to use. For someone with some programming experience and understanding who wants to focus on improving JavaScript skills, working with the APIs and developing with the browser this is a fantastic course. A couple of lessons are out-of-date however the finished solutions available in the repo are mostly up-to-date. I really like the honesty in the mistakes and even debugging his lesson code on video - it gives a much more honest representation of what programming is like. If a JavaScript jedi like Wes makes mistakes and spends time debugging so too will you.
 
 ## 01 - JavaScript Drum Kit
 
