@@ -5,7 +5,7 @@
     <br>
     <time class="postlist-date" datetime="{{ post.date | htmlDateString }}">{{ post.date | readableDate }}</time>
     <p>
-       {{post.data.excerpt}}...
+       {{post.data.excerpt}}...<a href="{{ post.url | url }}">read more</a>
     </p>
     {# {% for tag in post.data.tags %} #}
       {# {%- if collections.tagList.indexOf(tag) != -1 -%} #}
