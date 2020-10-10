@@ -1,6 +1,8 @@
 ---
 title: A Quick Look into Stamp Duties & Land Taxes
 slug: a-look-into-land-taxes
+permalink: "/a-look-into-land-taxes/"
+excerpt: "Stamp duties are a transaction tax. Prior to the digital era, the transfer of legal ownership presented a convenient time for governments to levy a tax. Upon the transfer of ownership a stamp duty was paid and the relevant transfer of ownership document was either stamped"
 date_published: 2015-07-22T10:40:06.000Z
 date_updated: 2019-09-22T18:11:57.000Z
 tags: economics, australia, tax, politics
@@ -31,23 +33,17 @@ By replacing stamp duties with an annually payable LVT land hoarding behaviour w
 
 The [Henry Review](http://taxreview.treasury.gov.au/content/finalreport.aspx?doc=html/publications/papers/final_report_part_1/chapter_6.htm) makes several important points in considering a land tax:
 
-- 
-A land tax could encompass all property types such that the use of land is more likely to go that which is most productive, whether that be commercial, residential or industrial.
+- A land tax could encompass all property types such that the use of land is more likely to go that which is most productive, whether that be commercial, residential or industrial.
 
-- 
-Tax-free thresholds could apply to exempt low value land. Particularly of benefit to agricultural land holders.
+- Tax-free thresholds could apply to exempt low value land. Particularly of benefit to agricultural land holders.
 
-- 
-Different rates of land tax could be constructed in a progressive manner. Much like the increasing rates of income tax or stamp duty seen above.
+- Different rates of land tax could be constructed in a progressive manner. Much like the increasing rates of income tax or stamp duty seen above.
 
-- 
-Replacing stamp duty with land tax would remove the supply impediments caused by the tax system. However, the tax system itself is not the major source of supply constraints.
+- Replacing stamp duty with land tax would remove the supply impediments caused by the tax system. However, the tax system itself is not the major source of supply constraints.
 
-- 
-Currently land tax policy exempts owner-occupied housing, removing 60% of land by value from the potential revenue base.
+- Currently land tax policy exempts owner-occupied housing, removing 60% of land by value from the potential revenue base.
 
-- 
-To avoid double taxation of those who have already paid stamp duty, the tax could be introduced by only applying to new transfers.
+- To avoid double taxation of those who have already paid stamp duty, the tax could be introduced by only applying to new transfers.
 
 [The Grattan Institute estimated in 2012](https://grattan.edu.au/wp-content/uploads/2014/04/Game_Changers_Web.pdf) that replacing stamp duty with a land tax would increase GDP by $25 billion. Other [research based on Melbourne house prices](http://www.ahuri.edu.au/downloads/publications/EvRevReports/AHURI_Final_Report_No182_The_spatial_and_distributional_impacts_of_the_Henry_Review_recommendations_on_stamp_duty_and_land_tax.pdf) suggested that the introduction of a land tax would decrease average house prices by 5% and would have a greater reduction on inner CDB house prices with up to 12% reductions.
 
