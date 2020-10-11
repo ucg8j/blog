@@ -32,6 +32,7 @@ strong {
 }
 p:last-child {
   margin-bottom: 0;
+  margin-top: 5px;
 }
 p,
 .tmpl-post li,
