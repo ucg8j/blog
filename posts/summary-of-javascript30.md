@@ -14,7 +14,9 @@ excerpt: "For someone with some programming experience and understanding who wan
 
 ## Review
 
-What could be better? Not a lot. I think Wes (the instructor) could have thought harder about prompting learners to pause the video and trying solo for themselves. He does once or twice somewhere in the first 10 lessons. But didn't do it after, which meant I tended to follow along waiting for the prompt. There are a couple of mistakes here and there - one was on a resource Wes was hosting returning a `404` for one of the lessons, but after emailing Wes fixed it about a week later. I thought some items could have been explained better e.g. CSS query selectors and the different syntax to use. For someone with some programming experience and understanding who wants to focus on improving JavaScript skills, working with the APIs and developing with the browser this is a fantastic course. A couple of lessons are out-of-date however the finished solutions available in the repo are mostly up-to-date. I really like the honesty in the mistakes and even debugging his lesson code on video - it gives a much more honest representation of what programming is like. If a JavaScript jedi like Wes makes mistakes and spends time debugging so too will you.
+What could be better? Not a lot. I think Wes (the instructor) could have thought harder about prompting learners to pause the video and trying solo for themselves. He does once or twice somewhere in the first 10 lessons. But didn't do it after, which meant I tended to follow along waiting for the prompt. There are a couple of mistakes here and there - one was on a resource Wes was hosting returning a `404` for one of the lessons, but after emailing Wes fixed it about a week later. 
+
+I thought some items could have been explained better e.g. CSS query selectors and the different syntax to use. For someone with some programming experience and understanding who wants to focus on improving JavaScript skills, working with the APIs and developing with the browser this is a fantastic course. A couple of lessons are out-of-date however the finished solutions available in the repo are mostly up-to-date. I really like the honesty in the mistakes and even debugging his lesson code on video - it gives a much more honest representation of what programming is like. If a JavaScript jedi like Wes makes mistakes and spends time debugging so too will you.
 
 ## 01 - JavaScript Drum Kit
 
@@ -136,7 +138,7 @@ ctx.strokeStyle = '#BBDA55';
 
 *Depending on how familiar one is with the dev tools, some very good tips to be had*
 
-- Various methods of `console`, e.g. `console.warn()``console.info()`
+- Various methods of `console`, e.g. `console.warn()` `console.info()`
 - Break on a paticular element action, inspect the element, right click on element in dev tools and add a 'break on' -> '*choose an option*'
 - `console.groupCollapsed()` group a bunch console logs and display them by default as collapsed.
 ```js
@@ -156,9 +158,10 @@ console.groupEnd('end of my group')
 
 - No new techniques in this lesson, but a harder application of the pattern of, select DOM elements, define callback function
 
+```js
 // select the divs
 const checkboxes = document.querySelectorAll('.inbox input[type="checkbox"]');
-```js
+
 function handleCheck(e) {
   // check if shiftkey pressed AND box is checked
   let inBetween = false;
@@ -517,7 +520,7 @@ function addHighlight(e) {
 N.b. - Firefox wasn't returning the voice objects from `speechSynthesis.getVoices()` at page load - switched to Chrome for this one.
 
 - Use the experimental [SpeechSynthesis API](https://developer.mozilla.org/en-US/docs/Web/API/SpeechSynthesis).
-- When filtering an array based on a singular user selection, I naturally wanted to `[filter()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter)` however this returns an array which you will have to select an element from. However, `[find()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/find)`will return the first element that meets the match critera.
+- When filtering an array based on a singular user selection, I naturally wanted to [`filter()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter) however this returns an array which you will have to select an element from. However, [`find()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/find) will return the first element that meets the match critera.
 ```js
 msg.voice = voices.filter(v => v.name === this.value)[0]
 // vs find
