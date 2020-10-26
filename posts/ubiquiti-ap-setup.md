@@ -1,5 +1,5 @@
 ---
-title: How to setup a Ubiquiti Access Point
+title: How to Setup a Ubiquiti Access Point
 slug: ubiquiti-ap-setup
 permalink: /ubiquiti-ap-setup/
 date_published: 2020-05-17T21:10:47.000Z

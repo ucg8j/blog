@@ -1,9 +1,9 @@
 {
   "title": "Luke Singham",
   "url": "https://lukesingham.com/",
-  "description": "I am writing about my experiences as a naval navel-gazer.",
+  "description": "Technology, Data Science and other ponderings",
   "feed": {
-    "subtitle": "I am writing about my experiences as a naval navel-gazer.",
+    "subtitle": "Technology, Data Science and other ponderings",
     "filename": "feed.xml",
     "path": "/feed/feed.xml",
     "id": "https://lukesingham.com/"
@@ -13,7 +13,7 @@
     "url": "https://lukesingham.com/feed/feed.json"
   },
   "author": {
-    "name": "Your Name Here",
+    "name": "Luke Singham",
     "email": "lukesingham@gmail.com",
     "url": "https://lukesingham.com/about-me/"
   }
