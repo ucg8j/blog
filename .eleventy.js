@@ -26,6 +26,12 @@ module.exports = function(eleventyConfig) {
     return DateTime.fromJSDate(dateObj, {zone: 'utc'}).toFormat('yyyy-LL-dd');
   });
 
+  // return current date year - used in footer
+  eleventyConfig.addFilter("dateYear", function() {
+    var dt = new Date();
+    return dt.getFullYear();
+   });
+
   // 
   eleventyConfig.setFrontMatterParsingOptions({
     excerpt: true
