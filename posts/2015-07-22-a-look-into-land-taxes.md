@@ -12,7 +12,7 @@ layout: layouts/post.njk
 ### Stamp Duties
 
 Stamp duties are a transaction tax. Prior to the digital era, the transfer of legal ownership presented a convenient time for governments to levy a tax. Upon the transfer of ownership a stamp duty was paid and the relevant transfer of ownership document was either stamped...
-![stamp-duty-stamped](http://www.ozrevenues.com/Revenue-Railway-Local-Perfin-Catalogue/nsw-revs/202.jpg)
+![stamp-duty-stamped](https://www.ozrevenues.com/Revenue-Railway-Local-Perfin-Catalogue/nsw-revs/202.jpg)
 
 Or a stamp was affixed...
 ![stamp-duty-stamp](/content/images/2017/08/stamp-duty-stamp-affixed.jpeg)
