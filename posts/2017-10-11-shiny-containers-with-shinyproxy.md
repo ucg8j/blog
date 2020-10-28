@@ -64,9 +64,7 @@ $ sudo systemctl restart docker
 ```
 
 ### Java8
-Shinyproxy requires a minimum of [Java 8](http://www.oracle.com/technetwork/java/javase/overview/java8-2100321.html). I followed the advice per [shinyproxy.io](https://www.shinyproxy.io/getting-started/) and installed the OpenJDK [Zulu](http://zulu.org/). This Quora answer from the product manager of Zulu gives some context behind this JDK:
-
-Read [](https://www.quora.com/What-is-it-like-to-use-Azul-Systems-Zulu-JVM/answer/Matt-Schuetze)[Matt Schuetze](https://www.quora.com/Matt-Schuetze)'s [answer](/What-is-it-like-to-use-Azul-Systems-Zulu-JVM#ans8731568) to [What is it like to use Azul Systems' Zulu JVM?](/What-is-it-like-to-use-Azul-Systems-Zulu-JVM) on [Quora](https://www.__nousername__.main.quora.com)
+Shinyproxy requires a minimum of [Java 8](http://www.oracle.com/technetwork/java/javase/overview/java8-2100321.html). I followed the advice per [shinyproxy.io](https://www.shinyproxy.io/getting-started/) and installed the OpenJDK [Zulu](http://zulu.org/). [This Quora answer from the product manager of Zulu](https://www.quora.com/What-is-it-like-to-use-Azul-Systems-Zulu-JVM/answer/Matt-Schuetze) gives some context behind this JDK.
 
 Run the following at the command line:
 
