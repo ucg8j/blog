@@ -134,7 +134,7 @@ array(['sales', 'accounting', 'hr', 'technical', 'support', 'management', 'IT', 
 
 * * *
 
-#### As an aside...
+### As an aside...
 
 `R` makes factors really easy to handle. For example, let's say we have data with an unordered factor variable `df$unordered.variable`:
 
