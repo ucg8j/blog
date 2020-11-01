@@ -208,7 +208,7 @@ pre {
 }
 .postlist-date {
   word-spacing: -0.5px;
-  color: #7f888e;
+  color: var(--meddarkgray);
 }
 .postlist-link {
   display: inline-block;
