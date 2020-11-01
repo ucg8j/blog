@@ -246,8 +246,9 @@ x_validate = x_validate.drop(bottom_vars, axis=1)
 
 ## Model Evaluation Basics
 
-The formula for **accuracy** is:  
-![](/content/images/2017/07/2786000a854e3b49c4fb9d6f41a0d7c503469b77.svg)
+The formula for **accuracy** is:
+<math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mtext>Accuracy</mtext><mo>=</mo><mfrac><mrow><mi>T</mi><mi>P</mi><mo>+</mo><mi>T</mi><mi>N</mi></mrow><mrow><mi>T</mi><mi>P</mi><mo>+</mo><mi>T</mi><mi>N</mi><mo>+</mo><mi>F</mi><mi>P</mi><mo>+</mo><mi>F</mi><mi>N</mi></mrow></mfrac></math>
+</math>
 
 * **TP** is the number of true positives
 
