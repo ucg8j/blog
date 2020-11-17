@@ -2,8 +2,7 @@
 title: The Best Self-Hosted RSS Feed Readers
 permalink: "/rss-feed-reader/"
 slug: rss-feed-reader
-date_published: 2020-05-31T14:06:00.000Z
-date_updated: 2020-05-31T15:32:54.000Z
+date: 2020-05-31
 tags: rss, foss, tech, self-host
 layout: layouts/post.njk
 excerpt: "What's the best open source RSS feed reader to use on your self-hosted setup?"

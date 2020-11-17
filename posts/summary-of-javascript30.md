@@ -2,8 +2,7 @@
 title: A Review and Summary of the Javascript30 Course
 permalink: "/summary-of-javascript30/"
 slug: summary-of-javascript30
-date_published: 2020-05-06T21:13:40.000Z
-date_updated: 2020-06-03T20:31:11.000Z
+date: 2020-05-06
 layout: layouts/post.njk
 excerpt: "For someone with some programming experience and understanding who wants to focus on improving JavaScript skills, working with the APIs and developing with the browser this is a fantastic course."
 ---

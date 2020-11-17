@@ -2,8 +2,7 @@
 title: How to Setup a Ubiquiti Access Point
 slug: ubiquiti-ap-setup
 permalink: /ubiquiti-ap-setup/
-date_published: 2020-05-17T21:10:47.000Z
-date_updated: 2020-05-17T21:10:47.000Z
+date: 2020-05-17
 tags: network, wifi
 excerpt: How to setup a Ubiquiti Access Point to resolve Wifi deadzones. And, how to avoid some mistakes in setting it up.
 layout: layouts/post.njk

@@ -2,8 +2,7 @@
 title: Setting up Pi-Hole on a Raspberry Pi Zero W using SSH
 slug: pi-hole
 permalink: "/pi-hole/"
-date_published: 2020-04-26T20:59:29.000Z
-date_updated: 2020-05-04T10:31:08.000Z
+date: 2020-04-26
 tags: r-pi, tech
 layout: layouts/post.njk
 excerpt: "Block all advertisements for all devices on my home WiFi network"
