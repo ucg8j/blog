@@ -20,7 +20,7 @@ The Mythical Man Month (MMM) is a collection of essays that encapsulate wisdom a
 Where the title of the book comes from. Many simpler types of work scale linearly with additional resources. For example, if you were a Farmer of 20 fields employing labour to til those fields. You might imagine doubling labour from 2 to 4 would double results. This is true, as there is little requirement for coordination of the manual labour. Labourers each get an allocation of fields to independently til. However, with work that requires much coordination, alignment of corresponding components of a greater system like software, adding more labour is frequently counterproductive. This leads to an assertion that *adding engineers to a late project will make it later* because of the communication overhead and the need to onboard.
 
 The effect is known as [combinatorial explosion](https://en.wikipedia.org/wiki/Combinatorial_explosion). Where each node (worker) that needs to be aligned with the rest of the team adds many more communication links.
-<math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mrow><mtext>links</mtext></mrow><mo>=</mo><mfrac><mrow><msup><mi>n</mi><mn>2</mn></msup><mo>-</mo><mi>n</mi></mrow><mn>2</mn></mfrac></mstyle></math>
+<math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mrow><mtext>links</mtext></mrow><mo>=</mo><mfrac><mrow><msup><mi>n</mi><mn>2</mn></msup><mo>-</mo><mi>n</mi></mrow><mn>2</mn></mfrac></math>
 
 A few examples demonstrate this:
 - when `n=2`, there is 1 link
