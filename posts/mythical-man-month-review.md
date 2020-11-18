@@ -10,7 +10,9 @@ layout: layouts/post.njk
 📚 Book: [Mythical Man Month](https://www.goodreads.com/book/show/13629.The_Mythical_Man_Month)
 ⭐️ Rating: 3/5 (4/5 if you haven't had experience in tech)
 
-The Mythical Man Month (MMM) is a collection of essays that encapsulate wisdom accumulated by the author Fred Brooks. If, like me, you have been in the tech industry for a number of years you are unlikely to gain much value from this book - as you have either read articles or experienced first hand these lessons. Some criticisms of the book:
+The Mythical Man Month (MMM) is a collection of essays that encapsulate wisdom accumulated by the author Fred Brooks. If, like me, you have been in the tech industry for a number of years you are unlikely to gain much value from this book - as you have either read articles or experienced first hand these lessons. 
+
+### Some criticisms of the book:
 - 🤦‍♀️ There's not a female pronoun in sight - one of the few mentions of a female, is for an analogy where the project is a pregnancy, adding more women to the project will not decrease the nine months it will take for the birth to happen. This is to be expected of a book originally written in 1975 and with a title like *Mythical Man Month*. I read the 1995 edition. I would hope any subsequent editions endeavour to have more gender inclusive language.
 - 👼 There's quite a lot of God mentions, more mentions of God than Women.
 - 📠 Many of the examples are very out of date. And the details on these examples of e.g. IBM 360 are superflous to the modern reader.
