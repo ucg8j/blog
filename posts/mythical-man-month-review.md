@@ -31,8 +31,19 @@ A few examples demonstrate this:
 
 This rule is also known as the '[two pizza rule](https://www.theguardian.com/technology/2018/apr/24/the-two-pizza-rule-and-the-secret-of-amazons-success)' 🍕 - teams shouldn't be larger than can be fed with two pizzas. Not helpful if you eat an entire pizza to yourself 🤤. However, 5-7 people is what is meant.
 
+### 🧠 Conceptual Integrity
+>... conceptual integrity is the most important consideration in system design
+
+Brooks talks a lot about *Conceptual Integrity* of software systems. In data analytics this is known by various terms e.g. ontology, entity models. If you have worked with any system with multiple contributors you have likely witnessed the core concepts of a system drift over time. Here Brooks suggests a solution,
+
+>If a system is to have conceptual integrity, someone must control the concepts. That is an aristocracy that needs no apology.
+
 ### 📈 10x programmers
-Brooks talks a lot about *Conceptual Integrity* of software systems. Some of this is a function of smaller teams. The type of team you should favour is one of a few senior engineers than one that is larger with junior engineers.
+To maintain *conceptual integrity* smaller teams should be preferred.
+
+>one wants the system to be built by as few minds as possible
+
+The type of team you should favour is one of a few senior engineers rather than one that is larger with junior engineers. Brooks cites a study measuring programmer productivity which is probably where the *10x engineers* terminology originated. I thought this might be an exaggeration, but I've seen this play out in a workplace. A leader of a project thought that software was a sweatshop and if they just got more cheap juniors fresh out of code bootcamps that software would happen. It didn't. However, hiring one senior and one mid-level engineer saw delivery sky rocket. And yes, the senior was an order of magnitude more productive than juniors and for less than 3x the price!
 
 ### 📄 Documentation
 Write a spec/proposal document prior to commencing on the code. This outlines a number of things, the *why*, the requirements of a solution, the range of solutions considered and the proposed solution to be implemented. This helps in many ways, the writing process helps expose gaps in thinking, communicates to others, helps align the team and provides a record of what is being done or has been done.
