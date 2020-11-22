@@ -5,12 +5,12 @@
   "feed": {
     "subtitle": "Technology, Data Science and other ponderings",
     "filename": "feed.xml",
-    "path": "/feed/feed.xml",
+    "path": "/feed.xml",
     "id": "https://lukesingham.com/"
   },
   "jsonfeed": {
-    "path": "/feed/feed.json",
-    "url": "https://lukesingham.com/feed/feed.json"
+    "path": "/feed.json",
+    "url": "https://lukesingham.com/feed.json"
   },
   "author": {
     "name": "Luke Singham",
