@@ -1,6 +1,13 @@
-# A Tour of Go - Summary Notes
+---
+title: Go Tour Summary
+permalink: /go-tour-summary/
+date: 2020-12-07
+tags: programming, go
+excerpt: These are my summary notes of 'A Tour of Go' - which is meant for people who are familiar with programming to have a quick tour
+layout: layouts/post.njk
+---
 
-These are my summary notes of A Tour of Go - which is meant for people who are familiar with programming to have a quick tour of the Go language. I'm most familiar with dynamic languages (`R`, `Python`, `JavaScript`) so there are some go-lang features that naturally feel new by the nature of Go being a statically typed language. I've included from the Go Tour items that I thought were most different to the languages I'm used to. I've expanded on some of the more advanced features like pointers, concurrency and polymorphism.
+These are my summary notes of [A Tour of Go](https://tour.golang.org) - which is meant for people who are familiar with programming to have a quick tour of the Go language. I'm most familiar with dynamic languages (`R`, `Python`, `JavaScript`) so there are some go-lang features that naturally feel new by the nature of Go being a statically typed language. A subsequent post will expand upon some of the more advanced features like pointers, concurrency and polymorphism.
 
 ## Named Return Values
 A return statement without arguments returns the named return values. This is known as a "naked" return.
@@ -13,7 +20,7 @@ func split(mynumber int) (x, y int) {
 }
 
 func main() {
-	fmt.Println(split(17))
+	fmt.Println(split(17))myt
 }
 // This will print x and y:
 // 68 -51
@@ -22,8 +29,8 @@ func main() {
 ## Variables
 The `var` statement declares a list of variables; as in function argument lists, the type is last.
 
-Variables with initializers
-A var declaration can include initializers, one per variable.
+### Variables with initializers
+A `var` declaration can include initializers, one per variable.
 
 If an initializer is present, the type can be omitted; the variable will take the type of the initializer.
 
@@ -40,7 +47,7 @@ var k, l = 1, 2 // implicit
 ```
 
 ## `:=`
-Inside a function, the := short assignment statement can be used in place of a var declaration with implicit type.
+Inside a function, the `:=` short assignment statement can be used in place of a var declaration with implicit type.
 
 Outside a function, every statement begins with a keyword (var, func, and so on) and so the `:=` construct is not available.
 
@@ -142,7 +149,6 @@ func main() {
 }
 // matches
 ```
-
 
 ### Switch with no condition
 Switch without a condition is the same as switch true. This construct can be a clean way to write long if-then-else chains.
@@ -256,7 +262,7 @@ func main() {
 ## Struct Literals
 A struct literal denotes a newly allocated struct value by listing the values of its fields.
 
-You can list just a subset of fields by using the Name: syntax. (And the order of named fields is irrelevant.)
+You can list just a subset of fields by using the Name: syntax. The order of named fields is irrelevant.
 
 The special prefix `&` returns a pointer to the struct value.
 ```go
@@ -280,7 +286,7 @@ func main() {
 ## Arrays
 The type `[n]T` is an array of `n` values of type `T`. The expression
 `var a [10]int`
-declares a variable a as an array of ten integers. An array's length is part of its type, so arrays cannot be resized.
+declares a variable `a` as an array of ten integers. **An array's length is part of its type, so arrays cannot be resized.**
 ```go
 func main() {
 	var a [2]string
@@ -347,10 +353,10 @@ And this creates the same array as above, then builds a slice that references it
 ## Slice length and capacity
 The length of a slice is the number of elements it contains.
 The capacity of a slice is the number of elements in the underlying array, counting from the first element in the slice.
-The length and capacity of a slice s can be obtained using the expressions `len(s)` and `cap(s)`.
+The length and capacity of a slice `s` can be obtained using the expressions `len(s)` and `cap(s)`.
 
 ## Nil slices
-The zero value of a slice is nil.
+The zero value of a slice is `nil`.
 ```go
 func main() {
 	var s []int
@@ -363,8 +369,8 @@ func main() {
 // nil!
 ```
 
-## Creating a slice with make
-Slices can be created with the built-in make function; this is how you create dynamically-sized arrays. The make function allocates a zeroed array and returns a slice that refers to that array:
+## Creating a slice with `make`
+Slices can be created with the built-in `make` function; this is how you create dynamically-sized arrays. The make function allocates a zeroed array and returns a slice that refers to that array:
 ```go
 a := make([]int, 5)  // len(a)=5
 
@@ -402,7 +408,7 @@ func printSlice(s []int) {
 ```
 
 ## Range
-The range form of the for loop iterates over a slice or map.
+The `range` form of the `for` loop iterates over a slice or map.
 When ranging over a slice, two values are returned for each iteration. The first is the index, and the second is a copy of the element at that index.
 
 **n.b.** [verbs in string templates.](https://golang.org/pkg/fmt/#hdr-Printing)
@@ -415,11 +421,11 @@ func main() {
 		fmt.Printf("2**%d = %d\n", i, v)
 	}
 }
-2**0 = 1
-2**1 = 2
-2**2 = 4
-2**3 = 8
-2**4 = 16
+// 2**0 = 1
+// 2**1 = 2
+// 2**2 = 4
+// 2**3 = 8
+// 2**4 = 16
 ```
 
 You can skip the index or value by assigning to _.
@@ -500,7 +506,7 @@ func main() {
 Go does not have classes. However, you can define methods on types.
 A method is a function with a special receiver argument.
 The receiver appears in its own argument list between the func keyword and the method name.
-In this example, the Abs method has a receiver of type Vertex named v.
+In this example, the `Abs` method has a receiver of type `Vertex` named `v`.
 ```go
 type Vertex struct {
 	X, Y float64
@@ -529,7 +535,7 @@ func main() {
 ```
 
 ## Pointer receivers
-Methods with pointer receivers can modify the value to which the receiver points (as Scale does here). Since methods often need to modify their receiver, pointer receivers are more common than value receivers.
+Methods with pointer receivers can modify the value to which the receiver points (as `Scale` does here 👇). Since methods often need to modify their receiver, pointer receivers are more common than value receivers.
 
 With a value receiver, the Scale method operates on a copy of the original Vertex value. (This is the same behavior as for any other function argument.) The Scale method must have a pointer receiver to change the Vertex value declared in the main function.
 ```go
@@ -595,21 +601,20 @@ Under the hood, interface values can be thought of as a tuple of a value and a c
 `(value, type)`
 An interface value holds a value of a specific underlying concrete type.
 
-## Interface values with nil underlying values
-If the concrete value inside the interface itself is nil, the method will be called with a nil receiver.
-In some languages this would trigger a null pointer exception, but in Go it is common to write methods that gracefully handle being called with a nil receiver (as with the method M in this example.)
+### Interface values with `nil` underlying values
+If the concrete value inside the interface itself is nil, the method will be called with a `nil` receiver.
+In some languages this would trigger a null pointer exception, but in Go it is common to write methods that gracefully handle being called with a `nil` receiver.
 
-## The empty interface
+### The empty interface
 The interface type that specifies zero methods is known as the empty interface:
 `interface{}`
-An empty interface may hold values of any type. (Every type implements at least zero methods.)
-Empty interfaces are used by code that handles values of unknown type. For example, fmt.Print takes any number of arguments of type interface{}.
+An empty interface may hold values of any type. Every type implements at least zero methods. Empty interfaces are used by code that handles values of unknown type. For example, `fmt.Print` takes any number of arguments of type interface{}.
 
-## Type assertions
+### Type assertions
 A type assertion provides access to an interface value's underlying concrete value.
 `t := i.(T)`
-This statement asserts that the interface value i holds the concrete type T and assigns the underlying T value to the variable t.
-If i does not hold a T, the statement will trigger a panic.
+This statement asserts that the interface value `i` holds the concrete type `T` and assigns the underlying `T` value to the variable `t`.
+If `i` does not hold a `T`, the statement will trigger a panic.
 To test whether an interface value holds a specific type, a type assertion can return two values: the underlying value and a boolean value that reports whether the assertion succeeded.
 `t, ok := i.(T)`
 ```go
@@ -630,7 +635,7 @@ func main() {
 }
 ```
 
-## Type switches
+### Type switches
 A type switch is a construct that permits several type assertions in series.
 A type switch is like a regular switch statement, but the cases in a type switch specify types (not values), and those values are compared against the type of the value held by the given interface value.
 ```go
@@ -656,8 +661,7 @@ func main() {
 ```
 
 ## Errors
-Go programs express error state with error values.
-The error type is a built-in interface similar to fmt.Stringer:
+Go programs express error state with error values. The error type is a built-in interface similar to `fmt.Stringer`:
 ```go
 type error interface {
     Error() string
@@ -694,10 +698,9 @@ func main() {
 // hello
 // hello
 ```
-
-# TODO - continue on here https://tour.golang.org/concurrency/2
-
-
+### ----------------------------------------------------------------------------------------------------------
+### 🚧 TODO - continue on here https://tour.golang.org/concurrency/2
+### ---------------------------------------------------------------------------------------------------------
 
 # Observations
 - unused variables are not allowed by the compiler - very cool
@@ -705,11 +708,11 @@ func main() {
 - hard concepts (read more on)
   - pointer indirection
     - performance
-    - mofdify in place
+    - modify in place
     - when optional, pointer to a string... no empty strings in go. But the pointer to the string will be `nil`
   - interfaces and polymorphism (types)
+  - concurrency
   - stringer, but why? Pretty printing? https://tour.golang.org/methods/17
-  -
 
 - skipped
   - exercises
@@ -720,7 +723,4 @@ func main() {
 - typing a particular concept into youtube usual has a human to explain it.
   - sentdex is pretty good at explaining in 5mins
 
-
-# Questions
 - is go functional? Nope and it's not OO. It's procedural. Very explicit.
-- this doesn't make sense
