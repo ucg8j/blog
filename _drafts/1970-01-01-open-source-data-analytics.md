@@ -28,6 +28,12 @@ Gitlab's development in the space
 
 Prefect and Dagster, as well as Kedro and Metaflow.
 
+#### ML frameworks
+https://github.com/cortexlabs/cortex
+https://github.com/Netflix/metaflow
+
+https://netflixtechblog.com/unbundling-data-science-workflows-with-metaflow-and-aws-step-functions-d454780c6280
+https://www.cortex.dev/post/reproducible-machine-learning-pipelines-with-metaflow-and-cortex
 
 #### DAG creation / testing / documentation
 [https://www.getdbt.com/](https://www.getdbt.com/)
@@ -68,6 +74,8 @@ Like Apache Superset
 A client side (browser) app for users to dump spreadsheet data in and usea gui to create D3 viz
 [https://github.com/rawgraphs/raw](https://github.com/rawgraphs/raw)
 
+A Contour ish app.
+https://github.com/simonw/datasette
 ### Custom Apps / dashboards
 [Python - Dash](https://github.com/ucg8j/awesome-dash)
 [R - Shiny](https://github.com/grabear/awesome-rshiny)
