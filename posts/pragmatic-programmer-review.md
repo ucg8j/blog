@@ -1,5 +1,5 @@
 ---
-title: Book Review - The Pragmatic Programmer
+title: The Pragmatic Programmer - Review
 permalink: /pragmatic-programmer-review/
 date: 2020-12-28
 tags: book, review, software, management
@@ -13,6 +13,7 @@ layout: layouts/post.njk
 ![](/content/images/2020/pragmatic-programmer-frontcover.png#thumbnail)
 
 The Pragmatic Programmer is a very good book full of practical advice. It's written with little *Tip* boxes which are the tl:dr; of a particular section. There's a healthy sprinkling of Dad jokes throughout the book 😁.
+
 Unlike, a [Mythical Man Month](/mythical-man-month-review/), I would recommend this to seasoned professionals as well as newbies. Though this also has a lot of content for the seasoned professional, it is much easier to parse. Instead of having long anecdotes about long since dead technology to gleam the lesson, this book is to the point, with helpful tip boxes, exercises and the examples are mostly relevant to today.
 
 ## ❗️ Some criticisms of the book:

@@ -1,5 +1,5 @@
 ---
-title: Book Review - The Mythical Man Month
+title: The Mythical Man Month - Review
 permalink: /mythical-man-month-review/
 date: 2020-11-18
 tags: book, review, software, management
