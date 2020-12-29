@@ -10,7 +10,7 @@ layout: layouts/post.njk
 📚 Book: [Mythical Man Month](https://www.goodreads.com/book/show/13629.The_Mythical_Man_Month)
 ⭐️ Rating: 3/5 (4/5 if you haven't had experience in tech)
 
-![](/content/images/2020/mythical-man-month-frontcover.png)
+![](/content/images/2020/mythical-man-month-frontcover.png#thumbnail)
 
 The Mythical Man Month (MMM) is a collection of essays that encapsulate wisdom accumulated by the author Fred Brooks. If, like me, you have been in the tech industry for a number of years you are unlikely to gain much value from this book - as you have either read articles or experienced first hand these lessons.
 

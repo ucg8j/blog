@@ -2,3 +2,5 @@ _site/
 node_modules/
 package-lock.json
 .lazyimages.json
+.lazyimages.json
+.vscode/settings.json
