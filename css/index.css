@@ -40,7 +40,7 @@ p,
 .tmpl-post li,
 
 li:not(:last-child) {
-  margin-bottom: 1rem;
+  margin-bottom: .75rem;
 }
 img {
   display: block;
@@ -49,7 +49,6 @@ img {
   height: auto;
 }
 img[src*="#thumbnail"] {
-  /* max-width: 3rem; */
   width: 60%;
   height: auto;
 }
@@ -85,10 +84,6 @@ footer {
 }
 main {
   padding: 0rem 0.25rem;
-}
-main :first-child {
-  margin-top: 15px;
-  margin-bottom: 5px;
 }
 header {
   background-color: #eef2f1;
@@ -177,6 +172,7 @@ pre {
 .nav {
   padding: 0;
   list-style: none;
+  margin-bottom: 0;
   float: left;
   margin-left: 1em;
 }
