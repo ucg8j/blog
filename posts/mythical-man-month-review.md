@@ -7,7 +7,7 @@ excerpt: A 2020 review of the classic software engineering management book.
 layout: layouts/post.njk
 ---
 
-📚 Book: [Mythical Man Month](https://www.goodreads.com/book/show/13629.The_Mythical_Man_Month)
+📚 Book: [Mythical Man Month](https://amzn.to/38P7XBK)
 ⭐️ Rating: 3/5 (4/5 if you haven't had experience in tech)
 
 ![](/content/images/2020/mythical-man-month-frontcover.png#thumbnail)

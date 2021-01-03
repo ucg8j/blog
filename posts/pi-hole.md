@@ -28,17 +28,17 @@ Additional with the Raspberry Pi Zero W:
 - Bluetooth 4.1
 - Bluetooth Low Energy (BLE)
 
-It genuinely is something to be excited about 😁. I have the slightly more expensive 'W' version - it's twice the price but I'd certainly recommend it for connectivity reasons, otherwise you'll be a little stuck for internet! 
+It genuinely is something to be excited about 😁. I have the slightly more expensive 'W' version - it's twice the price but I'd certainly recommend it for connectivity reasons, otherwise you'll be a little stuck for internet!
 
 ## Step 1: The Ingredients 🤤
 ![](/content/images/2020/04/raspberry-pi-zero-w-annotated-2.jpg)
 **Hardware**
 
-- [R Pi 0 W - £9.30](https://shop.pimoroni.com/products/raspberry-pi-zero-w?src=raspberrypi#show-accessories) (~$12USD)
-- [R Pi Power Supply - £8.10 (~$10USD)](https://shop.pimoroni.com/products/raspberry-pi-universal-power-supply)
-- [NOOBs 32GB micro sd card - £9 (~$11USD)](https://shop.pimoroni.com/products/noobs-32gb-microsd-card-3-1)
+- [R Pi 0 W - $18 USD](https://amzn.to/3aZjGjz)
+- [R Pi Power Supply - $10 USD)](https://amzn.to/3o1qoJH)
+- [NOOBs 32GB micro sd card - $18 USD](https://amzn.to/3rOdUav)
 
-Total = £26.40
+Total = $46 (~£26)
 
 **Software**
 
@@ -60,7 +60,7 @@ network={
 ```
 You can add multiple WiFi networks by repeating the above config with the relevant network credentials.
 
-In the same directory create a blank file `ssh`, ensuring that there's no extension. 
+In the same directory create a blank file `ssh`, ensuring that there's no extension.
 ```bash
 $ touch ssh
 ```
@@ -74,7 +74,7 @@ Press enter / answer yes to the prompts.  When asked for a password,  `raspber
 
 Run the following command to update the R Pi - this can take around 30mins so take a break at this point 🥱:
 ```bash
-$ sudo apt-get update && sudo apt-get upgrade -y 
+$ sudo apt-get update && sudo apt-get upgrade -y
 ```
 
 Then change password:
@@ -83,7 +83,7 @@ $ passwd
 ```
 ## Step 4: *Optional* what's the fastest Upstream DNS to select 🏁
 
-You need to select an upstream DNS as part of the Pi-Hole install. I wanted to know which one was going to give me the best performance. I found [this tool](https://github.com/mwiora/NAMEinator) a fork from a broken Google tool that did the job. If you don't have `go-lang` installed skip this step and choose a DNS provider you're comfortable with - I'd recommend Cloudflare. 
+You need to select an upstream DNS as part of the Pi-Hole install. I wanted to know which one was going to give me the best performance. I found [this tool](https://github.com/mwiora/NAMEinator) a fork from a broken Google tool that did the job. If you don't have `go-lang` installed skip this step and choose a DNS provider you're comfortable with - I'd recommend Cloudflare.
 ```bash
 $ go get github.com/mwiora/NAMEinator
 $ go get github.com/miekg/dns
