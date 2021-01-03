@@ -159,7 +159,7 @@ Then run the following commands and go to `localhost:8050` once the containers h
 $ docker-compose up -d db
 $ docker-compose up miniflux
 ```
-Firstly, the initial UI is *very *simple, whilst incredibly plain is very functional. Navigating the app is explicit with text whereas Stringer you had to poke around using icons without text descriptions.
+Firstly, the initial UI is *very* simple, whilst incredibly plain is very functional. Navigating the app is explicit with text whereas Stringer you had to poke around using icons without text descriptions.
 ![](/content/images/2020/05/Screen-Shot-2020-05-31-at-09.46.28.png)
 There are several integrations to apps like Pocket, Instapaper and Wallabag. And after changing the theme. the reader is quite nice. Albeit, I do notice the entire page refresh from the server side oriented app - but I have to tell myself that the simplicity philosophy trumps the complexity of introducing a frontend framework.
 ![](/content/images/2020/05/Screen-Shot-2020-05-31-at-13.36.10.png)
@@ -188,7 +188,7 @@ Do you have a list of websites you want to follow?
 - A lot of sites you can just `/rss` e.g `domainname.com/rss`
 - For medium sites add `/feed/` e.g. [`https://medium.com/feed/@verygoodblogger/`](https://medium.com/feed/@cjolowicz/)
 - I used [this site](https://opml-gen.ovh/) to convert a list feeds into an OPML file I could mass import to the various RSS feed reader apps.
-- About a decade ago I used blogspot/blogger. It had a feed reader, but no export facility. Nostagilically, I thought I'd get the list from there. Here's a hack to export the list. First navigate to '[Manage blogs I'm following](https://www.blogger.com/manage-blogs-following.g)', then open your browser dev tools and run the following JavaScript to get a list of the links.
+- About a decade ago I used blogspot/blogger. It had a feed reader, but no export facility. Nostalgically, I thought I'd get the list from there. Here's a hack to export the list. First navigate to '[Manage blogs I'm following](https://www.blogger.com/manage-blogs-following.g)', then open your browser dev tools and run the following JavaScript to get a list of the links.
 
 ```js
 const urls = document.querySelectorAll('.blogUrl');
