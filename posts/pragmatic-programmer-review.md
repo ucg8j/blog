@@ -8,6 +8,7 @@ layout: layouts/post.njk
 ---
 
 📚 Book: [The Pragmatic Programmer](https://www.goodreads.com/book/show/4099.The_Pragmatic_Programmer)
+
 ⭐️ Rating: 4/5 Sagely advice that is written in an engaging and highly consumable form.
 
 ![](/content/images/2020/pragmatic-programmer-frontcover.png#thumbnail)

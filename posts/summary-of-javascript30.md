@@ -648,7 +648,3 @@ document.customForm.minutes.addEventListener('onhover', function(e){...})
 *As the title suggests this is a bit of a fun simple game that is using the concepts learnt in previous lessons - a good way to end the course.*
 
 - On event's [there is a `isTrusted` boolean property](https://developer.mozilla.org/en-US/docs/Web/API/Event/isTrusted) that can be utilised to ensure the action on the web page is user generated. 
-
-## Addendum
-
-- TODO write summary and find good doc on document.querySelector(THISBIT), by id, class, attribute e.g. `data-time`
