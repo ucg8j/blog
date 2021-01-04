@@ -16,6 +16,7 @@
 }
 html,
 body {
+  /* overflow-x: scroll; Show horizontal scrollbar */
   padding: 0;
   margin: 0 auto;
   max-width: 40em;
@@ -39,7 +40,6 @@ p:last-child {
 }
 p,
 .tmpl-post li,
-
 li:not(:last-child) {
   margin-bottom: .75rem;
 }
@@ -51,6 +51,7 @@ img {
 }
 /* Applied to book reviews/summaries */
 img[src*="#thumbnail"] {
+  box-shadow: 1px 1px 5px #999;
   width: 60%;
   height: auto;
 }
@@ -96,8 +97,12 @@ header:after {
   clear: both;
 }
 table {
+  font-size: 85%;
   margin: 1em 0;
   border-collapse: collapse;
+  line-height: .9;
+  margin-left: auto;
+  margin-right: auto;
 }
 table tr {
   background: white;
@@ -158,7 +163,6 @@ pre {
   text-decoration: none; /* override del, ins, mark defaults */
   color: inherit; /* override del, ins, mark defaults */
 }
-
 /* allow highlighting empty lines */
 .highlight-line:empty:before {
   content: " ";
@@ -167,7 +171,6 @@ pre {
 .highlight-line + br {
   display: none;
 }
-
 .highlight-line-isdir {
   color: #b0b0b0;
   background-color: #222;
@@ -273,7 +276,6 @@ a[href].post-tag,
 a[href].post-tag:visited {
   color: #fff;
 }
-
 /* Warning */
 .warning {
   background-color: #ffc;
@@ -282,7 +284,6 @@ a[href].post-tag:visited {
 .warning ol:only-child {
   margin: 0;
 }
-
 /* Direct Links / Markdown Headers */
 .direct-link {
   font-family: sans-serif;
@@ -299,4 +300,26 @@ a[href].direct-link:focus:visited,
 :hover > a[href].direct-link,
 :hover > a[href].direct-link:visited {
   color: #aaa;
+}
+/*
+Following webkit may or may not work - seems to be the standard, but didn't have an effect on ny Android w. Firefox.
+Original aim: Force scrollbars on mobile for divs that overflow to always display. As opposed to only when you try to scroll on the div
+*/
+::-webkit-scrollbar {
+  -webkit-appearance: none;
+}
+::-webkit-scrollbar:vertical {
+  width: 12px;
+}
+::-webkit-scrollbar:horizontal {
+  height: 12px;
+}
+::-webkit-scrollbar-thumb {
+  -WebKit-box-shadow: 0 0 1px rgba(255,255,255,.5);
+  border-radius: 10px;
+  border: 2px solid #ffffff;
+}
+::-webkit-scrollbar-track {
+  border-radius: 10px;
+  background-color: #ffffff;
 }
