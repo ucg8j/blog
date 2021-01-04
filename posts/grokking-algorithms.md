@@ -1,18 +1,26 @@
 ---
 title: Grokking Algorithms - Summary
 permalink: /grokking-algorithms/
-date: 2020-12-31
+date: 2021-01-04
 tags: book, software, algorithms
-excerpt: A summary of the Grokking Algorithms book
+excerpt: A review and summary of the Grokking Algorithms book
 layout: layouts/post.njk
 ---
 
-📚 Book: [Grokking Algorithms](https://www.goodreads.com/book/show/22847284-grokking-algorithms-an-illustrated-guide-for-programmers-and-other-curio)
+📚 Book: [Grokking Algorithms](https://amzn.to/2MqMMyg)
 
-⭐️ Rating: 5/5
+⭐️ Rating: 5/5 I don't think you could manage to produce a more friendly introduction to algorithms.
 
-This is my personal summary of Grokking Algorithms. The headings match that of the book, so if a section needs fleshing out you should find the relevant section of the book. Italics reflect direct quotations. Not all sections are included as I felt not all needed summarising. Suffice to say, I highly recommended this book for those new to algorithms or those wanting a light refresher.
+![](/content/images/2020/grokking-algorithms-frontcover.png#thumbnail)
 
+I highly recommend this book for anyone who hasn't studied algorithms. You do not need to be a good programmer or to remember all of your high school maths you have probably forgotten. *Grokking Algorithms* is a beautifully formatted book that explains complex material simply using pictures, analogies and high level practical explanations.
+
+The only criticism I have of the book is the lightness of the last two chapters. Chapter 10 seems to detour into machine learning. And chapter 11 gives a very very quick skim over a few other algorithms not covered. I would have preferred to have seen more of the previous chapters - additional algorithms could have been covered to similar depth of the other chapters.
+
+For anyone who has done a university level course in Algorithms - this book is not deep enough. Although it might help as a light refresher that you can pick up and put down easily, as opposed to getting out an in-depth (hard)core algorithms book like [Introduction to Algorithms](https://amzn.to/35aXK1h).
+
+# Summary
+This is my personal summary of *Grokking Algorithms*. The headings match that of the book, so if a section needs fleshing out you should find the relevant section of the book. Italics reflect direct quotations. Not all sections are included as I felt not all needed summarising.
 # 1. Introduction to Algorithms
 *An algorithm is a set of instructions for accomplishing a task.*
 
@@ -53,22 +61,20 @@ print(binary_search(my_list, -1)) # None
 ## Running Time
 - Let, list = 4 billion
 - Linear time - Simple Search, starting at the beginning of the list until you find the right element, could take 4 billion steps
-- Logarithmic time - Finding the right element takes log2 4 billion = 32 (rounded)
+- Logarithmic time - Finding the right element takes log 4 billion = 32 (rounded)
 
 Lesson: Algorithm run times grow at different rates. Timing two different algs is not enough because it doesn't reflect how the run time will grow at different scales.
 
 ## Big O Notation
 >It's called Big O notation because you put a “big O” in front of the number of operations (it sounds like a joke, but it’s true!)
-
 >*Big O notation is about the worst-case scenario.*
 
 ### Some Common Big O Run Times
-
-- **O(log n)** 'log time'. E.g. Binary search.
-- **O(n)** 'linear time'. E.g. Simple search.
-- **O(n * log n)** 'log linear time'. E.g. A fast sorting algorithm, like quicksort (coming up in chapter 4).
-- **O(n<sup>2</sup>)** 'quadratic time' E.g. A slow sorting algorithm, like selection sort (coming up in chapter 2).
-- **O(n!)** 'factorial time' E.g. A really slow algorithm, like the traveling salesperson (coming up next!).
+- **O(log n)** *log time*. E.g. Binary search.
+- **O(n)** *linear time*. E.g. Simple search.
+- **O(n * log n)** *log linear time*. E.g. A fast sorting algorithm, like quicksort (see [chapter 4](#4.-quicksort)).
+- **O(n<sup>2</sup>)** *quadratic time* E.g. A slow sorting algorithm, like selection sort (see [chapter 2](#2.-selection-sort)).
+- **O(n!)** *factorial time* E.g. A really slow algorithm, like the traveling salesperson (see [next!](#the-traveling-salesperson)).
 
 Note: O(1) is constant time e.g. Is a number odd or even?
 
@@ -81,23 +87,24 @@ Is a classic example of a task that takes O(n!) to complete. To find the shortes
 # 2. Selection Sort
 >Each time you want to store an item in memory, you ask the computer for some space, and it gives you an address where you can store your item. If you want to store multiple items, there are two basic ways to do so: arrays and lists
 
-**Arrays** - require contiguous memory. I.e. require slots in memory that are side by side.
-**Linked Lists** - Do not require contiguous memory, instead each element contains an address to the next element in the list.
+#### Memory:
+- **Arrays** - require contiguous memory. I.e. require slots in memory that are side by side.
+- **Linked Lists** - Do not require contiguous memory, instead each element contains an address to the next element in the list.
 
 #### Adding more elements to a lists:
-**Arrays** - will need to find a slot in memory large enough for all elements or have been defined initially reserving extra space (trade off being a potential waste of memory).
-**Linked Lists** - update easily without having to reserve or pre-allocate memory.
+- **Arrays** - will need to find a slot in memory large enough for all elements or have been defined initially reserving extra space (trade off being a potential waste of memory).
+- **Linked Lists** - update easily without having to reserve or pre-allocate memory.
 
 #### Reading:
-**Arrays** are very fast at reading any element since the address is logically deduced using simple maths e.g. If the first element is at memory address 0 then where is element 5? It's at address 4.
-**Linked lists** are slower since you have to read each element's address to find the next elements address.
+- **Arrays** are very fast at reading any element since the address is logically deduced using simple maths e.g. If the first element is at memory address 0 then where is element 5? It's at address 4.
+- **Linked lists** are slower since you have to read each element's address to find the next elements address.
 
 *Terminology:* The position in memory is known as it's 'index'.
 
 #### Inserts:
 If you want to insert an item into the middle of a list:
-**Arrays** - you will need to move the location of all downstream elements to new memory locations. At worse, you will need to find an entire new memory slot to cater for the contiguous memory need.
-**Linked Lists** - only need one repoint of memory.
+- **Arrays** - you will need to move the location of all downstream elements to new memory locations. At worse, you will need to find an entire new memory slot to cater for the contiguous memory need.
+- **Linked Lists** - only need one repoint of memory.
 
 **Deletions:**
 >Unlike insertions, deletions will always work. Insertions can fail sometimes when there’s no space leſt in memory. But you can always delete an element... There are two different types of access: random access and sequential access. Sequential access means reading the elements one by one, starting at the first element. Linked lists can only do sequential access.
@@ -118,7 +125,7 @@ One method of sorting a list e.g.
 | Beatles | 15         |
 | ...     | ...        |
 
-Would be to iterate n (number of artists) times through the list and create a new list. The first search would be for the 1st highest playcount, then the 2nd and so on. So each search would be O(n) for O(n) artists, i.e. O(n<sup>2</sup>).
+Would be to iterate n (number of artists) times through the list and create a new list. The first search would be for the 1st highest playcount, then the 2nd and so on. Each search would be O(n) for O(n) artists, i.e. O(n<sup>2</sup>).
 
 ```python
 def findSmallest(arr):
@@ -182,8 +189,8 @@ def fact(x):
 If you call `fact(3)`, each time the base case is not met, `fact()` will call itself, pausing the previous function call on the stack. The subsequent call of `fact()` until the base case is met. At which point each function called in the stack get's popped off i.e. resolves all the way back down the stack to the original call of `fact(3)`.
 
 Stacks have two operations:
-- **push** adds an element to the collection, and
-- **pop** removes the most recently added element that was not yet remov
+- **`push()`** adds an element to the collection, and
+- **`pop()`** removes the most recently added element that has not yet been removed
 
 In the case where `fact(3)` is called. The first sticky note in the stack is `fact(3)`, the last is `fact(1)`. Before the final result are display the each result of `fact()` is multiplied by each of the copies of the function in the call stack with the variable x (per the logic of the function). E.g. 3x2x1 = 6.
 
@@ -201,7 +208,7 @@ Example: Say you have to divide up a piece of land into the largest possible squ
 
 >D&C isn’t a simple algorithm that you can apply to a problem. Instead, it’s a way to think about a problem.
 
-## For Loop vs recursion to sum an array
+## For Loop vs Recursion To Sum An Array
 ### For Loop
 For each item in the array, increment the total by the value of the item:
 ```python
@@ -231,8 +238,8 @@ def sum(array):
 Let's say you have an array of `[33,15,10]`. Quicksort will:
 1. Pick a number *the pivot* e.g. 33
 2. Partition into two subarrays:
-  - all elements greater than the pivot
-  - all elements less than the pivot
+  a. all elements greater than the pivot
+  b. all elements less than the pivot
   Such that you will have the pivot `[33]`, an array of number/s smaller than the pivot `[15,10]` and an array for numbers larger than the pivot `[]`.
 
 3. Call quicksort recursively on the two subarrays
@@ -253,30 +260,30 @@ def quicksort(array):
   if len(array) <2:
     return array
   else:
-  # recursive case
-  pivot = array[0]
-  less = [i for i in array[1:] if i <= pivot]
-  greater = [i for i in array[1:] if i > pivot]
+    # recursive case
+    pivot = array[0]
+    less = [i for i in array[1:] if i <= pivot]
+    greater = [i for i in array[1:] if i > pivot]
 
   return quicksort(less) + pivot + quicksort(greater)
 ```
 
 ## Big O Notation
-- Selection Sort is O(n^2)
-- Quick Sort is O(n^2)
-  - Worst case O(n^2)
+- Selection Sort is O(n<sup>2</sup>)
+- Quick Sort is O(n<sup>2</sup>)
+  - Worst case O(n<sup>2</sup>)
   - Avg. case O(n log n)
 - Merge Sort is O(n log n)
 
 If the avg. case of quicksort is O(n log n) why not use merge sort?
 
 ## Merge sort vs quicksort
-If you have two algorithms that print a list of numbers in a `for loop` where one sleeps for a second between each print operation. Both algorithms will be O(n) time. However we know in practice one is faster than the other. This is because really Big 0 notation is `c x n` where `c` is some fixed amount of time. Usually the constant doesn't matter. e.g. simple search vs binary search. Let's say the constant is 10ms for simple search and we penalise binary search with a constant of 1sec. If we had to search 4 billion records simple search would take 463days vs binary taking 32 seconds.
+If you have two algorithms that print a list of numbers in a `for` loop where one sleeps for a second between each print operation. Both algorithms will be O(n) time. However we know in practice one is faster than the other. This is because really Big 0 notation is `c x n` where `c` is some fixed amount of time. Usually the constant doesn't matter. e.g. simple search vs binary search. Let's say the constant is 10ms for simple search and we penalise binary search with a constant of 1sec. If we had to search 4 billion records simple search would take 463 days vs binary taking 32 seconds.
 
 However, sometimes, like in the case of mergesort vs quicksort. Quicksort has a smaller constant than mergesort. Therefore, if quicksort is O(n log n) time then quicksort is faster.
 
 ## Average case vs worst case
-The performance of quicksort depends on the chosen pivot. E.g. if the first element is always chosen and the array is already sorted it would take a call stack of 8 to sort the array O(n). On the other hand, picking the middle of the array each time would result in a call stack of 4 to sort the array O(log n). Both of these involve touching every element O(n). Therefore, the worst case is O(n) * O(n) = O(n^2) and the best case (average case) is O(n) * O(log n) = O(n log n). Therefore, if you choose the pivot randomly the runtime of quicksort is O(n log n).
+The performance of quicksort depends on the chosen pivot. E.g. if the first element is always chosen and the array is already sorted it would take a call stack of 8 to sort the array O(n). On the other hand, picking the middle of the array each time would result in a call stack of 4 to sort the array O(log n). Both of these involve touching every element O(n). Therefore, the worst case is O(n) * O(n) = O(n<sup>2</sup>) and the best case (average case) is O(n) * O(log n) = O(n log n). Therefore, if you choose the pivot randomly the runtime of quicksort is O(n log n).
 
 
 # 5. Hash Tables
@@ -285,7 +292,7 @@ A hash function returns the index of a value removing the need to perform a sear
 - map different strings to different indexes
 - not return indexes outside the size of the array
 
-A has function combined with an array is a hash table. Hash tables are are a complex data structure also known as maps, dictionaries and associattive arrays.
+A hash function combined with an array is a hash table. Hash tables are are a complex data structure also known as maps, dictionaries and associative arrays.
 
 ## Use cases
 DNS resolution - mapping domain names to IP addresses
@@ -304,7 +311,7 @@ To avoid worst case performance, collisions must be avoided. To avoid collisions
 - a good hash function
 
 # 6. Breadth First Search (BFS)
-BFS is great at Shortest path problems, examples of which include:
+BFS is great at Shortest Path problems, examples of which include:
 - fewest moves to victory in a checkers game
 - fewest edits from a misspelt word to a correct word
 - find the closest doctor
@@ -339,12 +346,12 @@ The ordering of which you add to the graph doesn't matter as hash tables do not 
 ## Implementing the algorithm
 1. Keep a queue of items
 2. Dequeue an item
-3. Check if item meets the condition
+3. Check if the item meets the condition
 4. Does it meet the connection?
-    - a. meets condition END
-    - b. Add all connected nodes to the condition
+    a. meets condition `END`
+    b. Add all connected nodes to the condition
 5. Loop
-6. If the queue is empty then end.
+6. If the queue is empty then `END`.
 
 ```py
 from collections import deque
@@ -461,6 +468,8 @@ while node is not None:
 ```
 
 # 8. Greedy Algorithms
+>Greedy algorithms optimize locally, hoping to end up with a global optimum. Greedy algorithms are easy to write and fast to run, so they make good approximation algorithms.
+
 ## The Classroom Scheduling problem
 With overlapping classroom run times how does one maximise the amount of classes to be held? The algorithm is very simple:
 1. Pick the class that ends the soonest, this will be the first class.
@@ -472,15 +481,14 @@ You are trying to maximise the value of the items one can place in a small bag 3
 - Laptop $2000 20lbs
 - Guitar $1500 15lbs
 
-The greedy strategy is to take the most expensive item. Buut the stereo leaves room for nothing else. $3000 get's pretty close to the optimal solution of $3500 (Laptop + Guitar)
-.
+The greedy strategy is to take the most expensive item. Buut the stereo leaves room for nothing else. $3000 get's pretty close to the optimal solution of $3500 (Laptop + Guitar).
 
 ## The Set Covering Problem
 You want to broadcast a radio show in the USA and reach listeners in all states. To minimise cost you want to minimise the number of stations you have to pay whilst maximising the states they broadcast to.
 1. To list every possible subset of stations is called the *power set*.
 2. From this pick the set with the smallest number of stations that covers all 50 states.
 
-Calculating the power set is a O(2^n) problem. If there are only 32 stations it would take 13.6 years to calculate at 10 subsets a second.
+Calculating the power set is a O(2<sup>n</sup>) problem. If there are only 32 stations it would take 13.6 years to calculate at 10 subsets a second.
 
 ## Approximation Algorithms
 A greedy algorithm will get close to the optimal solution with much less computation, e.g.:
@@ -491,7 +499,7 @@ N.b some overlap will occur.
 An approximation algorithm is judged on speed and how close the optimal solution they get.
 
 ### Python set operations
-```
+```py
 >>> fruits = set([“avocado”, “tomato”, “banana”])
 >>> vegetables = set([“beets”, “carrots”, “tomato”])
 
@@ -509,7 +517,7 @@ set([“avocado”, “banana”])
 ```
 
 The greedy solution to the state problem:
-```
+```py
 states_needed = set(['mt', 'wa', 'or', 'id', 'nv', 'ut', 'ca', 'az'])
 
 stations = {}
@@ -522,26 +530,23 @@ stations['kfive'] = set(['ca', 'az'])
 final_stations = set()
 
 while states_needed:
-    best_station = None
-    states_covered = set()
+  best_station = None
+  states_covered = set()
 
+  for station, states_for_station in stations.items():
+    # states that in both needed and for_station
+    covered = states_needed & states_for_station
 
-    for station, states_for_station in stations.items():
+    # check this station covers more than the current best station if so, assign as the new best station
+    if len(covered) > len(states_covered):
+      best_station = station
+      states_covered = covered
 
-        # states that in both needed and for_station
-        covered = states_needed & states_for_station
+  final_stations.add(best_station) # add to list of stations
+  states_needed -= states_covered # rm states covered from those needed
 
-        # check this station covers more than the current best station if so, assign
-        # as the new best station
-        if len(covered) > len(states_covered):
-            best_station = station
-            states_covered = covered
-
-    final_stations.add(best_station) # add to list of stations
-    states_needed -= states_covered # rm states covered from those needed
-
-final_stations
->>> {'kfive', 'kone', 'kthree', 'ktwo'}
+print(final_stations)
+# {'kfive', 'kone', 'kthree', 'ktwo'}
 ```
 
 ## NP-Complete Problems
@@ -549,8 +554,8 @@ final_stations
 Problem: A salesperson has to find the shortest distance when traveling to say 5 cities.
 
 For each additional cities the number goes up in a factorial fashion, here's an an example:
-```
-1 start city * 1 route = 1 total route
+
+>1 start city * 1 route = 1 total route
 2 start cities * 1 route = 2 total routes
 3 start cities * 2 route = 6 total routes
 4 start cities * 6 route = 24 total routes
@@ -558,7 +563,7 @@ For each additional cities the number goes up in a factorial fashion, here's an 
 6 start cities * 120 route = 720 total routes
 ...
 10 start cities * 362,880 route = 3,628,800 total routes
-```
+
 A good approximation algorithm would be to pick an arbitrary starting city and pick the closest non-visited city next.
 
 ### How to tell if a problem is NP complete?
@@ -581,18 +586,45 @@ You're a thief with Knapsack capacity of 4kgs. There are 3 items to steal:
 - Laptop $2000 3kgs
 - Guitar $1500 1kg
 
-The simplest algorithm would be to calculate every possible set of goods. However this doesn't scale, O(2^n). The optimal solution can be calculated using dynamic programming.
+The simplest algorithm would be to calculate every possible set of goods. However this doesn't scale, O(2<sup>n</sup>). The optimal solution can be calculated using dynamic programming.
 
-Dynamic programming:
-- starts by solving subproblems and builds up to solving the big problem
-- starts with a grid
+#### Dynamic Programming Steps:
+- start by solving subproblems and builds up to solving the big problem
+- start with a grid
 - fill each row out
-- for rows beyond the first row the cell above is the current max for that column. Check the current row's item + remaining space is > than the previous max. e.g. at cell [stereo][4kg] previous max is $1500. Becomes, cell[stereo][4kg] = 3000 + cell[stereo][4kg - 1](4kg - 4g)
-cell[i][j] = max(current_item + cell[i][j - 1](4kg - 4g)
+- for rows beyond the first row the cell above is the current max for that column. Check the current row's item + remaining space is > than the previous max. e.g. at cell [stereo][4kg] previous max is $1500. Placing the Stereo in the bag is greater than the previous max so this is the solution for this cell.
 
-
-Returning to the knapsack problem.
+#### Returning to the knapsack problem.
 Make a grid where items go down one side and knapsack weights go down the other
+
+If we start with the Guitar and ignore the rest of the products we can fill out the top row with the most value we can steal quite easily. This becomes our current best guess.
+
+<div class='twrap'>
+
+|                   | 1kg   | 2kg   | 3kg   | 4kg   |
+| :---------------- | :---- | :---- | :---- | :---- |
+| Guitar $1500 1kg  | $1500 | $1500 | $1500 | $1500 |
+| Stereo $3000 4kgs |       |       |       |       |
+| Laptop $2000 3kgs |       |       |       |       |
+
+</div>
+
+With the Stereo, it can't fit in any bag smaller than 4kg. Therefore, we can take the value from the cell immediately above for columns <4kg. In the 4kg column, the value is $3000 as that is much better than taking the Guitar at half the Stereo's value.
+
+
+<div class='twrap'>
+
+|                   | 1kg   | 2kg   | 3kg   | 4kg   |
+| :---------------- | :---- | :---- | :---- | :---- |
+| Guitar $1500 1kg  | $1500 | $1500 | $1500 | $1500 |
+| Stereo $3000 4kgs | $1500 | $1500 | $1500 | $3000 |
+| Laptop $2000 3kgs |       |       |       |       |
+
+</div>
+
+For the Laptop, it can't fit in any bag <3kg. So we drop down the values from the cell immediately above. At 3kg, taking the Laptop at $2000 is better than the cell value immediately above. Lastly, at 4kg *only* taking the laptop would be less than the value above of $3000. However, if we took the Laptop wit hthe 4kg bag, we would have 1kg left over. What's the best possible thing we could take at 1kg - a Guitar. Therefore, the optimal solution for 4kg is a Laptop + Guitar.
+
+<div class='twrap'>
 
 |                   | 1kg   | 2kg   | 3kg   | 4kg   |
 | :---------------- | :---- | :---- | :---- | :---- |
@@ -600,5 +632,68 @@ Make a grid where items go down one side and knapsack weights go down the other
 | Stereo $3000 4kgs | $1500 | $1500 | $1500 | $3000 |
 | Laptop $2000 3kgs | $1500 | $1500 | $2000 | $3500 |
 
+</div>
+
+## Dynamic Programming FAQs
+#### What happens if you add another item?
+All previously calculated values stay the same. You just work out the new rows values.
+
+#### What happens if you add a smaller item e.g. necklace 0.5kg?
+For original problem, the column increments were set on the smallest product weight, the Guitar at 1kg. To include a necklace, the columns would need to increment by 0.5kg starting at 0.5kg and ending at the max bag capacity 4kg.
+
+#### Can you steal fractions of an item?
+Using dynamic programming, no. But you could with a greedy algorithm.
+
+#### Can DP handle items that depend on each other?
+No.
+> Dynamic programming only works when each subproblem is discrete - when it doesn't depend on other subproblems.
+
+## Longest common substring
+Suppose you need to create a search functionality on a website, and you want to have search suggestions when someone makes a typo. For example, someone types `hish` when they probably mean `fish`. How would you use DP to solve the problem? *There is no formula, but DP should provide a framework to develop your idea.*
+
+
+|     | H   | I   | S   | H   |
+| :-- | :-- | :-- | :-- | :-- |
+| **F**   | 0   | 0   | 0   | 0   |
+| **I**   | 0   | 1   | 0   | 0   |
+| **S**   | 0   | 0   | 2   | 0   |
+| **H**   | 0   | 0   | 0   | 3   |
+
+1. If the letters don't match, then 0
+2. If they do match, then the value is the top-left neighbor + 1
+
+DP is used in the following applications:
+- DNA sequencing, *how similar are two animals DNA?*
+- `git diff`
+- string similarity problems, *Levenshtein distance* applied to spell check to determining the amount of copyright content is in something uploaded.
+
+## DP Takeaways
+- DP is useful when you're trying to optimise something given a constraint
+- DP is usable when the problem can be divided into discrete subproblems
+- DP solutions always involve a grid
+- each cell is a subproblem
+- there is no single formula for DP solutions
+
+# 10. K-Nearest Neighbours
+You need to classify citrus fruit into oranges or grapefruits.
+
+![](/content/images/2020/knn.svg)
+
+To make a decision, you could see what the 3 nearest neighbours were, and which ever has the majority vote will classify the mystery fruit.
+
+This can be generalised to any number of variables (i.e. features), in the above example there was only size and colour. So figuring out the distance between two points would be done by:
+
+<math xmlns="http://www.w3.org/1998/Math/MathML"><mstyle displaystyle="true"><mi>d</mi><mo>=</mo><msqrt><mrow><msup><mrow><mo>(</mo><msub><mi>x</mi><mn>1</mn></msub><mo>-</mo><msub><mi>x</mi><mn>2</mn></msub><mo>)</mo></mrow><mrow><mn>2</mn></mrow></msup><mo>+</mo><msup><mrow><mo>(</mo><msub><mi>y</mi><mn>1</mn></msub><mo>-</mo><msub><mi>y</mi><mn>2</mn></msub><mo>)</mo></mrow><mrow><mn>2</mn></mrow></msup></mrow></msqrt></mstyle></math>
+
+This expands to as many variables as required.
+
+<math xmlns="http://www.w3.org/1998/Math/MathML"><mstyle displaystyle="true"><mi>d</mi><mo>=</mo><msqrt><mrow><msup><mrow><mo>(</mo><msub><mi>x</mi><mn>1</mn></msub><mo>-</mo><msub><mi>x</mi><mn>2</mn></msub><mo>)</mo></mrow><mrow><mn>2</mn></mrow></msup><mo>+</mo><msup><mrow><mo>(</mo><msub><mi>y</mi><mn>1</mn></msub><mo>-</mo><msub><mi>y</mi><mn>2</mn></msub><mo>)</mo></mrow><mrow><mn>2</mn></mrow></msup><mo>+</mo><msup><mrow><mo>(</mo><msub><mi>z</mi><mn>1</mn></msub><mo>-</mo><msub><mi>z</mi><mn>2</mn></msub><mo>)</mo></mrow><mrow><mn>2</mn></mrow></msup><mo>+</mo><mo>...</mo><mi>e</mi><mi>t</mi><mi>c</mi></mrow></msqrt></mstyle></math>
+
+N.B. There were two more sections to this chapter *Regression* and *Intro to ML* which were very basic and not worth summarising.
+
+# 11. Where To Go Next
+This chapter does a very basic introduction to Binary Search Trees, Inverted Indexes, Fourier Transform, Parallel Algorithms, Map Reduce, Bloom Filters and a few others. They are summaries themselves.
+
 ## Other references
-[js Algorithms](https://github.com/trekhleb/javascript-algorithms)
+- [js Algorithms](https://github.com/trekhleb/javascript-algorithms)
+- [Animation of Algs from the book publisher](https://www.youtube.com/watch?v=oo_sb4luiPo)
