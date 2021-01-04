@@ -6,3 +6,6 @@ package-lock.json
 .vscode/settings.json
 .DS_Store
 content/.DS_Store
+content/images/.DS_Store
+content/.DS_Store
+.lazyimages.json
