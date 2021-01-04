@@ -25,7 +25,7 @@ If you think I could help you regarding tech, data or anything covered on this b
 - [Linkedin](https://www.linkedin.com/in/lukesingham/)
 
 ## What applications do you use?
-I found what other recommend useful, so here are my recommendations. The rationale behind these choices can be simplified to anti big tech monopolies and pro open source.
+I find what others recommend useful, so here are my recommendations. The rationale behind these choices can be simplified to anti big tech monopolies and pro open source.
 
 ✅ Applications I use and recommend:
 - Browser: [Firefox](https://www.mozilla.org/en-GB/firefox/new/)

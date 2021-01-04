@@ -14,7 +14,7 @@ It aims to be an open standard for the open web, where applications can get upda
 
 So why get one now?
 
-- Ideals of an open web. I don't have a Facebook account. I believe there are interesting blogs out there that I don't necessarily see unless they surfaced through the front page of search results or aggregators like Hacker News or Reddit.
+- Ideals of an open web. I don't have a Facebook account. I believe there are interesting blogs out there that I don't necessarily see unless they are surfaced through the front page of search results or aggregators like Hacker News or Reddit.
 - Solve the problem of - *huh this blog/site was really interesting. How do I keep track of new content without signing up to a thousand newsletters or entering a walled garden?*
 
 ## My Starting Point
