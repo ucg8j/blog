@@ -6,7 +6,7 @@ date_published: 2017-09-13T20:30:00.000Z
 date_updated: 2020-01-10T08:27:06.000Z
 tags: python, r
 layout: layouts/post.njk
-excerpt: "Anonymous Functions have no identity, no name, but still do stuff! They will not live in the global environment"
+excerpt: "A simple introduction and comparison of normal and anonymous functions in R and Python. Anonymous Functions also known as lambdas have no identity, no name, but still do stuff! They do not live in the global environment."
 ---
 
 > What's in a name? That which we call a rose by any other name would smell as sweet.
