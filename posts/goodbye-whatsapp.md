@@ -83,7 +83,7 @@ Or 📚 [The People Vs Tech](https://www.goodreads.com/book/show/39403470-the-pe
 
 
 ## 🚀 I'm onboard, what can I do?
-- ✅ Download Signal!
+- ✅ [Download Signal](https://signal.org/download/)!
 - >Be mindful that if you only delete WhatsApp from your device without using our in-app delete my account feature, your information will be stored with us for a longer period.
 https://www.whatsapp.com/legal/updates/privacy-policy?eea=0#privacy-policy-updates-how-we-work-with-other-facebook-companie
 
