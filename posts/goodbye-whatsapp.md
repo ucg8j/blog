@@ -69,10 +69,10 @@ The huge swaths of data allow for incredible levels of targetting. The more priv
 -Chamath Palihapitiya, former head of Facebook’s user growth team
 
 ## 😐 I won't make a difference if I move, I'm just one person
-This a [tragedy of the commons](https://en.wikipedia.org/wiki/Tragedy_of_the_commons) argument. People make the same argument when it comes to voting and democracy. If everyone believes that and doesn't vote, then the one dictator who wants to take power can walk down to the ballot box and cast that one vote and take control. An extreme hypothetical, but the point is, you might not feel like you might not make that much of a difference but collectively it does.
+This a [tragedy of the commons](https://en.wikipedia.org/wiki/Tragedy_of_the_commons) argument. People make the same argument when it comes to voting and democracy. If everyone believes that and doesn't vote, then the one dictator who wants to take power can walk down to the ballot box and cast that one vote and take control. An extreme hypothetical, but the point is, you might not feel like you make that much of a difference but collectively we make an impact.
 
 ## 🙃 I don't want another app on my phone
-This argument is pretty lazy but I have had it. We are downloading apps all the time, whether it's to pay for parking, collect coffee loyalty points, play games or the latest hip social media thing the cool kids are using. Ethical win for the price of moving your digits on that mini screen your eyes are glued to.
+This argument is pretty lazy but I have had it. We are downloading apps all the time, whether it's to pay for parking, collect coffee loyalty points, play games or the latest hip social media thing the cool kids are using. An ethical win for the price of moving your digits on that mini screen your eyes are glued to.
 
 ## 🤔 Ok, you've piqued my interest, where can I learn even more?
 The following Netflix documentaries:
@@ -97,13 +97,12 @@ https://www.whatsapp.com/legal/updates/privacy-policy?eea=0#privacy-policy-updat
 
 - If you found this post useful, feel free to share it.
 
-- Signal is a Not-For-Profit and relies on donations. You can donate directly. If you use Amazon Smile, you can set up the donations to go to the "Signal Technology Foundation".
+- Signal is a Not-For-Profit and relies on donations. You can [donate directly](https://signal.org/donate/). If you use Amazon Smile, you can set up the donations to go to the "Signal Technology Foundation".
 
 👋 See you on Signal!
 
 # ℹ️ Other tidbits
 - If your groups don't move, then a possible solution is to setup a WhatsApp<->Signal bridge using a separate phone+disposable sim using [Matrix bridges](https://matrix.org/bridges/)
 - [Interesting article](https://danielbmarkham.com/the-platform-is-the-enemy/), not on Whatsapp but social media generally.
->With the phone, I know who I want to call and why. I push buttons and we are connected. The tech helps me do what I've already decided to do. With Facebook, on the other hand, they get paid to show me things in a certain order. The premise is that I'm waiting (or "exploring" if you prefer) until I find something to interact with. The phone is a tool for me to use. I am the tool Facebook is using. I am no longer acting. I am reacting.
 - AMA on reddit - [here's the teddit link](https://teddit.net/r/technology/comments/kt91qk/signal_private_messenger_team_here_we_support_an/).
 - [Apparently](https://officechai.com/stories/whatsapps-original-founder-brian-actons-new-app-signal-becomes-top-free-app-in-india/) 'Signal has become India’s top free app on the App store. More than 100,000 users installed Signal across the app stores of Apple and Google in the last two days'
