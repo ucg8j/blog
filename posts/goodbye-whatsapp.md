@@ -51,7 +51,12 @@ Ok, this is more to relay a funny anecdote. the following tweet,
 # ✋ The objections
 
 ## 💬 But my network/group chats are on Whatsapp
-And people are moving in droves - just have a quick search on the net. And we've all done this before. In my lifetime, I've moved through the following for messenging:
+And people are moving in droves - just have a quick search on the net. The top downloaded app in several countries right now, is Signal.
+
+![](/content/images/2021/signal-top-downloaded-app.png)
+
+
+We've all done this before. In my lifetime, I've moved through the following for messaging:
 
 SMS/MMS ➡️ MSN ➡️ Myspace ➡️  FB ➡️ Whatsapp ➡️ Signal ✅
 
@@ -63,7 +68,7 @@ This is the same for Whatsapp. The chunky content you receive like files, videos
 >Arguing that you don't care about the right to privacy because you have nothing to hide is no different than saying you don't care about free speech because you have nothing to say." "When you say, ‘I have nothing to hide,’ you’re saying, ‘I don’t care about this right.’ You’re saying, ‘I don’t have this right, because I’ve got to the point where I have to justify it.’ The way rights work is, the government has to justify its intrusion into your rights.
 
 ## 🏛 Companies like Facebook are killing democracy
-The huge swaths of data allow for incredible levels of targetting. The more privacy and data you give up the more targetable and manipulatable you are. 'But *I'm* not influenced by ads' - sadly you may not be aware of it. 93% of Americans believe they are in the top 50% of drivers - this is [illusory superiority](https://en.wikipedia.org/wiki/Illusory_superiority). And based on the analytics, you and I very much are influenceable. Even if you are unmovable, frequently it's our friends unintentionally giving up our data, uploading photos of us, tagging us and just the mere fact they are part of your network allows data scientists to make highly accurate guesses of who you are - the inverse is true.
+The huge swaths of data allow for incredible levels of targeting. The more privacy and data you give up the more targetable and manipulatable you are. 'But *I'm* not influenced by ads' - sadly you may not be aware of it. 93% of Americans believe they are in the top 50% of drivers - this is [illusory superiority](https://en.wikipedia.org/wiki/Illusory_superiority). And based on the analytics, you and I very much are influenceable. Even if you are unmovable, frequently it's our friends unintentionally giving up our data, uploading photos of us, tagging us and just the mere fact they are part of your network allows data scientists to make highly accurate guesses of who you are - the inverse is true.
 
 >'We have created tools that are ripping apart the social fabric of how society works'
 -Chamath Palihapitiya, former head of Facebook’s user growth team
