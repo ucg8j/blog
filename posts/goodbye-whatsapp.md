@@ -19,7 +19,7 @@ Anyone who uses Whatsapp would have seen the ultimatum Facebook is handing its u
 
 In 2014 [Facebook bought Whatsapp for $19 billion](https://www.bbc.com/news/business-26266689). This was not out of charity. The intention was always to [integrate the valuable data](https://mashable.com/article/facebook-data-merge-privacy-concerns/) on you and monetise this huge purchase.
 
-Facebook's primary business is collecting and storing as much data about you to build complex models most people don't understand. But that doesn't matter as long as they can keep your eyeballs on their products they can sell your attention to whoever wants to buy it, from consumer product companies to people trying to manipulate election outcomes.
+Facebook's primary business is collecting and storing as much data about you to build complex models most people don't understand. But that doesn't matter as long as they can keep your eyeballs on their products - they can sell your attention to whoever wants to buy it, from consumer product companies to people trying to manipulate election outcomes.
 
 In typical Orwellian fashion it will try everything to stop you, from [paying for ads on the app store to be the first result when you search for 'Signal'](https://twitter.com/signalapp/status/1348079223701794819/) to texting you to come back.
 
@@ -33,7 +33,7 @@ In typical Orwellian fashion it will try everything to stop you, from [paying fo
 >As an organization we work very hard to **not know anything about you all. There aren’t analytics in the app, we use end to end encryption for everything** from your messages and calls/video as well as all your metadata so we have no idea who you talk to or what you talk about
 
 ## 🕵️‍♂️ Facebook is not about privacy
-Despite what Zuckerberg might say publicly Facebooks DNA is to get your data and sell it - it is not there to offer you privacy or the best private messenging service, it's an afterthought. As with this update to the t&cs they are demonstrating they can change the rules whenever they like to what they most prefer - more of your data. This is a little concerning:
+Despite what Zuckerberg might say publicly Facebook's DNA is to get your data and sell it - it is not there to offer you privacy or the best private messaging service, it's an afterthought. As with this update to the t&cs they are demonstrating they can change the rules whenever they like to what they most prefer - more of your data. This is a little concerning:
 
 ![](/content/images/2021/whatsapp-policy-diff.png)
 [Source](https://twitter.com/Shiftreduce/status/1347546599384346624)
