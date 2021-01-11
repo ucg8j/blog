@@ -1,5 +1,5 @@
 ---
-title: Goodbye Whatsapp, Hello Signal
+title: Goodbye Whatsapp - Hello Signal
 permalink: /goodbye-whatsapp/
 date: 2021-01-14
 tags: tech
