@@ -39,7 +39,7 @@ Despite what Zuckerberg might say publicly Facebook's DNA is to get your data an
 [Source](https://twitter.com/Shiftreduce/status/1347546599384346624)
 
 ## 💰 Whatsapp founder gave $50 mil to Signal
-Yes that's right, the co-founder of Whatsapp [gave $50 million dollars to Signal](https://signal.org/blog/signal-foundation/) to it's competitor. Why? He regrets selling to Facebook, when the Facebook Cambridge Analytica scandal happened several years back, he tweeted ['It is time. #deletefacebook'](https://twitter.com/brianacton/status/976231995846963201). Both Founders ended up leaving over disputes of monetisation - well we here now and it's time to delete Whatsapp too.
+Yes that's right, the co-founder of Whatsapp [gave $50 million dollars to Signal](https://signal.org/blog/signal-foundation/) to it's competitor. Why? He regrets selling to Facebook, when the Facebook Cambridge Analytica scandal happened several years back, he tweeted ['It is time. #deletefacebook'](https://twitter.com/brianacton/status/976231995846963201). Both Founders ended up leaving over disputes of monetisation - well we are here now and it's time to delete Whatsapp too.
 
 ## 🚀 Elon Musk says so!
 Ok, this is more to relay a funny anecdote. the following tweet,
