@@ -10,7 +10,7 @@ layout: layouts/post.njk
 [Image source](https://i.redd.it/0imry50rxy961.png)
 
 
-Anyone who uses Whatsapp would have seen the ultimatum Facebook is handing its users. The summary is, *give us your data or don't use our platform, you have until the 8th of Feb 2021*. The choice is very simple for me, Whatsapp has been something I have reluctantly used ever since it was bought by Facebook. However, not everyone in my network pays attention to privacy or values it as much as I value it. Reasonably my friends and family ask 'but why should stop using Whatsapp?' or 'but everyone I know is on Whatsapp'. These are great objections. In this post, I'll explain why I'm moving and hopefully tackle some of the common objections I've had.
+Anyone who uses Whatsapp would have seen the ultimatum Facebook is handing its users. The summary is, *give us your data or don't use our platform, you have until the 8th of Feb 2021*. The choice is very simple for me, Whatsapp has been something I have reluctantly used ever since it was bought by Facebook. However, not everyone in my network pays attention to privacy or values it as much as I value it. Reasonably my friends and family ask 'but why should I stop using Whatsapp?' or 'but everyone I know is on Whatsapp'. These are great objections. In this post, I'll explain why I'm moving and hopefully tackle some of the common objections I've had.
 
 # 👨‍⚖️ The case for Signal
 
