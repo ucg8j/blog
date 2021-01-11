@@ -33,13 +33,13 @@ In typical Orwellian fashion it will try everything to stop you, from [paying fo
 >As an organization we work very hard to **not know anything about you all. There aren’t analytics in the app, we use end to end encryption for everything** from your messages and calls/video as well as all your metadata so we have no idea who you talk to or what you talk about
 
 ## 🕵️‍♂️ Facebook is not about privacy
-Despite what Zuckerberg might say publicly, as with this change they are demonstrating they can change the rules whenever they like to what they most prefer, more of your data. This is a little concerning:
+Despite what Zuckerberg might say publicly Facebooks DNA is to get your data and sell it - it is not there to offer you privacy or the best private messenging service, it's an afterthought. As with this update to the t&cs they are demonstrating they can change the rules whenever they like to what they most prefer - more of your data. This is a little concerning:
 
 ![](/content/images/2021/whatsapp-policy-diff.png)
 [Source](https://twitter.com/Shiftreduce/status/1347546599384346624)
 
 ## 💰 Whatsapp founder gave $50 mil to Signal
-Yes that's right, the co-founder of Whatsapp [gave $50 million dollars to Signal](https://signal.org/blog/signal-foundation/) to it's competitor. Why? He regrets selling to Facebook, when the Facebook Cambridge Analytica scandal happened several years back, he tweeted ['It is time. #deletefacebook'](https://twitter.com/brianacton/status/976231995846963201). Both Founders ended up leaving over over disputes of monetisation - well we here now and it's time to delete Whatsapp too.
+Yes that's right, the co-founder of Whatsapp [gave $50 million dollars to Signal](https://signal.org/blog/signal-foundation/) to it's competitor. Why? He regrets selling to Facebook, when the Facebook Cambridge Analytica scandal happened several years back, he tweeted ['It is time. #deletefacebook'](https://twitter.com/brianacton/status/976231995846963201). Both Founders ended up leaving over disputes of monetisation - well we here now and it's time to delete Whatsapp too.
 
 ## 🚀 Elon Musk says so!
 Ok, this is more to relay a funny anecdote. the following tweet,
@@ -51,9 +51,9 @@ Ok, this is more to relay a funny anecdote. the following tweet,
 # ✋ The objections
 
 ## 💬 But my network/group chats are on Whatsapp
-And people are moving in droves. And we've done this before. In my lifetime, I've moved through the following for messenging:
+And people are moving in droves - just have a quick search on the net. And we've all done this before. In my lifetime, I've moved through the following for messenging:
 
-SMS/MMS ➡️ MSN ➡️ myspace ➡️  FB ➡️ Whatsapp ➡️ Signal ✅
+SMS/MMS ➡️ MSN ➡️ Myspace ➡️  FB ➡️ Whatsapp ➡️ Signal ✅
 
 ## 📱 Signal takes up too much room on my phone
 This is the same for Whatsapp. The chunky content you receive like files, videos and voice messages. You can clear out this content on either app.
@@ -65,8 +65,8 @@ This is the same for Whatsapp. The chunky content you receive like files, videos
 ## 🏛 Companies like Facebook are killing democracy
 The huge swaths of data allow for incredible levels of targetting. The more privacy and data you give up the more targetable and manipulatable you are. 'But *I'm* not influenced by ads' - sadly you may not be aware of it. 93% of Americans believe they are in the top 50% of drivers - this is [illusory superiority](https://en.wikipedia.org/wiki/Illusory_superiority). And based on the analytics, you and I very much are influenceable. Even if you are unmovable, frequently it's our friends unintentionally giving up our data, uploading photos of us, tagging us and just the mere fact they are part of your network allows data scientists to make highly accurate guesses of who you are - the inverse is true.
 
->We have created tools that are ripping apart the social fabric of how society works
-- Chamath Palihapitiya, who once led Facebook’s user growth team
+>'We have created tools that are ripping apart the social fabric of how society works'
+-Chamath Palihapitiya, former head of Facebook’s user growth team
 
 ## 😐 I won't make a difference if I move, I'm just one person
 This a [tragedy of the commons](https://en.wikipedia.org/wiki/Tragedy_of_the_commons) argument. People make the same argument when it comes to voting and democracy. If everyone believes that and doesn't vote, then the one dictator who wants to take power can walk down to the ballot box and cast that one vote and take control. An extreme hypothetical, but the point is, you might not feel like you might not make that much of a difference but collectively it does.
