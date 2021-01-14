@@ -7,8 +7,6 @@ excerpt: With the update to Whatsapp's i.e. Facebook's terms and conditions forc
 layout: layouts/post.njk
 ---
 ![](/content/images/2021/data-linked-to-you.png)
-[Image source](https://i.redd.it/0imry50rxy961.png)
-
 
 Anyone who uses Whatsapp would have seen the ultimatum Facebook is handing its users. The summary is, *give us your data or don't use our platform, you have until the 8th of Feb 2021*. The choice is very simple for me, Whatsapp has been something I have reluctantly used ever since it was bought by Facebook. However, not everyone in my network pays attention to privacy or values it as much as I value it. Reasonably my friends and family ask 'but why should I stop using Whatsapp?' or 'but everyone I know is on Whatsapp'. These are great objections. In this post, I'll explain why I'm moving and hopefully tackle some of the common objections I've had.
 
@@ -21,7 +19,11 @@ In 2014 [Facebook bought Whatsapp for $19 billion](https://www.bbc.com/news/busi
 
 Facebook's primary business is collecting and storing as much data about you to build complex models most people don't understand. But that doesn't matter as long as they can keep your eyeballs on their products - they can sell your attention to whoever wants to buy it, from consumer product companies to people trying to manipulate election outcomes.
 
-In typical Orwellian fashion it will try everything to stop you, from [paying for ads on the app store to be the first result when you search for 'Signal'](https://twitter.com/signalapp/status/1348079223701794819/) to texting you to come back.
+The worst result of Facebook's giant panopticon on the world is the undermining of democracy. [Russian influence on the US 2016 election](https://theconversation.com/fact-check-us-what-is-the-impact-of-russian-interference-in-the-us-presidential-election-146711) was confirmed by intelligence agencies. Within the US the Trump campaign utilised [Cambridge Analytica to profile American voters using Facebook](https://www.bbc.com/news/technology-43581892) - providing them the information on who to target i.e. which Facebook bubbles. From here they launched a wholesale disinformation campaign using Facebook. In Brasil at the inauguration of Bolsonaro [the crowd cheered 'Facebook Facebook Facebook' and 'Whatsapp Whatsapp Whatsapp'](https://www.vox.com/policy-and-politics/2019/1/22/18177076/social-media-facebook-far-right-authoritarian-populism) - they were crediting these platforms for the win, which had a wealth consortium funding a massive fake news campaign. The examples to list are too long. Facebook empowers authoritarian movements. [An analysis of a UK government inquiry](https://www.theguardian.com/technology/2019/feb/18/a-digital-gangster-destroying-democracy-the-damning-verdict-on-facebook), put it well
+
+>Facebook is an out-of-control train wreck that is destroying democracy and must be brought under control
+
+One way to do that is by not using it's platform or the platforms like Whatsapp it has purchased to further increase it's power. But in typical Orwellian fashion it will try everything to stop you from leaving, from [paying for ads on the app store to be the first result when you search for 'Signal'](https://twitter.com/signalapp/status/1348079223701794819/) to texting you to come back.
 
 ![](/content/images/2021/fb-please-come-back.png)
 
@@ -33,13 +35,12 @@ In typical Orwellian fashion it will try everything to stop you, from [paying fo
 >As an organization we work very hard to **not know anything about you all. There aren’t analytics in the app, we use end to end encryption for everything** from your messages and calls/video as well as all your metadata so we have no idea who you talk to or what you talk about
 
 ## 🕵️‍♂️ Facebook is not about privacy
-Despite what Zuckerberg might say publicly Facebook's DNA is to get your data and sell it - it is not there to offer you privacy or the best private messaging service, it's an afterthought. As with this update to the t&cs they are demonstrating they can change the rules whenever they like to what they most prefer - more of your data. This is a little concerning:
+Despite what Zuckerberg might say publicly, it is deeply embedded into Facebook's DNA to get your data and sell it - it is not there to offer you privacy or the best private messaging service, it's an afterthought. As with this update to the t&cs they are demonstrating they can change the rules whenever they like to what they most prefer - more of your data. [A tweet](https://twitter.com/Shiftreduce/status/1347546599384346624) revealed a subtle change of Whatsapp's end to end encryption paper which is a little concerning:
 
 ![](/content/images/2021/whatsapp-policy-diff.png)
-[Source](https://twitter.com/Shiftreduce/status/1347546599384346624)
 
 ## 💰 Whatsapp founder gave $50 mil to Signal
-Yes that's right, the co-founder of Whatsapp [gave $50 million dollars to Signal](https://signal.org/blog/signal-foundation/) to it's competitor. Why? He regrets selling to Facebook, when the Facebook Cambridge Analytica scandal happened several years back, he tweeted ['It is time. #deletefacebook'](https://twitter.com/brianacton/status/976231995846963201). Both Founders ended up leaving over disputes of monetisation - well we are here now and it's time to delete Whatsapp too.
+Yes that's right, the co-founder of Whatsapp [gave $50 million dollars to Signal](https://signal.org/blog/signal-foundation/) to it's competitor. Why? He regrets selling to Facebook, when the [Facebook Cambridge Analytica scandal](https://www.bbc.com/news/technology-54722362) happened several years back, he tweeted ['It is time. #deletefacebook'](https://twitter.com/brianacton/status/976231995846963201). Both Founders ended up leaving over disputes of monetisation - well we are here now and it's time to delete Whatsapp too.
 
 ## 🚀 Elon Musk says so!
 Ok, this is more to relay a funny anecdote. the following tweet,
@@ -58,14 +59,16 @@ And people are moving in droves - just have a quick search on the net. The top d
 
 We've all done this before. In my lifetime, I've moved through the following for messaging:
 
-SMS/MMS ➡️ MSN ➡️ Myspace ➡️  FB ➡️ Whatsapp ➡️ Signal ✅
+SMS ➡️ MSN ➡️ Myspace ➡️  FB ➡️ Hangouts ➡️ Whatsapp ➡️ Signal ✅
 
 ## 📱 Signal takes up too much room on my phone
-This is the same for Whatsapp. The chunky content you receive like files, videos and voice messages. You can clear out this content on either app.
+This is the same for Whatsapp. The chunky content you receive like files, videos and voice messages can be cleared out on either app.
 
 ## 🔎 I've got nothing to hide, Facebook can have my data
 [Edward Snowden counters](https://en.wikipedia.org/wiki/Nothing_to_hide_argument#Criticism) this argument very well:
 >Arguing that you don't care about the right to privacy because you have nothing to hide is no different than saying you don't care about free speech because you have nothing to say." "When you say, ‘I have nothing to hide,’ you’re saying, ‘I don’t care about this right.’ You’re saying, ‘I don’t have this right, because I’ve got to the point where I have to justify it.’ The way rights work is, the government has to justify its intrusion into your rights.
+
+Handing our data over to this giant profiling machine is aiding the corrosion of our democratic societies.
 
 ## 🏛 Companies like Facebook are killing democracy
 The huge swaths of data allow for incredible levels of targeting. The more privacy and data you give up the more targetable and manipulatable you are. 'But *I'm* not influenced by ads' - sadly you may not be aware of it. 93% of Americans believe they are in the top 50% of drivers - this is [illusory superiority](https://en.wikipedia.org/wiki/Illusory_superiority). And based on the analytics, you and I very much are influenceable. Even if you are unmovable, frequently it's our friends unintentionally giving up our data, uploading photos of us, tagging us and just the mere fact they are part of your network allows data scientists to make highly accurate guesses of who you are - the inverse is true.
@@ -77,14 +80,14 @@ The huge swaths of data allow for incredible levels of targeting. The more priva
 This a [tragedy of the commons](https://en.wikipedia.org/wiki/Tragedy_of_the_commons) argument. People make the same argument when it comes to voting and democracy. If everyone believes that and doesn't vote, then the one dictator who wants to take power can walk down to the ballot box and cast that one vote and take control. An extreme hypothetical, but the point is, you might not feel like you make that much of a difference but collectively we make an impact.
 
 ## 🙃 I don't want another app on my phone
-This argument is pretty lazy but I have had it. We are downloading apps all the time, whether it's to pay for parking, collect coffee loyalty points, play games or the latest hip social media thing the cool kids are using. An ethical win for the price of moving your digits on that mini screen your eyes are glued to.
+This argument is pretty lazy but I have had it. We are downloading apps all the time, whether it's to pay for parking, collect coffee loyalty points, play games or the latest hip social media thing the cool kids are using. This is an ethical win for the price of moving your digits on that mini screen your eyes are glued to.
 
 ## 🤔 Ok, you've piqued my interest, where can I learn even more?
 The following Netflix documentaries:
 - [The Great Hack](https://www.imdb.com/title/tt4736550/?ref_=wl_li_tt)
 - [The Social Dilemma](https://www.imdb.com/title/tt11464826/?ref_=vp_back)
 
-Or 📚 [The People Vs Tech](https://www.goodreads.com/book/show/39403470-the-people-vs-tech)
+Or 📚 [The People Vs Tech](https://amzn.to/3i7zyCk)
 
 
 ## 🚀 I'm onboard, what can I do?
@@ -96,7 +99,7 @@ https://www.whatsapp.com/legal/updates/privacy-policy?eea=0#privacy-policy-updat
 
 - Update your 'bio' message to notify your contacts you won't be on Whatsapp after the 8th of Feb.
 
-- Leave a 1 star review on the app store.
+- Leave Whatsapp a 1 star review on the app store.
 
 - For easier transition of group chats, [set your Signal group and send a link](https://support.signal.org/hc/en-us/articles/360051086971-Group-Link-or-QR-code) to your whatsapp group to help them migrate over.
 
