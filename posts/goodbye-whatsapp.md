@@ -77,7 +77,9 @@ The huge swaths of data allow for incredible levels of targeting. The more priva
 -Chamath Palihapitiya, former head of Facebook’s user growth team
 
 ## 😐 I won't make a difference if I move, I'm just one person
-This a [tragedy of the commons](https://en.wikipedia.org/wiki/Tragedy_of_the_commons) argument. People make the same argument when it comes to voting and democracy. If everyone believes that and doesn't vote, then the one dictator who wants to take power can walk down to the ballot box and cast that one vote and take control. An extreme hypothetical, but the point is, you might not feel like you make that much of a difference but collectively we make an impact.
+This a [paradox of voting](https://en.wikipedia.org/wiki/Paradox_of_voting#:~:text=The%20paradox%20of%20voting%2C%20also,normally%20exceed%20the%20expected%20benefits.&text=Moreover%2C%20the%20expected%20benefits%20are,will%20never%20be%20certainly%20pivotal.) and an [apathy towards action](https://en.wikipedia.org/wiki/Voter_apathy#:~:text=In%20political%20science%2C%20voter%20apathy,vote%20where%20voting%20is%20compulsory.). The argument is made when it comes to voting and democracy. If everyone believes it won't make a diferrence and doesn't vote, then the one dictator who wants to take power can walk down to the ballot box and cast that one vote and take control. An extreme hypothetical, but the point is, you might not feel like you make that much of a difference but collectively we make an impact.
+
+*Update 16/01/2021 - [Signal's growth of downloads is truly mindboggling](../signal-is-better-than-telegram/#6.-signal's-growth-is-outpacing-the-alternatives-📈)*
 
 ## 🙃 I don't want another app on my phone
 This argument is pretty lazy but I have had it. We are downloading apps all the time, whether it's to pay for parking, collect coffee loyalty points, play games or the latest hip social media thing the cool kids are using. This is an ethical win for the price of moving your digits on that mini screen your eyes are glued to.
