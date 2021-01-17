@@ -2,8 +2,7 @@
 title: Binary Classification in Python - Who's Going to Leave Next?
 slug: whos-going-to-leave-next
 permalink: "/whos-going-to-leave-next/"
-date_published: 2017-07-12T10:41:53.000Z
-date_updated: 2019-08-04T12:12:11.000Z
+date: 2017-07-12
 feature_image: /content/images/2017/11/bar-beach-sunset.jpg
 excerpt: "This post goes through a binary classification problem with Python's machine learning library scikit-learn."
 tags: python, machine-learning, viz

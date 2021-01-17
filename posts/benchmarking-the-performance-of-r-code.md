@@ -3,8 +3,7 @@ title: Benchmarking the Performance of R Code
 permalink: "/benchmarking-the-performance-of-r-code/"
 slug: benchmarking-the-performance-of-r-code
 excerpt: "To assess the performance of R code there's a great little package called microbenchmark. I was particularly interested in the performance increase of a shiny application"
-date_published: 2017-06-18T02:19:21.000Z
-date_updated: 2019-08-04T12:07:08.000Z
+date: 2017-06-18
 tags: r, microbenchmark, make-it-fast
 layout: layouts/post.njk
 ---

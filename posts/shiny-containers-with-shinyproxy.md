@@ -4,8 +4,7 @@ slug: shiny-containers-with-shinyproxy
 permalink: "/shiny-containers-with-shinyproxy/"
 feature_image: /content/images/2017/10/background-1.jpg
 excerpt: "Setup shinyproxy as a production level way of deploying multiple containerised shiny apps with authentication. Additionally I'll"
-date_published: 2017-10-11T12:07:06.000Z
-date_updated: 2020-02-29T22:46:57.000Z
+date: 2017-10-11
 tags: python, r, shiny, docker, nginx, deployment, springboot
 layout: layouts/post.njk
 ---

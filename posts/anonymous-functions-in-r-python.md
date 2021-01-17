@@ -2,8 +2,7 @@
 title: Anonymous Functions in R and Python
 slug: anonymous-functions-in-r-python
 permalink: "/anonymous-functions-in-r-python/"
-date_published: 2017-09-13T20:30:00.000Z
-date_updated: 2020-01-10T08:27:06.000Z
+date: 2017-09-13
 tags: python, r
 layout: layouts/post.njk
 excerpt: "A simple introduction and comparison of normal and anonymous functions in R and Python. Anonymous Functions also known as lambdas have no identity, no name, but still do stuff! They do not live in the global environment."

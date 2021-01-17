@@ -3,8 +3,7 @@ title: How to Make a Wordcloud Using R
 permalink: /how-to-make-a-word-cloud-using-r/
 slug: how-to-make-a-word-cloud-using-r
 excerpt: "Recently I have been using R for some basic data visualisations, outputs like word clouds and heat maps. I don't have a programming background so upon first look the R command line based environment can seem a little daunting. However, the ease at which I have been able to create some pretty amazing outputs with very little code has surprised me"
-date_published: 2014-06-19T00:57:57.000Z
-date_updated: 2019-08-04T12:09:09.000Z
+date: 2014-06-19
 tags: r, viz, text-mining
 layout: layouts/post.njk
 ---

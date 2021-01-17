@@ -3,8 +3,7 @@ title: Rooting a Oneplus 3T Phone
 slug: rooting-a-oneplus-3t-phone
 permalink: "/rooting-a-oneplus-3t-phone/"
 excerpt: "I recently rooted my Oneplus 3T phone on Android 7.1.1. Finding the right information was not as easy as I thought it might be, so here's…"
-date_published: 2017-07-05T12:46:57.000Z
-date_updated: 2019-08-04T12:06:46.000Z
+date: 2017-07-05
 tags: android
 layout: layouts/post.njk
 ---

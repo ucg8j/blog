@@ -2,8 +2,7 @@
 title: Shiny (R) Web App Performance - Profiling
 slug: shiny-r-performance-profiling
 permalink: "/shiny-r-performance-profiling/"
-date_published: 2017-08-06T11:27:18.000Z
-date_updated: 2019-08-04T12:13:13.000Z
+date: 2017-08-06
 tags: r, make-it-fast, shiny
 layout: layouts/post.njk
 excerpt: "Introduced at the 2016 R conference, the profvis package offers a visual way of inspecting the call stack and highlights the most memory…"

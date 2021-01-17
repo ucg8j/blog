@@ -3,8 +3,7 @@ title: A Quick Look into Stamp Duties & Land Taxes
 slug: a-look-into-land-taxes
 permalink: "/a-look-into-land-taxes/"
 excerpt: "Stamp duties are a transaction tax. Prior to the digital era, the transfer of legal ownership presented a convenient time for governments to levy a tax. Upon the transfer of ownership a stamp duty was paid and the relevant transfer of ownership document was either stamped"
-date_published: 2015-07-22T10:40:06.000Z
-date_updated: 2019-09-22T18:11:57.000Z
+date: 2015-07-22
 tags: economics, australia, tax, politics
 layout: layouts/post.njk
 ---

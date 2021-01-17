@@ -4,8 +4,7 @@ slug: how-to-deploy-plotlys-dash-using-shinyproxy
 permalink: "/how-to-deploy-plotlys-dash-using-shinyproxy/"
 feature_image: /content/images/2017/11/background-horses.jpg
 excerpt: "In a previous post I established that I could easily deploy a 'Hello World' flask.py web application using Shinyproxy. Therefore, I thought"
-date_published: 2017-11-14T13:44:50.000Z
-date_updated: 2019-08-04T12:16:05.000Z
+date: 2017-11-14
 tags: python, docker, dash.py, shinyproxy
 layout: layouts/post.njk
 ---

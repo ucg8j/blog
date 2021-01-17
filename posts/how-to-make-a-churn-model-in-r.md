@@ -2,8 +2,7 @@
 title: How to Make a Churn Model in R
 slug: how-to-make-a-churn-model-in-r
 permalink: "/how-to-make-a-churn-model-in-r/"
-date_published: 2017-11-21T11:11:24.000Z
-date_updated: 2020-01-02T13:57:13.000Z
+date: 2017-11-21
 feature_image: /content/images/2017/11/brighton-palace-pier.jpg
 excerpt: "The following post details how to make a churn model in R. It was part of an interview process for which a take home assignment was one of"
 tags: machine-learning, r

@@ -3,8 +3,7 @@ title: Post War but not Post Confict
 permalink: /post-war/
 slug: post-war
 excerpt: "What happened in Sri Lanka was a major Rwanda-like atrocity, in a different scale, where the West didn't care. There was plenty of early warning. This conflict has been going on for years and decades. Plenty of things could have been done to prevent it. But there was not enough interest"
-date_published: 2013-08-21T20:52:00.000Z
-date_updated: 2020-02-27T22:08:48.000Z
+date: 2013-08-21
 tags: CHOGM, Sri Lanka, Civil War, Human Rights, Tamil, United Nations
 layout: layouts/post.njk
 ---
