@@ -1,6 +1,7 @@
 ---
 title: Grokking Algorithms - Summary
 permalink: /grokking-algorithms/
+slug: grokking-algorithms
 date: 2021-01-04
 tags: book, software, algorithms
 excerpt: Grokking Algorithms* is a beautifully formatted book that explains complex material simply using pictures, analogies and high level practical explanations. This post is a review and summary of the Grokking Algorithms book.

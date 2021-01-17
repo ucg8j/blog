@@ -1,6 +1,7 @@
 ---
 title: The Mythical Man Month - Review
 permalink: /mythical-man-month-review/
+slug: mythical-man-month-review
 date: 2020-11-18
 tags: book, review, software, management
 excerpt: A 2020 review of the classic software engineering management book.
