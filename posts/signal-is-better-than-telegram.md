@@ -1,7 +1,6 @@
 ---
 title: 8 Reasons Why Signal is Better than Telegram
 permalink: /signal-is-better-than-telegram/
-slug: signal-is-better-than-telegram
 date: 2021-01-16
 tags: tech
 excerpt: If you decided it's time to dump Whatsapp and are choosing a better messaging app, then you're likely choosing between Signal and Telegram. Here's why Signal is superior to Telegram

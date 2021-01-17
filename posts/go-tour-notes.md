@@ -1,7 +1,6 @@
 ---
 title: Go Tour Summary
 permalink: /go-tour-summary/
-slug: go-tour-summary
 date: 2020-12-07
 tags: programming, go
 excerpt: These are my summary notes of 'A Tour of Go' - which is meant for people who are familiar with programming to have a quick tour

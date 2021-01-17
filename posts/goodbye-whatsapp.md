@@ -1,7 +1,6 @@
 ---
 title: Goodbye Whatsapp - Hello Signal
 permalink: /goodbye-whatsapp/
-slug: goodbye-whatsapp
 date: 2021-01-11
 tags: tech
 excerpt: With the update to Whatsapp's i.e. Facebook's terms and conditions forcing even more data overreach, the time has come to say goodbye to Whatsapp

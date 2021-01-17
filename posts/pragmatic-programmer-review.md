@@ -1,7 +1,6 @@
 ---
 title: The Pragmatic Programmer - Review
 permalink: /pragmatic-programmer-review/
-slug: pragmatic-programmer-review
 date: 2020-12-28
 tags: book, review, software, management
 excerpt: A 2020 review of the classic software engineering management book.
