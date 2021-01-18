@@ -85,6 +85,9 @@ footer {
   margin-top: 2rem;
   color: var(--meddarkgray);
 }
+.rss-footer {
+  float: right;
+}
 main {
   padding: 0rem 0.25rem;
 }
