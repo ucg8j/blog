@@ -16,7 +16,7 @@ Telegram is for profit 💰. I want the reassurance that the profit motive isn't
 
 ![](/content/images/2021/data-collected-and-linked-to-you.png)
 ## 3. Signal's Code Is Completely Open Source 🔍
-[Here is Signal's code](https://github.com/signalapp) - the fact that it is publically available is important for scrutiny to occur. Telegram's code is only partially open source. Most importantly, Telegram's server software - where your valuable messages get sent - is not open source. How can we trust what we can't see?
+[Here is Signal's code](https://github.com/signalapp) - the fact that it is publicly available is important for scrutiny to occur. Telegram's code is only partially open source. Most importantly, Telegram's server software - where your valuable messages get sent - is not open source. How can we trust what we can't see?
 
 ## 4. Signals E2E is the best 🥇
 Signal's end-to-end encryption protocol is [regarded as best in class](https://www.wired.com/story/signal-encryption-protocol-hacker-lexicon/), and is widely regarded as far superior to Telegram's. The [security industry has heavily criticised Telegram's encryption model](https://security.stackexchange.com/a/49802/115711).
