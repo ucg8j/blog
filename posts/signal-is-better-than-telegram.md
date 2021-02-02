@@ -24,7 +24,7 @@ Signal's end-to-end encryption protocol is [regarded as best in class](https://w
 ## 5. Signal Protects You By Default 🔒
 All of Signal's messages and content are encrypted by default. Not the case for Telegram.
 
-## 6. Signal's Passes Independently Verified ✅
+## 6. Signal Is Independently Verified ✅
 Telegram does not have a great reputation when it comes to independent audits.  In contrast, Signal's protocol has been [inspected by industry experts and given the thumbs-up](https://threatpost.com/signal-audit-reveals-protocol-cryptographically-sound/121892/) 👍.
 
 ## 7. Signal's Growth Is Outpacing The Alternatives 📈
