@@ -39,9 +39,9 @@ I find what others recommend useful, so here are my recommendations. The rationa
 
 🟠 Applications I wish I didn't use:
 - Chrome (no choice at work)
-- Whatsapp (the network effect - gradually moving my network to Signal)
 
 ❌ Applications I don't use and don't recommend:
+- [Whatsapp](../goodbye-whatsapp/)
 - Facebook
 - Instagram
 - TikTok
