@@ -13,7 +13,7 @@ draft: true
 - how does the Name Node know where everything is? Firstly it has a FS image where everything is. And an edit log of changes that have been made.
 - if the name node went down you wouldn’t know where to put/get things from HDFS. So there are two name nodes an active and a backup/passive one.
 
-- on the name node, run hdfs balancer after pruning to try and recover nodes i.e. reudce them below 85% where they start to fail. Can also run this with different thresholds if necessary (see HDFS Runbook ([https://rtfm.palantir.build/docs/hadoop-runbook/master/maintenance/pages/rebalance.html](https://rtfm.palantir.build/docs/hadoop-runbook/master/maintenance/pages/rebalance.html))) and this [http://www.informit.com/articles/article.aspx?p=2755708&seqNum=5](http://www.informit.com/articles/article.aspx?p=2755708&amp;seqNum=5)
+- on the name node, run hdfs balancer after pruning to try and recover nodes i.e. reudce them below 85% where they start to fail. Can also run this with different thresholds  and this [http://www.informit.com/articles/article.aspx?p=2755708&seqNum=5](http://www.informit.com/articles/article.aspx?p=2755708&amp;seqNum=5)
 
 * you can increase bandwidth whilst (though why not before) hdfs balancer is running: ./hdfs dfsadmin -setBalancerBandwidth 104857760
 
@@ -95,4 +95,3 @@ historicisation of a dataset that has a changing schema
     columns, structs = get_all_fieldnames(list_of_dfs)
     
     all_super_dfs = [get_super_dataset(df) for df in list_of_dfs] 
-    
