@@ -14,7 +14,7 @@ layout: layouts/post.njk
 
 ![](/content/images/2020/pragmatic-programmer-frontcover.png#thumbnail)
 
-The Pragmatic Programmer is a very good book full of practical advice. It's written with little *Tip* boxes which are the tl:dr; of a particular section. There's a healthy sprinkling of Dad jokes throughout the book 😁.
+The Pragmatic Programmer is a very good book full of practical advice. It's written with little *Tip* boxes which are the tl:dr; of a particular section. Plus, there's a healthy sprinkling of Dad jokes throughout the book 😁.
 
 Unlike, a [Mythical Man Month](/mythical-man-month-review/), I would recommend this to seasoned professionals as well as newbies. Though this also has a lot of content for the seasoned professional, it is much easier to parse. Instead of having long anecdotes about long since dead technology to gleam the lesson, this book is to the point, with helpful tip boxes, exercises and the examples are mostly relevant to today.
 
@@ -27,7 +27,7 @@ Whilst I agree with the principle, the accompanying pages advocate for the creat
 I've not observed anyone creating a mini-language during a project. What I think is more practical and occurs in real-world projects is creating packages of functions whose scope is limited to a particular domain. Such that the ontological representation, the digital recreation of real world concepts happens with a set of classes and/or functions that map to the domain.
 
 #### Chp 3 - The Basic Tools
-This chapter discusses tools that a pragmatic programmer should have in their tool kit. Inevitable the technological tools have changed in the intervening years. Well, eMacs and Vi are still around, but the recommended plugins etc. are out of date. If you don't have a good toolset already, I'd recommend going through the MIT's [The Missing Semester of Your CS Education.](https://missing.csail.mit.edu/)
+This chapter discusses tools that a pragmatic programmer should have in their tool kit. Inevitably the technological tools have changed in the intervening years. Well, eMacs and Vi are still around, but the recommended plugins etc. are out of date. If you don't have a good toolset already, I'd recommend going through MIT's [The Missing Semester of Your CS Education.](https://missing.csail.mit.edu/)
 
 
 ## ✅ Major (Useful) Points of the Book
@@ -35,7 +35,7 @@ This chapter discusses tools that a pragmatic programmer should have in their to
 It's quite a common occurrence for technical people when asked by a stakeholder to feel anxious or pressured to provide an estimate of when something can be done on the spot. For a particular data request, this might mean involving the stakeholder in the tradeoff between how accurate vs how quick the deliverable's turnaround is.
 
 ### 🍸 DRY
-Don't repeat yourself (DRY) is a commonly held maxim of programming. The Pragramatic Programmer exposits the common causes for duplication. This can arise from multiple places, project requirements, multiple target platforms, multiple programming languages being used in one system, laziness etc. A programmer may have to duplicate the schema of a database table to represent it as a class in their programme. Documentation in code as comments and as a separate accompanying document. But these can be duplicative of each other.
+Don't repeat yourself (DRY) is a commonly held maxim of programming. The Pragramatic Programmer exposits the common causes for duplication. This can arise from multiple places, project requirements, multiple target platforms, multiple programming languages being used in one system, laziness etc. A programmer may have to duplicate the schema of a database table to represent it as a class in their program. Documentation in code as comments and as a separate accompanying document. But these can be duplicative of each other.
 
 > good code has lots of comments
 
@@ -60,7 +60,7 @@ Better known these days as 'agile development', 'MVP' and 'iteration'. *Tracer B
 *Involve your users* and ask if they need high accuracy or a ballpark figure for the estimate. First understand the problem space, this will involve working with your user to understand not just what they are asking, but what their *actual problem* is. Then whiteboard what the system is you will build to solve it. If this is large enough a system, then estimate how long each component could take to build. Keep track of this estimate so you can track the accuracy of your estimates. As you go through each project iteration (sprint) update the estimate based on any change in delivery schedule that may now be apparent.
 
 A fun fact from a footnote:
->What is the value of π? "3"... if you are a legislator. In 1987, Indiana State Legistlature House Bill No. 246 attempted to decree that henceforth π should have the value of "3".
+>What is the value of π? "3"... if you are a legislator. In 1987, Indiana State Legislature House Bill No. 246 attempted to decree that henceforth π should have the value of "3".
 
 Lastly, when asked for an estimate *you say, "I'll get back to you"*.
 
@@ -86,7 +86,7 @@ The book talks about Java Object Oriented examples. However the principle applie
 >Tip 36: Minimise coupling between modules
 
 ### 🎛 Design for Concurrency
-The book uses the example of making a cocktail and all the tasks that are required from 'open blender' to 'get pink umbrellas'. If you analyse all of these tasks, some are dependent on others to complete. But many area able to happen in parallel to another task. Diagrams can help design for concurrency.
+The book uses the example of making a cocktail and all the tasks that are required from 'open blender' to 'get pink umbrellas'. If you analyse all of these tasks, some are dependent on others to complete. But many tasks are able to happen in parallel to another task. Diagrams can help design for concurrency.
 
 ![](/content/images/2020/design-for-concurrency.svg)
 
