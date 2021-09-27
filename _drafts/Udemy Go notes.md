@@ -391,6 +391,12 @@ func main () {
 ```
 
 ### Method Sets
+[TODO:]
+
+### Marshalling JSON data
+From wiki
+>[Marshalling] the process of transforming the memory representation of an object into a data format suitable for storage or transmission.... similar or synonymous to serialization.
+
 
 
 **Fun fact** - Programs used to be written in one large piece of code, e.g. Basic, which had goto statements to jumped between sections of the code. So it was very difficult to figure out a the logic of the program - true spaghetti code.

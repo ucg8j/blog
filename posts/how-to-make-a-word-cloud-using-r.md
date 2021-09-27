@@ -3,12 +3,10 @@ title: How to Make a Wordcloud Using R
 permalink: /how-to-make-a-word-cloud-using-r/
 slug: how-to-make-a-word-cloud-using-r
 excerpt: "Recently I have been using R for some basic data visualisations, outputs like word clouds and heat maps. I don't have a programming background so upon first look the R command line based environment can seem a little daunting. However, the ease at which I have been able to create some pretty amazing outputs with very little code has surprised me"
-date: 2014-06-19
+date: 2013-06-19
 tags: r, viz, text-mining
 layout: layouts/post.njk
 ---
-
-_Written about a year ago and reposted here..._
 
 Recently I have been using R for some basic data visualisations, outputs like word clouds and heat maps. I don't have a programming background so upon first look the R command line based environment can seem a little daunting. However, the ease at which I have been able to create some pretty amazing outputs with very little code has surprised me. In this blog I will attempt to share the steps in a simple process as well as the small amount of code that is needed.
 
@@ -30,9 +28,10 @@ library(SnowballC)
 
 This is the point where you load the text with which you would like to create your word cloud with. For this example I am using [JFK's 'We choose to go to the Moon'](http://en.wikipedia.org/wiki/We_choose_to_go_to_the_Moon) speech.
 
+Create a new folder e.g. `~/Desktop/test/` containing a `speech.txt` file.
 ```r
 # Create a corpus variable
-mooncloud <- Corpus(DirSource("/put_your_path_to_your_text_here/"))
+mooncloud <- Corpus(DirSource("~/Desktop/test/"))
 
 # Make sure it has loaded properly - have a look!
 inspect(mooncloud)
