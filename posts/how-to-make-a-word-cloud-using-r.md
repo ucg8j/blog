@@ -30,9 +30,10 @@ library(SnowballC)
 
 This is the point where you load the text with which you would like to create your word cloud with. For this example I am using [JFK's 'We choose to go to the Moon'](http://en.wikipedia.org/wiki/We_choose_to_go_to_the_Moon) speech.
 
+Create a new folder e.g. `~/Desktop/test/` containing a `speech.txt` file.
 ```r
 # Create a corpus variable
-mooncloud <- Corpus(DirSource("/put_your_path_to_your_text_here/"))
+mooncloud <- Corpus(DirSource("~/Desktop/test/"))
 
 # Make sure it has loaded properly - have a look!
 inspect(mooncloud)
