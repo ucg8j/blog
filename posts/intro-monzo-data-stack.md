@@ -8,6 +8,8 @@ excerpt: The modern data stack is a collection of rapidly evolving technologies 
 layout: layouts/post.njk
 ---
 
+*Originally posted on [Data@Monzo Medium](https://medium.com/data-monzo/an-introduction-to-monzos-data-stack-827ae531bc99)*
+
 The modern data stack is a collection of rapidly evolving technologies that together provide a platform for analytics.
 
 While we at Monzo already have quite a modern data stack, there is always more to learn and room for improvement. This post summarises the core components of our modern data platform, some of the challenges we currently face, and what we want to change.
@@ -131,7 +133,8 @@ We use Looker for all of our dashboards. With automations like reports being sen
 A small amount of custom data visualisation occurs in Google Sheets and in Google Colab (Google’s hosted Jupyter notebook solution).
 
 The main challenge has been the responsiveness of Looker at our scale. Despite Looker’s importance, nobody in the company owns it explicitly. This has resulted in continual degradation of cleanliness, structure and speed over the last 4 years. To date we have run a couple of ad-hoc projects to optimise Looker cleanliness and loading for end users. We’ve also created automation scripts to clean up broken dashboards, charts and detect columns in LookML that no longer exist.
-Machine Learning platform
+
+# Machine Learning platform
 
 The Machine Learning (ML) platform deserves a separate Machine Learning Infrastructure blog post — watch this space! Briefly, our ML stack broadly sits at the intersection of Analytics Infrastructure (GCP), where we house and analyse our data, and the Backend (AWS), where we deploy our business logic. Our long-term strategy is to enable data scientists and backend engineers alike to safely and easily use machine learning as a tool, where appropriate, across the entire spectrum of problems we are tackling at Monzo.
 
