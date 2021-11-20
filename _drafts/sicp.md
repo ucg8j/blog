@@ -186,7 +186,7 @@ In this example, self-reference enables a 'memory' of the sums. `print_sums` is 
 
 # Recursion
 TODO: check if link works
-See [Grokking Algorithms Summary for a basic intro to Recursion](./grokking-algorithms/#3.-recursion). Composing Programs has [a beautifully simple demonstration of simple recursion](composingprograms.com/pages/17-recursive-functions.html#printing-in-recursive-functions) using `print`.
+See [Grokking Algorithms Summary for a basic intro to Recursion](./grokking-algorithms/#3.-recursion). Composing Programs has [a beautifully simple demonstration of simple recursion](composingprograms.com/pages/17-recursive-functions.html#printing-in-recursive-functions) using `print`. CS61a has a nice guide on [how to define a recursive function](https://inst.eecs.berkeley.edu/~cs61a/su21/disc/disc03/#recursion) in three steps.
 
 ## Mutual Recursion
 >When a recursive procedure is divided among two functions that call each other, the functions are said to be mutually recursive
@@ -362,6 +362,13 @@ def rest(s):
 	assert s != empty, "empty linked list has no rest."
 	return s[1]
 ```
+
+
+------------------------
+<!-- WHERE AM I UP TO:  -->
+TODO: this homework https://inst.eecs.berkeley.edu/~cs61a/su21/hw/hw02/
+
+------------------------
 
 
 # References
