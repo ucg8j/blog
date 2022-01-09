@@ -36,7 +36,13 @@ from IPython.display import Image
 from pydotplus import graph_from_dot_data
 ```
 
-The dataset for this exercise was found on [kaggle](https://www.kaggle.com/ludobenistant/hr-analytics/downloads/human-resources-analytics.zip). Once unzipped, I read in the data:
+The dataset for this exercise was originally found on [kaggle](https://www.kaggle.com/). It's no longer available via Kaggle, so you can download a copy from my GitHub repo by running:
+
+```bash
+curl https://raw.githubusercontent.com/ucg8j/kaggle_HR/master/HR_comma_sep.csv >| HR_comma_sep.csv
+```
+
+Then to read in the data:
 
 ```python
 # Set working directory
