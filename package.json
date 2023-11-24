@@ -34,6 +34,7 @@
     "markdown-it-anchor": "^5.2.5"
   },
   "dependencies": {
+    "markdown-it-footnote": "^3.0.3",
     "sharp": "^0.32.6"
   }
 }
