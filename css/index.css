@@ -40,8 +40,9 @@ p:last-child {
 }
 p,
 .tmpl-post li,
-li:not(:last-child) {
+li:not(header li):not(:last-child) {
   margin-bottom: .75rem;
+  margin-top: .75rem;
 }
 img {
   display: block;
