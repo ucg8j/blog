@@ -2,7 +2,7 @@
 title: Startup Reflections
 permalink: /startup-reflections/
 slug: startup-reflections
-date: 2023-11-27
+date: 2023-12-01
 tags: tech, startups
 excerpt: After 12 months of working on a startup and failing to get traction. These are a collection of hard lessons learnt.
 layout: layouts/post.njk

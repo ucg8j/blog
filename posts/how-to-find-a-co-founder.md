@@ -2,7 +2,7 @@
 title: How to find a co-founder
 permalink: /how-to-find-a-co-founder/
 slug: how-to-find-a-co-founder
-date: 2023-11-27
+date: 2023-12-01
 tags: tech, startups
 excerpt: Having found a co-founder twice. I formed a process that worked for me. Here is how I did it.
 layout: layouts/post.njk
