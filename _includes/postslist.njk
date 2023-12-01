@@ -4,7 +4,7 @@
     <a href="{{ post.url | url }}" class="postlist-link">{% if post.data.title %}{{ post.data.title }}{% else %}<code>{{ post.url }}</code>{% endif %}</a>
     <br>
     <time class="postlist-date" datetime="{{ post.date | htmlDateString }}">{{ post.date | readableDate }}</time>
-    <p>{{post.data.excerpt}}...<a href="{{ post.url | url }}">read more</a></p>
+    <p>{{post.data.excerpt}}... <a href="{{ post.url | url }}">read more</a></p>
     {# {% for tag in post.data.tags %} #}
       {# {%- if collections.tagList.indexOf(tag) != -1 -%} #}
       {# {% set tagUrl %}/tags/{{ tag }}/{% endset %} #}

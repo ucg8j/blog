@@ -5,6 +5,6 @@ eleventyNavigation:
   order: 1
 ---
 
-{% set postslist = collections.posts | head(-25) %}
+{% set postslist = collections.posts | head(-30) %}
 {% set postslistCounter = collections.posts | length %}
 {% include "postslist.njk" %}
