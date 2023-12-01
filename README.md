@@ -64,7 +64,7 @@ DEBUG=* npx eleventy
 ```
 
 ### Implementation Notes
-
+ 
 * `about/index.md` shows how to add a content page.
 * `posts/` has the blog posts but really they can live in any directory. They need only the `post` tag to be added to this collection.
 * Add the `nav` tag to add a template to the top level site navigation. For example, this is in use on `index.njk` and `about/index.md`.
@@ -80,4 +80,3 @@ DEBUG=* npx eleventy
 # LS notes
 - using node v18.3.0
 - may need to `export PKG_CONFIG_PATH=$PKG_CONFIG_PATH:/System/Volumes/Data/opt/homebrew/Cellar/libarchive/3.7.2/lib/pkgconfig` to get `npm install` to work
-
