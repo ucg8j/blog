@@ -229,7 +229,7 @@ def sum(array):
     return 0
   else:
     # divide the problem up
-    return array[0] + sum[1:]
+    return array[0] + sum([1:])
 ```
 
 ## Quicksort
@@ -293,7 +293,7 @@ A hash function returns the index of a value removing the need to perform a sear
 - map different strings to different indexes
 - not return indexes outside the size of the array
 
-A hash function combined with an array is a hash table. Hash tables are are a complex data structure also known as maps, dictionaries and associative arrays.
+A hash function combined with an array is a hash table. Hash tables are a complex data structure also known as maps, dictionaries and associative arrays.
 
 ## Use cases
 DNS resolution - mapping domain names to IP addresses
