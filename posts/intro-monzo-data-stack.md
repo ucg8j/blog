@@ -44,7 +44,7 @@ It’s worth noting that the event tables in BigQuery have a column for the payl
 
 We use Fivetran for loading data from several systems, including for our accounting and web analytics data.
 
-We also load a few miscellaneous bits of data, `or example data dumps from third parties directly loaded into BigQuery or Google Cloud Storage. However, we aim to keep bespoke approaches to a minimum.
+We also load a few miscellaneous bits of data, for example data dumps from third parties directly loaded into BigQuery or Google Cloud Storage. However, we aim to keep bespoke approaches to a minimum.
 
 A challenge we face, particularly with our events data is ownership. Frequently, teams that generate the event data in our production stack are not the teams consuming the data. When a data developer picks that event data up in BigQuery, they may not have all of the domain context and the data can have many issues, for example all the data needed for particular analysis needs. Not knowing who to contact about the data slows us down. We will solve this by having clear ownership of all our data, from our production stack to our analytics stack (see the data discovery and metadata management section later in this post 👇). Where possible we also include a data developer within data-generating teams.
 
