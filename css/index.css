@@ -1,17 +1,18 @@
 :root {
-  --red: #C5004A;
-  --darkred: #7F0036;
+  --red: #c5004a;
+  --darkred: #7f0036;
   --lightgray: #e0e0e0;
-  --gray: #C0C0C0;
-  --meddarkgray:#707070;
+  --gray: #c0c0c0;
+  --meddarkgray: #707070;
   --darkgray: #333;
-  --navy: #17050F;
+  --navy: #17050f;
   --blue: #082840;
   --white: #fff;
-  --accent: #2563eb;
-  --accent-hover: #1d4ed8;
-  --surface: #f8fafc;
-  --border: #e2e8f0;
+  --bg: #faf9f7;
+  --text: #1a1a1a;
+  --secondary: #4a4a4a;
+  --accent: #c4704a;
+  --border: #e5e2dd;
 }
 * {
   box-sizing: border-box;
@@ -22,17 +23,18 @@ html,
 body {
   padding: 0;
   margin: 0 auto;
-  max-width: 42rem;
-  padding-left: 1rem;
-  padding-right: 1rem;
-  line-height: 1.5;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  color: #334155;
-  background-color: var(--surface);
-  font-size: 18px;
+  max-width: 640px;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+  line-height: 1.6;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  color: var(--text);
+  background-color: var(--bg);
+  font-size: 16px;
 }
 h2 {
   margin-top: 1em;
+  color: var(--text);
 }
 strong {
   color: #555;
@@ -44,8 +46,8 @@ p:last-child {
 p,
 .tmpl-post li,
 li:not(header li):not(:last-child) {
-  margin-bottom: .75rem;
-  margin-top: .75rem;
+  margin-bottom: 0.75rem;
+  margin-top: 0.75rem;
 }
 img {
   display: block;
@@ -60,7 +62,7 @@ img[src*="#thumbnail"] {
   height: auto;
 }
 .tmpl-post li {
-  display: list-item
+  display: list-item;
 }
 a {
   color: #17286cec;
@@ -82,29 +84,28 @@ code {
   font-size: 85%;
   background-color: var(--color-markdown-code-bg);
   border-radius: 6px;
-  background-color: rgba(27,31,35,0.05);
+  background-color: rgba(27, 31, 35, 0.05);
 }
 footer {
-  margin-bottom: 1rem;
-  margin-top: 2rem;
-  color: var(--meddarkgray);
+  margin-bottom: 2rem;
+  margin-top: 3rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--border);
+  color: var(--secondary);
+  font-size: 0.875rem;
 }
 .rss-footer {
   float: right;
 }
+.rss-footer:hover {
+  color: var(--accent);
+}
 main {
-  padding: 0rem 0.25rem;
+  padding: 0;
 }
 header {
-  background: linear-gradient(135deg, #0f172a 0%, #1e3a5f 100%);
-  padding: 0 1rem;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-  border-radius: 0 0 8px 8px;
-  margin-bottom: 2rem;
+  padding: 4rem 0 3rem 0;
+  background: transparent;
 }
 header:after {
   content: "";
@@ -115,15 +116,16 @@ table {
   font-size: 85%;
   margin: 1em 0;
   border-collapse: collapse;
-  line-height: .9;
+  line-height: 0.9;
   margin-left: auto;
   margin-right: auto;
 }
 table tr {
   background: white;
-  border-bottom: 1px solid
+  border-bottom: 1px solid;
 }
-table th, table td {
+table th,
+table td {
   padding: 10px 20px;
 }
 table td span {
@@ -149,7 +151,10 @@ Source: https://code-boxx.com/css-responsive-table/
 }
 pre,
 code {
-  font-family: Consolas, Menlo, Monaco, "Andale Mono WT", "Andale Mono", "Lucida Console", "Lucida Sans Typewriter", "DejaVu Sans Mono", "Bitstream Vera Sans Mono", "Liberation Mono", "Nimbus Mono L", "Courier New", Courier, monospace;
+  font-family: Consolas, Menlo, Monaco, "Andale Mono WT", "Andale Mono",
+    "Lucida Console", "Lucida Sans Typewriter", "DejaVu Sans Mono",
+    "Bitstream Vera Sans Mono", "Liberation Mono", "Nimbus Mono L",
+    "Courier New", Courier, monospace;
   line-height: 1.5;
 }
 pre {
@@ -168,9 +173,8 @@ pre {
   -ms-hyphens: none;
   hyphens: none;
   padding: 1em 1em;
-  margin: .5em 0;
+  margin: 0.5em 0;
   background-color: #f6f6f6;
-
 }
 .highlight-line {
   display: block;
@@ -192,7 +196,7 @@ pre {
 }
 .highlight-line-active {
   background-color: #444;
-  background-color: hsla(0, 0%, 27%, .8);
+  background-color: hsla(0, 0%, 27%, 0.8);
 }
 .highlight-line-add {
   background-color: #45844b;
@@ -204,42 +208,49 @@ pre {
 /* Header */
 .home {
   padding: 0;
-  margin: 1rem 0;
-  font-size: 1em;
+  margin: 0 0 0.5rem 0;
+  float: none;
+}
+.home h1 {
+  font-size: 1.75rem;
+  font-weight: 600;
+  margin: 0 0 0.5rem 0;
 }
 .home a {
-  color: #fff;
+  color: var(--text);
   text-decoration: none;
-  font-weight: 600;
-  letter-spacing: -0.5px;
-  transition: opacity 0.2s ease;
 }
 .home a:hover {
-  opacity: 0.85;
+  color: var(--accent);
+}
+.home-tagline {
+  font-size: 1rem;
+  color: var(--secondary);
+  margin: 0;
 }
 
 /* Nav */
 .nav {
   padding: 0;
   list-style: none;
-  margin: 1rem 0;
+  margin: 1.5rem 0 0 0;
   display: flex;
   gap: 1.5rem;
+  float: none;
 }
 .nav-item a {
-  color: rgba(255, 255, 255, 0.85);
+  color: var(--secondary);
   text-decoration: none;
-  font-size: 0.9rem;
-  font-weight: 500;
+  font-size: 0.875rem;
+  font-weight: 400;
   transition: color 0.2s ease;
 }
 .nav-item a:hover {
-  color: #fff;
+  color: var(--accent);
 }
 .nav-item-active a {
-  color: #fff;
-  border-bottom: 2px solid rgba(255, 255, 255, 0.6);
-  padding-bottom: 2px;
+  color: var(--text);
+  font-weight: 500;
 }
 
 /* Posts list */
@@ -250,38 +261,43 @@ pre {
 }
 .postlist-item {
   padding: 1.5rem;
-  margin-bottom: 1rem;
+  margin-bottom: 1.25rem;
   background: var(--white);
   border: 1px solid var(--border);
-  border-radius: 8px;
-  transition: box-shadow 0.2s ease, border-color 0.2s ease;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+  position: relative;
 }
 .postlist-item:hover {
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
   border-color: var(--accent);
+  transform: translateY(-1px);
 }
 .postlist-item:before {
   display: none;
 }
-.postlist-date {
-  display: inline-block;
-  font-size: 0.75rem;
-  font-weight: 600;
-  color: var(--accent);
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
+.postlist-item-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1rem;
   margin-bottom: 0.5rem;
+}
+.postlist-date {
+  font-size: 0.8125rem;
+  color: var(--secondary);
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 .postlist-link {
   display: block;
-  font-size: 1.25rem;
-  letter-spacing: -0.5px;
+  font-size: 1.125rem;
   text-decoration: none;
-  color: var(--darkgray);
-  font-weight: 700;
-  line-height: 1.3;
-  margin-bottom: 0.5rem;
+  color: var(--text);
+  font-weight: 600;
+  line-height: 1.4;
   transition: color 0.2s ease;
+  flex: 1;
 }
 .postlist-link:hover {
   color: var(--accent);
@@ -290,25 +306,23 @@ pre {
   font-weight: bold;
 }
 .tmpl-home .postlist-link {
-  font-size: 1.25rem;
-  font-weight: 700;
-}
-.postlist-excerpt {
-  color: #64748b;
-  font-size: 0.95rem;
-  line-height: 1.6;
-  margin: 0.75rem 0;
-}
-.postlist-readmore {
-  display: inline-block;
-  font-size: 0.85rem;
+  font-size: 1.125rem;
   font-weight: 600;
+}
+.postlist-item p {
+  font-size: 0.9375rem;
+  color: var(--secondary);
+  line-height: 1.6;
+  margin: 0 0 0.75rem 0;
+}
+.postlist-item p a {
+  font-size: 0.875rem;
   color: var(--accent);
   text-decoration: none;
-  transition: color 0.2s ease;
+  font-weight: 500;
 }
-.postlist-readmore:hover {
-  color: var(--accent-hover);
+.postlist-item p a:hover {
+  text-decoration: underline;
 }
 
 /* Tags */
@@ -341,7 +355,7 @@ a[href].post-tag:visited {
   font-family: sans-serif;
   text-decoration: none;
   font-style: normal;
-  margin-left: .1em;
+  margin-left: 0.1em;
 }
 a[href].direct-link,
 a[href].direct-link:visited {
@@ -367,7 +381,7 @@ Original aim: Force scrollbars on mobile for divs that overflow to always displa
   height: 12px;
 }
 ::-webkit-scrollbar-thumb {
-  -WebKit-box-shadow: 0 0 1px rgba(255,255,255,.5);
+  -webkit-box-shadow: 0 0 1px rgba(255, 255, 255, 0.5);
   border-radius: 10px;
   border: 2px solid #ffffff;
 }
