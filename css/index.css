@@ -1,35 +1,48 @@
 :root {
-  --red: #C5004A;
-  --darkred: #7F0036;
+  --red: #c5004a;
+  --darkred: #7f0036;
   --lightgray: #e0e0e0;
-  --gray: #C0C0C0;
-  --meddarkgray:#707070;
+  --gray: #c0c0c0;
+  --meddarkgray: #707070;
   --darkgray: #333;
-  --navy: #17050F;
+  --navy: #17050f;
   --blue: #082840;
   --white: #fff;
+  --bg: #ffffff;
+  --text: #1c1c1c;
+  --secondary: #525252;
+  --accent: #4a7c59;
+  --border: #e4e7e2;
 }
 * {
   box-sizing: border-box;
   /* TODO - I quite like these fonts, decide on fonts */
   /* font-family: "Avenir", "Helvetica", sans-serif; */
 }
+::selection {
+  background-color: rgba(74, 124, 89, 0.2);
+  color: inherit;
+}
+::-moz-selection {
+  background-color: rgba(74, 124, 89, 0.2);
+  color: inherit;
+}
 html,
 body {
-  /* overflow-x: scroll; Show horizontal scrollbar */
   padding: 0;
   margin: 0 auto;
-  max-width: 40em;
-  padding-left: 0.25rem;
-  padding-right: 0.25rem;
-  line-height: 1.35;
-  font-family: system-ui, sans-serif;
-  color: #555;
-  background-color: var(--white);
-  font-size: 20px;
+  max-width: 640px;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+  line-height: 1.6;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  color: var(--text);
+  background-color: var(--bg);
+  font-size: 16px;
 }
 h2 {
   margin-top: 1em;
+  color: var(--text);
 }
 strong {
   color: #555;
@@ -41,8 +54,8 @@ p:last-child {
 p,
 .tmpl-post li,
 li:not(header li):not(:last-child) {
-  margin-bottom: .75rem;
-  margin-top: .75rem;
+  margin-bottom: 0.75rem;
+  margin-top: 0.75rem;
 }
 img {
   display: block;
@@ -57,10 +70,10 @@ img[src*="#thumbnail"] {
   height: auto;
 }
 .tmpl-post li {
-  display: list-item
+  display: list-item;
 }
 a {
-  color: #17286cec;
+  color: var(--accent);
 }
 /* a[href] {
   color: var(--blue);
@@ -71,29 +84,42 @@ a[href]:visited {
 blockquote {
   margin: 0 0 1.5em;
   padding: 0 1.5em;
-  border-left: 3px solid #3eb0ef;
+  border-left: 3px solid var(--accent);
   font-style: italic;
+  color: var(--secondary);
 }
 code {
   margin: 0;
   font-size: 85%;
   background-color: var(--color-markdown-code-bg);
   border-radius: 6px;
-  background-color: rgba(27,31,35,0.05);
+  background-color: rgba(27, 31, 35, 0.05);
 }
 footer {
-  margin-bottom: 1rem;
-  margin-top: 2rem;
-  color: var(--meddarkgray);
+  margin-bottom: 2rem;
+  margin-top: 3rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--border);
+  color: var(--secondary);
+  font-size: 0.875rem;
 }
 .rss-footer {
   float: right;
 }
+.rss-footer:hover {
+  color: var(--accent);
+}
 main {
-  padding: 0rem 0.25rem;
+  padding: 0;
 }
 header {
-  background-color: #eef2f1;
+  padding: 1.5rem 0 1rem 0;
+  background: transparent;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 1rem;
 }
 header:after {
   content: "";
@@ -104,15 +130,16 @@ table {
   font-size: 85%;
   margin: 1em 0;
   border-collapse: collapse;
-  line-height: .9;
+  line-height: 0.9;
   margin-left: auto;
   margin-right: auto;
 }
 table tr {
   background: white;
-  border-bottom: 1px solid
+  border-bottom: 1px solid;
 }
-table th, table td {
+table th,
+table td {
   padding: 10px 20px;
 }
 table td span {
@@ -138,7 +165,10 @@ Source: https://code-boxx.com/css-responsive-table/
 }
 pre,
 code {
-  font-family: Consolas, Menlo, Monaco, "Andale Mono WT", "Andale Mono", "Lucida Console", "Lucida Sans Typewriter", "DejaVu Sans Mono", "Bitstream Vera Sans Mono", "Liberation Mono", "Nimbus Mono L", "Courier New", Courier, monospace;
+  font-family: Consolas, Menlo, Monaco, "Andale Mono WT", "Andale Mono",
+    "Lucida Console", "Lucida Sans Typewriter", "DejaVu Sans Mono",
+    "Bitstream Vera Sans Mono", "Liberation Mono", "Nimbus Mono L",
+    "Courier New", Courier, monospace;
   line-height: 1.5;
 }
 pre {
@@ -157,9 +187,8 @@ pre {
   -ms-hyphens: none;
   hyphens: none;
   padding: 1em 1em;
-  margin: .5em 0;
+  margin: 0.5em 0;
   background-color: #f6f6f6;
-
 }
 .highlight-line {
   display: block;
@@ -181,7 +210,7 @@ pre {
 }
 .highlight-line-active {
   background-color: #444;
-  background-color: hsla(0, 0%, 27%, .8);
+  background-color: hsla(0, 0%, 27%, 0.8);
 }
 .highlight-line-add {
   background-color: #45844b;
@@ -192,75 +221,155 @@ pre {
 
 /* Header */
 .home {
-  padding: 0 1rem;
-  float: left;
-  margin: 1rem 0; /* 16px /16 */
-  font-size: 1em; /* 16px /16 */
+  padding: 0;
+  margin: 0;
+  float: none;
+  flex: 1;
 }
-.home :link:not(:hover) {
+.home h1 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin: 0;
+}
+.home a {
+  color: var(--text);
   text-decoration: none;
+}
+.home a:hover {
+  color: var(--accent);
+}
+.home-tagline {
+  font-size: 0.875rem;
+  color: var(--secondary);
+  margin: 0.25rem 0 0 0;
 }
 
 /* Nav */
 .nav {
   padding: 0;
   list-style: none;
-  margin-bottom: 0;
-  float: left;
-  margin-left: 1em;
+  margin: 0;
+  display: flex;
+  gap: 1.5rem;
+  float: none;
+  flex-shrink: 0;
+  align-items: baseline;
+  padding-top: 0.125rem;
 }
-.nav-item {
-  display: inline-block;
-  margin-right: 1em;
-}
-.nav-item a[href]:not(:hover) {
+.nav-item a {
+  color: var(--secondary);
   text-decoration: none;
+  font-size: 0.875rem;
+  font-weight: 400;
+  transition: color 0.2s ease;
 }
-.nav-item-active {
+.nav-item a:hover {
+  color: var(--accent);
+}
+.nav-item-active a {
+  color: var(--text);
   font-weight: 500;
-  text-decoration: underline;
 }
 
 /* Posts list */
 .postlist {
   list-style: none;
   padding: 0;
-  margin-top: 25px;
+  margin-top: 0;
 }
- .postlist-item {
-  margin-top: 2rem;
+.postlist-item {
+  padding: 1.5rem 0;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1.5rem;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid var(--border);
+  transition: all 0.2s ease;
+  position: relative;
+  cursor: pointer;
 }
-.postlist-item:before {
-  text-decoration: none; /* remove underline */
-  display: inline-block;
+.postlist-item:last-child {
+  border-bottom: none;
+}
+.postlist-item:hover {
+  border-bottom-color: var(--accent);
+}
+.postlist-item::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-left: 3px solid transparent;
+  transition: border-color 0.2s ease;
   pointer-events: none;
-  line-height: 100%;
-  text-align: right;
-  margin-top: 4rem;
-
 }
-.postlist-date,
+.postlist-item:hover::before {
+  border-left-color: var(--accent);
+}
 .postlist-item:before {
-  font-size: 0.8125em; /* 13px /16 */
-  color: var(--darkgray);
+  display: none;
+}
+.postlist-item-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1rem;
+  margin-bottom: 0.5rem;
 }
 .postlist-date {
-  word-spacing: -0.5px;
-  color: var(--meddarkgray);
+  font-size: 0.8125rem;
+  color: var(--secondary);
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 .postlist-link {
-  display: inline-block;
-  font-size: 30px;
-  letter-spacing: -1px;
-  text-decoration: none; /* remove underline */
-  /* padding: 0.25em 0.1875em;
+  display: block;
+  font-size: 1.125rem;
+  text-decoration: none;
+  color: var(--text);
+  font-weight: 600;
+  line-height: 1.4;
+  transition: color 0.2s ease;
+  flex: 1;
+}
+.postlist-link::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1;
+}
+.postlist-item:hover .postlist-link {
+  color: var(--accent);
 }
 .postlist-item-active .postlist-link {
   font-weight: bold;
 }
 .tmpl-home .postlist-link {
-  font-size: 1.1875em; /* 19px /16 */
-  font-weight: 700;
+  font-size: 1.125rem;
+  font-weight: 600;
+}
+.postlist-item p {
+  font-size: 0.9375rem;
+  color: var(--secondary);
+  line-height: 1.6;
+  margin: 0 0 0.75rem 0;
+}
+.postlist-item p a {
+  font-size: 0.875rem;
+  color: var(--accent);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s ease;
+  position: relative;
+  z-index: 2;
+}
+.postlist-item p a:hover {
+  color: #3d6549;
 }
 
 /* Tags */
@@ -293,7 +402,7 @@ a[href].post-tag:visited {
   font-family: sans-serif;
   text-decoration: none;
   font-style: normal;
-  margin-left: .1em;
+  margin-left: 0.1em;
 }
 a[href].direct-link,
 a[href].direct-link:visited {
@@ -319,7 +428,7 @@ Original aim: Force scrollbars on mobile for divs that overflow to always displa
   height: 12px;
 }
 ::-webkit-scrollbar-thumb {
-  -WebKit-box-shadow: 0 0 1px rgba(255,255,255,.5);
+  -webkit-box-shadow: 0 0 1px rgba(255, 255, 255, 0.5);
   border-radius: 10px;
   border: 2px solid #ffffff;
 }
