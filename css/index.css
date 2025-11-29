@@ -326,7 +326,7 @@ pre {
 }
 .postlist-link {
   display: block;
-  font-size: 1.125rem;
+  font-size: 1.3rem;
   text-decoration: none;
   color: var(--text);
   font-weight: 600;
@@ -350,7 +350,7 @@ pre {
   font-weight: bold;
 }
 .tmpl-home .postlist-link {
-  font-size: 1.125rem;
+  font-size: 1.3rem;
   font-weight: 600;
 }
 .postlist-item p {
