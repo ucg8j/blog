@@ -19,6 +19,14 @@
   /* TODO - I quite like these fonts, decide on fonts */
   /* font-family: "Avenir", "Helvetica", sans-serif; */
 }
+::selection {
+  background-color: rgba(74, 124, 89, 0.2);
+  color: inherit;
+}
+::-moz-selection {
+  background-color: rgba(74, 124, 89, 0.2);
+  color: inherit;
+}
 html,
 body {
   padding: 0;
@@ -105,7 +113,7 @@ main {
   padding: 0;
 }
 header {
-  padding: 2rem 0 2rem 0;
+  padding: 1.5rem 0 1rem 0;
   background: transparent;
   display: flex;
   justify-content: space-between;
