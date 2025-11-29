@@ -8,6 +8,10 @@
   --navy: #17050F;
   --blue: #082840;
   --white: #fff;
+  --accent: #2563eb;
+  --accent-hover: #1d4ed8;
+  --surface: #f8fafc;
+  --border: #e2e8f0;
 }
 * {
   box-sizing: border-box;
@@ -16,17 +20,16 @@
 }
 html,
 body {
-  /* overflow-x: scroll; Show horizontal scrollbar */
   padding: 0;
   margin: 0 auto;
-  max-width: 40em;
-  padding-left: 0.25rem;
-  padding-right: 0.25rem;
-  line-height: 1.35;
-  font-family: system-ui, sans-serif;
-  color: #555;
-  background-color: var(--white);
-  font-size: 20px;
+  max-width: 42rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  line-height: 1.5;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  color: #334155;
+  background-color: var(--surface);
+  font-size: 18px;
 }
 h2 {
   margin-top: 1em;
@@ -93,7 +96,15 @@ main {
   padding: 0rem 0.25rem;
 }
 header {
-  background-color: #eef2f1;
+  background: linear-gradient(135deg, #0f172a 0%, #1e3a5f 100%);
+  padding: 0 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  border-radius: 0 0 8px 8px;
+  margin-bottom: 2rem;
 }
 header:after {
   content: "";
@@ -192,75 +203,112 @@ pre {
 
 /* Header */
 .home {
-  padding: 0 1rem;
-  float: left;
-  margin: 1rem 0; /* 16px /16 */
-  font-size: 1em; /* 16px /16 */
+  padding: 0;
+  margin: 1rem 0;
+  font-size: 1em;
 }
-.home :link:not(:hover) {
+.home a {
+  color: #fff;
   text-decoration: none;
+  font-weight: 600;
+  letter-spacing: -0.5px;
+  transition: opacity 0.2s ease;
+}
+.home a:hover {
+  opacity: 0.85;
 }
 
 /* Nav */
 .nav {
   padding: 0;
   list-style: none;
-  margin-bottom: 0;
-  float: left;
-  margin-left: 1em;
+  margin: 1rem 0;
+  display: flex;
+  gap: 1.5rem;
 }
-.nav-item {
-  display: inline-block;
-  margin-right: 1em;
-}
-.nav-item a[href]:not(:hover) {
+.nav-item a {
+  color: rgba(255, 255, 255, 0.85);
   text-decoration: none;
-}
-.nav-item-active {
+  font-size: 0.9rem;
   font-weight: 500;
-  text-decoration: underline;
+  transition: color 0.2s ease;
+}
+.nav-item a:hover {
+  color: #fff;
+}
+.nav-item-active a {
+  color: #fff;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.6);
+  padding-bottom: 2px;
 }
 
 /* Posts list */
 .postlist {
   list-style: none;
   padding: 0;
-  margin-top: 25px;
+  margin-top: 0;
 }
- .postlist-item {
-  margin-top: 2rem;
+.postlist-item {
+  padding: 1.5rem;
+  margin-bottom: 1rem;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  transition: box-shadow 0.2s ease, border-color 0.2s ease;
+}
+.postlist-item:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  border-color: var(--accent);
 }
 .postlist-item:before {
-  text-decoration: none; /* remove underline */
-  display: inline-block;
-  pointer-events: none;
-  line-height: 100%;
-  text-align: right;
-  margin-top: 4rem;
-
-}
-.postlist-date,
-.postlist-item:before {
-  font-size: 0.8125em; /* 13px /16 */
-  color: var(--darkgray);
+  display: none;
 }
 .postlist-date {
-  word-spacing: -0.5px;
-  color: var(--meddarkgray);
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 0.5rem;
 }
 .postlist-link {
-  display: inline-block;
-  font-size: 30px;
-  letter-spacing: -1px;
-  text-decoration: none; /* remove underline */
-  /* padding: 0.25em 0.1875em;
+  display: block;
+  font-size: 1.25rem;
+  letter-spacing: -0.5px;
+  text-decoration: none;
+  color: var(--darkgray);
+  font-weight: 700;
+  line-height: 1.3;
+  margin-bottom: 0.5rem;
+  transition: color 0.2s ease;
+}
+.postlist-link:hover {
+  color: var(--accent);
 }
 .postlist-item-active .postlist-link {
   font-weight: bold;
 }
 .tmpl-home .postlist-link {
-  font-size: 1.1875em; /* 19px /16 */
+  font-size: 1.25rem;
   font-weight: 700;
+}
+.postlist-excerpt {
+  color: #64748b;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  margin: 0.75rem 0;
+}
+.postlist-readmore {
+  display: inline-block;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--accent);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+.postlist-readmore:hover {
+  color: var(--accent-hover);
 }
 
 /* Tags */
