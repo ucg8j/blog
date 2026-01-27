@@ -51,5 +51,38 @@
     </footer>
 
     <!-- Current page: {{ page.url | url }} -->
+
+    <!-- Lightbox -->
+    <div class="lightbox-overlay" id="lightbox">
+      <button class="lightbox-close" aria-label="Close">&times;</button>
+      <img src="" alt="">
+    </div>
+    <script>
+      (function() {
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = lightbox.querySelector('img');
+        
+        // Open lightbox on image click (only in post content)
+        document.querySelectorAll('.tmpl-post img').forEach(function(img) {
+          img.addEventListener('click', function() {
+            lightboxImg.src = this.src;
+            lightboxImg.alt = this.alt;
+            lightbox.classList.add('active');
+            document.body.style.overflow = 'hidden';
+          });
+        });
+        
+        // Close lightbox
+        function closeLightbox() {
+          lightbox.classList.remove('active');
+          document.body.style.overflow = '';
+        }
+        
+        lightbox.addEventListener('click', closeLightbox);
+        document.addEventListener('keydown', function(e) {
+          if (e.key === 'Escape') closeLightbox();
+        });
+      })();
+    </script>
   </body>
 </html>

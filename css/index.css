@@ -436,3 +436,64 @@ Original aim: Force scrollbars on mobile for divs that overflow to always displa
   border-radius: 10px;
   background-color: #ffffff;
 }
+
+/* Lightbox */
+.lightbox-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.92);
+  z-index: 9999;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.25s ease, visibility 0.25s ease;
+  cursor: zoom-out;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+.lightbox-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+.lightbox-overlay img {
+  max-width: 90vw;
+  max-height: 90vh;
+  object-fit: contain;
+  border-radius: 4px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+  transform: scale(0.95);
+  transition: transform 0.25s ease;
+  margin: 0;
+}
+.lightbox-overlay.active img {
+  transform: scale(1);
+}
+.lightbox-close {
+  position: absolute;
+  top: 1.5rem;
+  right: 1.5rem;
+  width: 2.5rem;
+  height: 2.5rem;
+  border: none;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+  color: #fff;
+  font-size: 1.5rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s ease;
+}
+.lightbox-close:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+/* Make post images clickable */
+.tmpl-post img:not(.lightbox-overlay img) {
+  cursor: zoom-in;
+  transition: opacity 0.2s ease;
+}
+.tmpl-post img:not(.lightbox-overlay img):hover {
+  opacity: 0.9;
+}
