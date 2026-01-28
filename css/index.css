@@ -13,6 +13,7 @@
   --secondary: #525252;
   --accent: #4a7c59;
   --border: #e4e7e2;
+  --code-font-size: 12px;
 }
 * {
   box-sizing: border-box;
@@ -172,7 +173,7 @@ code {
   line-height: 1.5;
 }
 pre {
-  font-size: 14px;
+  font-size: var(--code-font-size);
   line-height: 1.375;
   direction: ltr;
   text-align: left;
