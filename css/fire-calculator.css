@@ -226,6 +226,11 @@ input[type="radio"]:checked ~ * {
   border-left: 4px solid #ff9f40;
 }
 
+.status-caution {
+  background: rgba(255, 193, 7, 0.15);
+  border-left: 4px solid #ffc107;
+}
+
 .result-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));

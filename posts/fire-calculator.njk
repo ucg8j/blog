@@ -76,7 +76,7 @@ layout: layouts/post.njk
     <div class="input-grid-3">
       <div class="input-group">
         <label for="current-age">Current Age</label>
-        <input type="number" id="current-age" value="30" min="18" max="80">
+        <input type="number" id="current-age" value="35" min="18" max="80">
       </div>
       <div class="input-group">
         <label for="fire-age">Target FIRE Age</label>
@@ -378,7 +378,7 @@ layout: layouts/post.njk
   }
 
   function updateUKPensionAgeDisplay() {
-    const currentAge = parseInt(elements.currentAge.value) || 30;
+    const currentAge = parseInt(elements.currentAge.value) || 35;
     const pensionAge = getUKPensionAccessAge(currentAge);
     elements.ukPensionAgeDisplay.textContent = pensionAge;
   }
@@ -413,7 +413,7 @@ layout: layouts/post.njk
     const inputs = {
       country,
       displayCurrency,
-      currentAge: parseInt(elements.currentAge.value) || 30,
+      currentAge: parseInt(elements.currentAge.value) || 35,
       fireAge: parseInt(elements.fireAge.value) || 50,
       annualSpending: parseFloat(elements.annualSpending.value) || 40000,
       returnRate: (parseFloat(elements.returnRate.value) || 7) / 100,
@@ -641,14 +641,21 @@ layout: layouts/post.njk
     let statusClass = 'status-success';
     let statusMessage = '';
     
-    if (actualFireAge === null) {
+    // Check if funds ever deplete (accessible goes to zero before end of simulation)
+    const fundsDepleted = years.some(y => y.age >= targetFireAge && y.totalAccessible <= 0);
+    
+    if (fundsDepleted) {
       statusClass = 'status-warning';
-      statusMessage = 'Based on current projections, you may not reach FIRE with accessible funds. Consider increasing contributions or reducing spending.';
-    } else if (actualFireAge > targetFireAge) {
-      statusClass = 'status-warning';
-      statusMessage = 'You will have enough <em>accessible</em> funds at age ' + actualFireAge + ', which is ' + (actualFireAge - targetFireAge) + ' years after your target. Consider bridging with accessible savings.';
+      statusMessage = 'Based on current projections, your accessible funds may run out before pension/super unlocks. Consider increasing contributions or reducing spending.';
+    } else if (effectiveWithdrawalRate > 0.04) {
+      statusClass = 'status-caution';
+      statusMessage = 'You can FIRE at age ' + targetFireAge + ', but your initial withdrawal rate of ' + formatPercent(effectiveWithdrawalRate) + ' is above the traditional 4% safe rate. Your funds are projected to last, especially once pension/super unlocks.';
+    } else if (actualFireAge === null || actualFireAge > targetFireAge) {
+      // Has enough to not deplete but doesn't meet strict 25x rule
+      statusClass = 'status-success';
+      statusMessage = 'You are on track to reach FIRE at age ' + targetFireAge + '. Your accessible funds will sustain your spending until pension/super unlocks.';
     } else {
-      statusMessage = 'You are on track to reach FIRE at age ' + targetFireAge + ' with sufficient accessible funds.';
+      statusMessage = 'You are on track to reach FIRE at age ' + targetFireAge + ' with sufficient accessible funds meeting the 4% safe withdrawal rate.';
     }
 
     // Withdrawal rate warning
