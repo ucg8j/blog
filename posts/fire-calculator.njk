@@ -73,7 +73,7 @@ layout: layouts/post.njk
   <!-- Personal Details -->
   <div class="calc-section">
     <h3>About You</h3>
-    <div class="input-grid">
+    <div class="input-grid-3">
       <div class="input-group">
         <label for="current-age">Current Age</label>
         <input type="number" id="current-age" value="30" min="18" max="80">
@@ -83,7 +83,7 @@ layout: layouts/post.njk
         <input type="number" id="fire-age" value="50" min="25" max="80">
       </div>
       <div class="input-group">
-        <label for="annual-spending">Annual Spending in Retirement</label>
+        <label for="annual-spending">Retirement Spending p.a.</label>
         <div class="input-with-prefix">
           <span class="currency-prefix" id="spending-currency">£</span>
           <input type="number" id="annual-spending" value="40000" min="0" step="1000">
@@ -105,8 +105,8 @@ layout: layouts/post.njk
         </div>
       </div>
       <div class="input-group">
-        <label for="mortgage-payoff-age">Age When Mortgage Paid Off</label>
-        <input type="number" id="mortgage-payoff-age" value="50" min="25" max="80">
+        <label for="mortgage-years">Years Until Paid Off</label>
+        <input type="number" id="mortgage-years" value="20" min="0" max="50">
       </div>
     </div>
   </div>
@@ -235,8 +235,16 @@ layout: layouts/post.njk
       <!-- Filled by JavaScript -->
     </div>
 
-    <div class="chart-container">
-      <canvas id="projection-chart"></canvas>
+    <div class="charts-wrapper">
+      <div class="chart-container">
+        <h4>Net Worth Available (Accessible Funds)</h4>
+        <canvas id="available-chart"></canvas>
+      </div>
+
+      <div class="chart-container">
+        <h4>Total Net Worth (All Accounts)</h4>
+        <canvas id="projection-chart"></canvas>
+      </div>
     </div>
 
     <div class="breakdown-table-container" id="breakdown-table-container">
@@ -248,10 +256,6 @@ layout: layouts/post.njk
     </div>
   </div>
 
-  <!-- Disclaimer -->
-  <div class="calc-section disclaimer">
-    <p><strong>Disclaimer:</strong> This calculator is for illustrative purposes only and does not constitute financial advice. Tax rules, preservation ages, and regulations change over time. Consult a qualified financial adviser for personalised advice.</p>
-  </div>
 </div>
 
 <script>
@@ -303,7 +307,7 @@ layout: layouts/post.njk
     returnRate: document.getElementById('return-rate'),
     inflationRate: document.getElementById('inflation-rate'),
     mortgagePayment: document.getElementById('mortgage-payment'),
-    mortgagePayoffAge: document.getElementById('mortgage-payoff-age'),
+    mortgageYears: document.getElementById('mortgage-years'),
     
     // UK inputs
     ukPensionBalance: document.getElementById('uk-pension-balance'),
@@ -319,6 +323,7 @@ layout: layouts/post.njk
   };
 
   let chart = null;
+  let availableChart = null;
 
   // ============================================
   // EXCHANGE RATE
@@ -330,7 +335,7 @@ layout: layouts/post.njk
       if (!response.ok) throw new Error('API error');
       const data = await response.json();
       currentExchangeRate = data.rates.AUD;
-      elements.exchangeRateDisplay.textContent = '1 GBP = ' + currentExchangeRate.toFixed(4) + ' AUD';
+      elements.exchangeRateDisplay.textContent = '1 GBP = ' + currentExchangeRate.toFixed(2) + ' AUD';
     } catch (error) {
       console.warn('Failed to fetch exchange rate, using fallback:', error);
       currentExchangeRate = FALLBACK_EXCHANGE_RATE;
@@ -401,7 +406,7 @@ layout: layouts/post.njk
       returnRate: (parseFloat(elements.returnRate.value) || 7) / 100,
       inflationRate: (parseFloat(elements.inflationRate.value) || 2.5) / 100,
       mortgagePayment: (parseFloat(elements.mortgagePayment.value) || 0) * 12, // Convert monthly to annual
-      mortgagePayoffAge: parseInt(elements.mortgagePayoffAge.value) || 50,
+      mortgageYears: parseInt(elements.mortgageYears.value) || 20,
       accounts: []
     };
 
@@ -453,7 +458,8 @@ layout: layouts/post.njk
   }
 
   function calculateProjection(inputs) {
-    const { currentAge, fireAge, annualSpending, returnRate, inflationRate, mortgagePayment, mortgagePayoffAge, accounts, displayCurrency } = inputs;
+    const { currentAge, fireAge, annualSpending, returnRate, inflationRate, mortgagePayment, mortgageYears, accounts, displayCurrency } = inputs;
+    const mortgagePayoffAge = currentAge + mortgageYears;
     const endAge = 90;
     const years = [];
     
@@ -663,7 +669,8 @@ layout: layouts/post.njk
         '</div>' +
       '</div>';
 
-    // Render chart
+    // Render charts
+    renderAvailableChart(results, inputs);
     renderChart(results, inputs);
     
     // Render breakdown table
@@ -692,7 +699,7 @@ layout: layouts/post.njk
     
     // Add mortgage payoff age if relevant
     if (inputs.mortgagePayment > 0) {
-      milestoneAges.add(inputs.mortgagePayoffAge);
+      milestoneAges.add(inputs.currentAge + inputs.mortgageYears);
     }
 
     // Filter to valid ages and sort
@@ -838,6 +845,144 @@ layout: layouts/post.njk
     }
   }
 
+  function renderAvailableChart(results, inputs) {
+    const { years, displayCurrency, targetFireAge } = results;
+    const ctx = document.getElementById('available-chart').getContext('2d');
+
+    // Prepare data
+    const labels = years.map(y => y.age);
+    const accessibleData = years.map(y => Math.round(y.totalAccessible));
+    
+    // Determine milestone ages
+    const milestoneAges = new Set();
+    milestoneAges.add(targetFireAge); // FIRE age
+    
+    // Check for UK Pension (access at 55) and AU Super (access at 60)
+    const hasUKPension = inputs.accounts.some(a => a.name === 'UK Pension');
+    const hasAUSuper = inputs.accounts.some(a => a.name === 'AU Super');
+    
+    if (hasUKPension) milestoneAges.add(55);
+    if (hasAUSuper) milestoneAges.add(60);
+    
+    // Mark each year as milestone or not
+    const yearsWithMilestones = years.map(y => ({
+      ...y,
+      milestone: milestoneAges.has(y.age),
+      isFireAge: y.age === targetFireAge
+    }));
+    
+    // Point styling - only show markers on milestones
+    const pointRadius = yearsWithMilestones.map(y => y.milestone ? 6 : 0);
+    const pointHoverRadius = yearsWithMilestones.map(y => y.milestone ? 8 : 0);
+    const pointBackgroundColors = yearsWithMilestones.map(y => {
+      if (y.isFireAge) {
+        return 'rgba(255, 99, 132, 1)'; // Red for FIRE age
+      }
+      if (y.milestone) {
+        return 'rgba(54, 162, 235, 1)'; // Blue for pension access
+      }
+      return 'rgba(54, 162, 235, 1)';
+    });
+
+    // Destroy existing chart
+    if (availableChart) {
+      availableChart.destroy();
+    }
+
+    availableChart = new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels,
+        datasets: [{
+          label: 'Accessible Net Worth',
+          data: accessibleData,
+          borderColor: 'rgba(54, 162, 235, 1)',
+          backgroundColor: 'rgba(54, 162, 235, 0.1)',
+          borderWidth: 2,
+          fill: true,
+          tension: 0.1,
+          pointBackgroundColor: pointBackgroundColors,
+          pointRadius: pointRadius,
+          pointHoverRadius: pointHoverRadius
+        }, {
+          label: 'Total Net Worth',
+          data: years.map(y => Math.round(y.totalNetWorth)),
+          borderColor: 'rgba(200, 200, 200, 0.6)',
+          backgroundColor: 'transparent',
+          borderWidth: 1,
+          borderDash: [5, 5],
+          fill: false,
+          tension: 0.1,
+          pointRadius: 0,
+          pointHoverRadius: 0
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        interaction: {
+          mode: 'index',
+          intersect: false
+        },
+        plugins: {
+          title: {
+            display: true,
+            text: 'Net Worth Available Over Time (' + displayCurrency + ')'
+          },
+          tooltip: {
+            callbacks: {
+              label: function(context) {
+                return context.dataset.label + ': ' + formatCurrency(context.raw, displayCurrency);
+              },
+              afterBody: function(context) {
+                const age = context[0].label;
+                const yearData = years.find(y => y.age === parseInt(age));
+                if (yearData) {
+                  const lines = [];
+                  if (yearData.age === targetFireAge) {
+                    lines.push('🔥 FIRE Age');
+                  }
+                  if (hasUKPension && yearData.age === 55) {
+                    lines.push('🇬🇧 UK Pension accessible');
+                  }
+                  if (hasAUSuper && yearData.age === 60) {
+                    lines.push('🇦🇺 AU Super accessible');
+                  }
+                  return lines;
+                }
+                return [];
+              }
+            }
+          }
+        },
+        scales: {
+          x: {
+            title: {
+              display: true,
+              text: 'Age'
+            }
+          },
+          y: {
+            title: {
+              display: true,
+              text: displayCurrency
+            },
+            ticks: {
+              callback: function(value) {
+                if (value >= 1000000) {
+                  return (value / 1000000).toFixed(1) + 'M';
+                } else if (value >= 1000) {
+                  return (value / 1000).toFixed(0) + 'K';
+                }
+                return value;
+              }
+            }
+          }
+        }
+      }
+    });
+  }
+
   function renderChart(results, inputs) {
     const { years, displayCurrency } = results;
     const ctx = document.getElementById('projection-chart').getContext('2d');
@@ -872,7 +1017,9 @@ layout: layouts/post.njk
       backgroundColor: colors[name] || 'rgba(128, 128, 128, 0.7)',
       borderColor: borderColors[name] || 'rgba(128, 128, 128, 1)',
       borderWidth: 1,
-      fill: true
+      fill: true,
+      pointRadius: 0,
+      pointHoverRadius: 0
     }));
 
     // Destroy existing chart

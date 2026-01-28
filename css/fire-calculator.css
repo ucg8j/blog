@@ -8,11 +8,6 @@
 .calc-section {
   margin-bottom: 2rem;
   padding-bottom: 1.5rem;
-  border-bottom: 1px solid var(--border, #e4e7e2);
-}
-
-.calc-section:last-child {
-  border-bottom: none;
 }
 
 .calc-section h3 {
@@ -61,15 +56,9 @@
   align-items: center;
   gap: 0.5rem;
   cursor: pointer;
-  padding: 0.5rem 1rem;
-  border: 1px solid var(--border, #e4e7e2);
-  border-radius: 6px;
+  padding: 0.5rem 0;
   transition: all 0.2s ease;
   font-size: 0.9375rem;
-}
-
-.radio-label:hover {
-  border-color: var(--accent, #4a7c59);
 }
 
 .radio-label input[type="radio"] {
@@ -89,6 +78,12 @@ input[type="radio"]:checked ~ * {
 .input-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1rem;
+}
+
+.input-grid-3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
   gap: 1rem;
 }
 
@@ -444,6 +439,12 @@ input[type="radio"]:checked ~ * {
 }
 
 /* Responsive */
+@media (max-width: 640px) {
+  .input-grid-3 {
+    grid-template-columns: 1fr;
+  }
+}
+
 @media (max-width: 480px) {
   .radio-group {
     flex-direction: column;
