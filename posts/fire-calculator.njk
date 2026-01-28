@@ -114,7 +114,7 @@ layout: layouts/post.njk
   <!-- UK Accounts -->
   <div class="calc-section uk-section" id="uk-section">
     <h3>UK Accounts</h3>
-    <p class="section-note">Private pension accessible at age <strong>55</strong> (57 from 2028). ISA funds accessible anytime.</p>
+    <p class="section-note" id="uk-pension-note">Private pension accessible at age <strong id="uk-pension-age-display">57</strong>. ISA funds accessible anytime.</p>
     
     <div class="account-group">
       <h4>Pension (Workplace/SIPP)</h4>
@@ -265,9 +265,15 @@ layout: layouts/post.njk
   // ============================================
   // CONSTANTS
   // ============================================
+  // UK pension access age: 55 if you reach 55 before 2028, otherwise 57
+  function getUKPensionAccessAge(currentAge) {
+    const currentYear = new Date().getFullYear();
+    const yearTurning55 = currentYear + (55 - currentAge);
+    return yearTurning55 < 2028 ? 55 : 57;
+  }
+
   const PRESERVATION_AGES = {
     uk: {
-      pension: 55, // Rising to 57 in 2028
       isa: 0,      // Accessible anytime
       statePension: 67
     },
@@ -299,6 +305,7 @@ layout: layouts/post.njk
     breakdownTableContainer: document.getElementById('breakdown-table-container'),
     spendingCurrency: document.getElementById('spending-currency'),
     mortgageCurrency: document.getElementById('mortgage-currency'),
+    ukPensionAgeDisplay: document.getElementById('uk-pension-age-display'),
     
     // Inputs
     currentAge: document.getElementById('current-age'),
@@ -370,6 +377,12 @@ layout: layouts/post.njk
     elements.mortgageCurrency.textContent = currencySymbol;
   }
 
+  function updateUKPensionAgeDisplay() {
+    const currentAge = parseInt(elements.currentAge.value) || 30;
+    const pensionAge = getUKPensionAccessAge(currentAge);
+    elements.ukPensionAgeDisplay.textContent = pensionAge;
+  }
+
   function formatCurrency(amount, currency) {
     const symbol = currency === 'GBP' ? '£' : '$';
     return symbol + Math.round(amount).toLocaleString();
@@ -412,6 +425,7 @@ layout: layouts/post.njk
 
     // UK accounts (in GBP)
     if (country === 'uk' || country === 'both') {
+      const ukPensionAccessAge = getUKPensionAccessAge(inputs.currentAge);
       inputs.accounts.push({
         name: 'UK Pension',
         type: 'pension',
@@ -419,7 +433,7 @@ layout: layouts/post.njk
         currency: 'GBP',
         balance: parseFloat(elements.ukPensionBalance.value) || 0,
         contribution: parseFloat(elements.ukPensionContribution.value) || 0,
-        accessAge: PRESERVATION_AGES.uk.pension
+        accessAge: ukPensionAccessAge
       });
       inputs.accounts.push({
         name: 'UK ISA',
@@ -533,14 +547,23 @@ layout: layouts/post.njk
       } else {
         // Drawdown phase
         yearWithdrawals = adjustedSpending;
-        let remainingWithdrawal = adjustedSpending;
         
-        // First withdraw from accessible accounts
+        // Calculate total accessible balance for proportional withdrawal
+        let totalAccessibleBalance = 0;
         for (const acc of accountBalances) {
-          if (age >= acc.accessAge && remainingWithdrawal > 0) {
-            const withdrawal = Math.min(acc.balanceInDisplayCurrency, remainingWithdrawal);
-            acc.balanceInDisplayCurrency -= withdrawal;
-            remainingWithdrawal -= withdrawal;
+          if (age >= acc.accessAge) {
+            totalAccessibleBalance += acc.balanceInDisplayCurrency;
+          }
+        }
+        
+        // Withdraw proportionally from all accessible accounts
+        if (totalAccessibleBalance > 0) {
+          const withdrawalRatio = Math.min(1, adjustedSpending / totalAccessibleBalance);
+          for (const acc of accountBalances) {
+            if (age >= acc.accessAge && acc.balanceInDisplayCurrency > 0) {
+              const withdrawal = acc.balanceInDisplayCurrency * withdrawalRatio;
+              acc.balanceInDisplayCurrency -= withdrawal;
+            }
           }
         }
         
@@ -683,6 +706,10 @@ layout: layouts/post.njk
   function renderBreakdownTable(results, inputs) {
     const { years, targetFireAge, displayCurrency } = results;
     
+    // Get UK pension access age from accounts (if present)
+    const ukPensionAccount = inputs.accounts.find(a => a.name === 'UK Pension');
+    const ukPensionAccessAge = ukPensionAccount ? ukPensionAccount.accessAge : null;
+    
     // Determine which years to show (milestones + a few surrounding years)
     const milestoneAges = new Set([
       inputs.currentAge,
@@ -691,11 +718,15 @@ layout: layouts/post.njk
       targetFireAge - 1,
       targetFireAge,
       targetFireAge + 1,
-      PRESERVATION_AGES.uk.pension,
       PRESERVATION_AGES.au.super,
       70,
       80
     ]);
+    
+    // Add UK pension age if applicable
+    if (ukPensionAccessAge) {
+      milestoneAges.add(ukPensionAccessAge);
+    }
     
     // Add mortgage payoff age if relevant
     if (inputs.mortgagePayment > 0) {
@@ -730,7 +761,7 @@ layout: layouts/post.njk
       if (age === inputs.currentAge) notes.push('Start');
       if (age === targetFireAge) notes.push('FIRE Target');
       if (yearData.isMortgagePaidOff) notes.push('Mortgage paid off');
-      if (age === PRESERVATION_AGES.uk.pension && (inputs.country === 'uk' || inputs.country === 'both')) {
+      if (ukPensionAccessAge && age === ukPensionAccessAge && (inputs.country === 'uk' || inputs.country === 'both')) {
         notes.push('UK Pension unlocks');
       }
       if (age === PRESERVATION_AGES.au.super && (inputs.country === 'au' || inputs.country === 'both')) {
@@ -773,10 +804,12 @@ layout: layouts/post.njk
     
     // Add pension/super unlock ages
     if (inputs.country === 'uk' || inputs.country === 'both') {
-      if (PRESERVATION_AGES.uk.pension > targetFireAge) {
-        const yearData = years.find(y => y.age === PRESERVATION_AGES.uk.pension);
+      const ukPensionAccount = inputs.accounts.find(a => a.name === 'UK Pension');
+      const ukPensionAccessAge = ukPensionAccount ? ukPensionAccount.accessAge : 57;
+      if (ukPensionAccessAge > targetFireAge) {
+        const yearData = years.find(y => y.age === ukPensionAccessAge);
         milestones.push({
-          age: PRESERVATION_AGES.uk.pension,
+          age: ukPensionAccessAge,
           label: 'UK Pension unlocks',
           balance: yearData ? yearData.totalAccessible : 0,
           strategy: 'Add UK Pension to accessible pool'
@@ -819,28 +852,29 @@ layout: layouts/post.njk
   }
 
   function getStrategyForAge(age, inputs) {
-    const ukPensionAge = PRESERVATION_AGES.uk.pension;
+    const ukPensionAccount = inputs.accounts.find(a => a.name === 'UK Pension');
+    const ukPensionAge = ukPensionAccount ? ukPensionAccount.accessAge : 57;
     const auSuperAge = PRESERVATION_AGES.au.super;
     
     if (inputs.country === 'both') {
       if (age < ukPensionAge) {
-        return 'Draw from UK ISA and AU Savings';
+        return 'Proportional draw from UK ISA and AU Savings';
       } else if (age < auSuperAge) {
-        return 'Draw from UK ISA, UK Pension, and AU Savings';
+        return 'Proportional draw from UK ISA, UK Pension, and AU Savings';
       } else {
-        return 'All accounts accessible';
+        return 'All accounts accessible - proportional draw';
       }
     } else if (inputs.country === 'uk') {
       if (age < ukPensionAge) {
         return 'Draw from ISA only';
       } else {
-        return 'ISA and Pension both accessible';
+        return 'Proportional draw from ISA and Pension';
       }
     } else {
       if (age < auSuperAge) {
         return 'Draw from taxable savings/ETFs only';
       } else {
-        return 'Superannuation now accessible';
+        return 'Proportional draw from Super and Savings';
       }
     }
   }
@@ -857,12 +891,12 @@ layout: layouts/post.njk
     const milestoneAges = new Set();
     milestoneAges.add(targetFireAge); // FIRE age
     
-    // Check for UK Pension (access at 55) and AU Super (access at 60)
-    const hasUKPension = inputs.accounts.some(a => a.name === 'UK Pension');
-    const hasAUSuper = inputs.accounts.some(a => a.name === 'AU Super');
+    // Check for UK Pension and AU Super
+    const ukPensionAccount = inputs.accounts.find(a => a.name === 'UK Pension');
+    const auSuperAccount = inputs.accounts.find(a => a.name === 'AU Super');
     
-    if (hasUKPension) milestoneAges.add(55);
-    if (hasAUSuper) milestoneAges.add(60);
+    if (ukPensionAccount) milestoneAges.add(ukPensionAccount.accessAge);
+    if (auSuperAccount) milestoneAges.add(auSuperAccount.accessAge);
     
     // Mark each year as milestone or not
     const yearsWithMilestones = years.map(y => ({
@@ -942,10 +976,10 @@ layout: layouts/post.njk
                   if (yearData.age === targetFireAge) {
                     lines.push('🔥 FIRE Age');
                   }
-                  if (hasUKPension && yearData.age === 55) {
+                  if (ukPensionAccount && yearData.age === ukPensionAccount.accessAge) {
                     lines.push('🇬🇧 UK Pension accessible');
                   }
-                  if (hasAUSuper && yearData.age === 60) {
+                  if (auSuperAccount && yearData.age === auSuperAccount.accessAge) {
                     lines.push('🇦🇺 AU Super accessible');
                   }
                   return lines;
@@ -1115,8 +1149,13 @@ layout: layouts/post.njk
       elements.resultsSection.scrollIntoView({ behavior: 'smooth' });
     });
 
+    // Update UK pension age when current age changes
+    elements.currentAge.addEventListener('change', updateUKPensionAgeDisplay);
+    elements.currentAge.addEventListener('input', updateUKPensionAgeDisplay);
+
     // Initial setup
     updateVisibility();
+    updateUKPensionAgeDisplay();
   }
 
   // Start
