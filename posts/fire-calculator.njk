@@ -12,16 +12,8 @@ permalink: /fire-calculator/
 layout: layouts/post.njk
 ---
 
-<p>A calculator for working out your path to Financial Independence, designed specifically for UK and Australian residents. It accounts for the different pension access ages and tax-advantaged accounts in each country.</p>
+<p>A calculator for working out your path to Financial Independence, designed specifically for UK and/or Australian residents. It accounts for the different pension access ages and tax-advantaged accounts in each country.</p>
 
-<p><strong>Choose your situation:</strong></p>
-<ul>
-  <li><strong>UK Only</strong> - Workplace pension, SIPP, and ISA</li>
-  <li><strong>Australia Only</strong> - Superannuation and taxable savings</li>
-  <li><strong>Both Countries</strong> - For those with finances split across UK and Australia, with live currency conversion</li>
-</ul>
-
-<p><strong>Note:</strong> Your main residence is typically excluded from FIRE calculations. If you own your home outright, factor the lack of rent/mortgage into your retirement spending. If planning to downsize, include the expected equity release in your accessible investments.</p>
 
 <link rel="stylesheet" href="/css/fire-calculator.css">
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -95,7 +87,7 @@ layout: layouts/post.njk
   <!-- Mortgage Section -->
   <div class="calc-section">
     <h3>Mortgage (Optional)</h3>
-    <p class="section-note">If you have a mortgage, enter the details below. Your spending will automatically reduce after payoff.</p>
+    <p class="section-note">If you have a mortgage, enter the details below. Your spending will automatically reduce after payoff. Your main residence is typically excluded from FIRE calculations. If you own your home outright, factor the lack of rent/mortgage into your retirement spending. If planning to downsize, include the expected equity release in your accessible investments.</p>
     <div class="input-grid">
       <div class="input-group">
         <label for="mortgage-payment">Monthly Mortgage Payment</label>
@@ -645,8 +637,82 @@ layout: layouts/post.njk
     const fundsDepleted = years.some(y => y.age >= targetFireAge && y.totalAccessible <= 0);
     
     if (fundsDepleted) {
+      // Calculate gap details
+      let depletionAge = null;
+      let gapShortfall = 0;      // Shortfall during gap before pension unlocks
+      let totalShortfall = 0;    // Total spending during all depleted years
+      let depletedYears = 0;
+      
+      // Find first pension/super unlock age after FIRE
+      const pensionUnlockAges = inputs.accounts
+        .filter(a => a.accessAge > targetFireAge)
+        .map(a => a.accessAge)
+        .sort((a, b) => a - b);
+      const firstUnlockAge = pensionUnlockAges.length > 0 ? pensionUnlockAges[0] : null;
+      
+      // Find depletion age and calculate shortfalls
+      for (const year of years) {
+        if (year.age >= targetFireAge && year.totalAccessible <= 0 && depletionAge === null) {
+          depletionAge = year.age;
+        }
+        if (depletionAge !== null && year.totalAccessible <= 0) {
+          totalShortfall += year.adjustedSpending;
+          depletedYears++;
+          // Gap shortfall: only count years before pension unlocks
+          if (year.totalLocked > 0) {
+            gapShortfall += year.adjustedSpending;
+          }
+        }
+      }
+      
+      // Determine if this is a "gap" problem or "total depletion" problem
+      const isGapProblem = firstUnlockAge && depletionAge < firstUnlockAge;
+      const gapYears = isGapProblem ? firstUnlockAge - depletionAge : 0;
+      const runwayYears = fireYearAccessible > 0 ? (fireYearAccessible / fireYearSpending).toFixed(1) : 0;
+      
+      // Calculate potential fixes
+      const yearsToFire = targetFireAge - inputs.currentAge;
+      const shortfallToUse = isGapProblem ? gapShortfall : totalShortfall;
+      const additionalSavingsNeeded = yearsToFire > 0 ? Math.ceil(shortfallToUse / yearsToFire / 1000) * 1000 : 0;
+      
       statusClass = 'status-warning';
-      statusMessage = 'Based on current projections, your accessible funds may run out before pension/super unlocks. Consider increasing contributions or reducing spending.';
+      
+      if (isGapProblem) {
+        // Scenario 1: Funds run out BEFORE pension unlocks
+        const spendingReduction = gapYears > 0 ? Math.ceil((gapShortfall / gapYears) / 100) * 100 : 0;
+        const spendingReductionPct = inputs.annualSpending > 0 ? ((spendingReduction / inputs.annualSpending) * 100).toFixed(0) : 0;
+        
+        statusMessage = '<strong>Accessible funds run out at age ' + depletionAge + '</strong>';
+        statusMessage += ', leaving a <strong>' + gapYears + '-year gap</strong> before pension/super unlocks at ' + firstUnlockAge + '.';
+        statusMessage += '<br><br><strong>Current runway:</strong> ' + runwayYears + ' years of spending covered at FIRE';
+        statusMessage += '<br><strong>Gap shortfall:</strong> ~' + formatCurrency(gapShortfall, displayCurrency) + ' needed to bridge to pension access';
+        
+        if (yearsToFire > 0) {
+          statusMessage += '<br><br><strong>To fix, consider:</strong><ul style="margin: 0.5rem 0 0 1.5rem; padding: 0;">';
+          statusMessage += '<li>Increase accessible savings by ~' + formatCurrency(additionalSavingsNeeded, displayCurrency) + '/year</li>';
+          statusMessage += '<li>Reduce spending by ~' + formatCurrency(spendingReduction, displayCurrency) + '/year (' + spendingReductionPct + '%)</li>';
+          statusMessage += '<li>Delay FIRE by ' + gapYears + '+ years</li>';
+          statusMessage += '</ul>';
+        }
+      } else {
+        // Scenario 2: Funds run out AFTER pension unlocks (total savings insufficient)
+        const yearsShort = depletedYears;
+        const spendingReduction = depletedYears > 0 ? Math.ceil((totalShortfall / (90 - targetFireAge)) / 100) * 100 : 0;
+        const spendingReductionPct = inputs.annualSpending > 0 ? ((spendingReduction / inputs.annualSpending) * 100).toFixed(0) : 0;
+        
+        statusMessage = '<strong>All funds run out at age ' + depletionAge + '</strong>';
+        statusMessage += ', leaving you <strong>' + yearsShort + ' years short</strong> of age 90.';
+        statusMessage += '<br><br><strong>Current runway:</strong> ' + runwayYears + ' years of spending covered at FIRE';
+        statusMessage += '<br><strong>Total shortfall:</strong> ~' + formatCurrency(totalShortfall, displayCurrency) + ' needed to reach age 90';
+        
+        if (yearsToFire > 0) {
+          statusMessage += '<br><br><strong>To fix, consider:</strong><ul style="margin: 0.5rem 0 0 1.5rem; padding: 0;">';
+          statusMessage += '<li>Increase total savings by ~' + formatCurrency(additionalSavingsNeeded, displayCurrency) + '/year</li>';
+          statusMessage += '<li>Reduce spending by ~' + formatCurrency(spendingReduction, displayCurrency) + '/year (' + spendingReductionPct + '%)</li>';
+          statusMessage += '<li>Delay FIRE to build a larger nest egg</li>';
+          statusMessage += '</ul>';
+        }
+      }
     } else if (effectiveWithdrawalRate > 0.04) {
       statusClass = 'status-caution';
       statusMessage = 'You can FIRE at age ' + targetFireAge + ', but your initial withdrawal rate of ' + formatPercent(effectiveWithdrawalRate) + ' is above the traditional 4% safe rate. Your funds are projected to last, especially once pension/super unlocks.';
@@ -836,6 +902,18 @@ layout: layouts/post.njk
       }
     }
     
+    // Add depletion age if funds run out
+    const depletionYear = years.find(y => y.age >= targetFireAge && y.totalAccessible <= 0);
+    if (depletionYear) {
+      milestones.push({
+        age: depletionYear.age,
+        label: 'Funds depleted',
+        isWarningMarker: true,
+        balance: 0,
+        strategy: 'No accessible funds remaining'
+      });
+    }
+    
     // Sort by age
     milestones.sort((a, b) => a.age - b.age);
     
@@ -843,7 +921,9 @@ layout: layouts/post.njk
     let html = '<h4>Liquidity Timeline & Drawdown Strategy</h4><div class="timeline">';
     
     for (const milestone of milestones) {
-      const markerClass = milestone.isFireMarker ? 'fire-marker' : '';
+      let markerClass = '';
+      if (milestone.isFireMarker) markerClass = 'fire-marker';
+      if (milestone.isWarningMarker) markerClass = 'warning-marker';
       
       html += '<div class="timeline-item ' + markerClass + '">' +
                 '<div class="timeline-age">Age ' + milestone.age + '</div>' +

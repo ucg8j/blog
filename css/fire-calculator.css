@@ -319,6 +319,24 @@ input[type="radio"]:checked ~ * {
   height: 14px;
 }
 
+.timeline-item.warning-marker::before {
+  background: #c62828;
+  border-color: #c62828;
+  width: 14px;
+  height: 14px;
+}
+
+.timeline-item.warning-marker .timeline-age,
+.timeline-item.warning-marker .timeline-event {
+  color: #c62828;
+}
+
+.timeline-item.warning-marker .timeline-strategy {
+  color: #c62828;
+  font-style: normal;
+  font-weight: 500;
+}
+
 .timeline-age {
   font-weight: 600;
   font-size: 0.9375rem;
