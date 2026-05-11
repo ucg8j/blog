@@ -1,0 +1,638 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Holo Agent Canvas Training Demo</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #071018;
+      --panel: #101b26;
+      --ink: #edf7ff;
+      --muted: #9fb3c8;
+      --line: #284157;
+      --good: #54d58a;
+      --warn: #ffc857;
+      --bad: #ff7373;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      overflow: auto;
+      background:
+        radial-gradient(circle at 18% 12%, rgb(36 96 118 / 38%), transparent 28rem),
+        radial-gradient(circle at 88% 18%, rgb(114 56 142 / 25%), transparent 24rem),
+        var(--bg);
+      color: var(--ink);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    .frame {
+      width: 1240px;
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      position: absolute;
+      z-index: 2;
+      top: 14px;
+      left: 24px;
+      right: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      pointer-events: none;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 20px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .status {
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 8px 12px;
+      color: var(--muted);
+      background: rgb(255 255 255 / 5%);
+      font-size: 13px;
+    }
+
+    .stage-wrap {
+      width: 1240px;
+      height: 760px;
+      border: 0;
+      border-radius: 0;
+      padding: 0;
+      background: transparent;
+      box-shadow: none;
+    }
+
+    canvas {
+      display: block;
+      width: 1240px;
+      height: 760px;
+      border-radius: 0;
+      background: #0a1420;
+    }
+
+    .sr-status {
+      position: fixed;
+      left: -9999px;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+    }
+  </style>
+</head>
+<body>
+  <div class="frame">
+    <header>
+      <h1>Canvas Operations Portal</h1>
+      <div class="status" id="statusText">Not started</div>
+    </header>
+    <div class="stage-wrap">
+      <canvas id="moduleCanvas" width="1240" height="760" aria-label="Canvas training module"></canvas>
+    </div>
+    <div class="sr-status" id="screenState" aria-live="polite"></div>
+  </div>
+
+  <script>
+    const canvas = document.querySelector("#moduleCanvas");
+    const ctx = canvas.getContext("2d");
+    const statusText = document.querySelector("#statusText");
+    const screenState = document.querySelector("#screenState");
+
+    const state = {
+      screen: 0,
+      valveSelected: false,
+      found: new Set(),
+      quizPassed: false,
+      finalConfirmed: false,
+      message: "",
+    };
+
+    class StageNode {
+      constructor({ name, x, y, w = 1, h = 1, text = "", mouseEnabled = true, visible = true, onClick = null }) {
+        this.name = name;
+        this.x = x;
+        this.y = y;
+        this.w = w;
+        this.h = h;
+        this.text = text;
+        this.mouseEnabled = mouseEnabled;
+        this.visible = visible;
+        this.onClick = onClick;
+        this.children = [];
+        this.parent = null;
+      }
+
+      addChild(child) {
+        child.parent = this;
+        this.children.push(child);
+        return child;
+      }
+
+      localToGlobal(x, y) {
+        let gx = this.x + x;
+        let gy = this.y + y;
+        let node = this.parent;
+        while (node) {
+          gx += node.x;
+          gy += node.y;
+          node = node.parent;
+        }
+        return { x: gx, y: gy };
+      }
+
+      hasEventListener(eventName) {
+        return Boolean(this.onClick) && ["click", "mousedown", "pressup"].includes(eventName);
+      }
+
+      dispatchEvent(event) {
+        if (event.type === "click") {
+          if (this.onClick) this.onClick();
+        }
+      }
+    }
+
+    window.createjs = {
+      MouseEvent: class {
+        constructor(type) {
+          this.type = type;
+        }
+      },
+    };
+
+    window.stage = new StageNode({ name: "root", x: 0, y: 0, mouseEnabled: false });
+
+    function resetStage() {
+      window.stage.children = [];
+    }
+
+    function addHotspot(config) {
+      const node = new StageNode(config);
+      node.addChild(new StageNode({
+        name: `${config.name}_label`,
+        x: 0,
+        y: 0,
+        text: config.text,
+        mouseEnabled: false,
+      }));
+      window.stage.addChild(node);
+      return node;
+    }
+
+    function addNext(enabled) {
+      const nav = new StageNode({
+        name: "next_mc",
+        x: 1058,
+        y: 690,
+        w: 124,
+        h: 46,
+        text: "Next",
+        mouseEnabled: enabled,
+        onClick: null,
+      });
+      nav.addChild(new StageNode({
+        name: "selection_btn",
+        x: 62,
+        y: 23,
+        w: 124,
+        h: 46,
+        text: "Next",
+        mouseEnabled: enabled,
+        onClick: enabled ? () => setScreen(state.screen + 1) : null,
+      }));
+      nav.addChild(new StageNode({
+        name: "display_txt",
+        x: 0,
+        y: 0,
+        text: "Next",
+        mouseEnabled: false,
+      }));
+      window.stage.addChild(nav);
+    }
+
+    function setScreen(nextScreen) {
+      state.screen = Math.max(0, Math.min(nextScreen, 5));
+      state.message = "";
+      render();
+    }
+
+    canvas.addEventListener("click", (event) => {
+      const rect = canvas.getBoundingClientRect();
+      const x = (event.clientX - rect.left) * canvas.width / rect.width;
+      const y = (event.clientY - rect.top) * canvas.height / rect.height;
+      const hit = findCanvasHit(window.stage, x, y);
+      if (hit) hit.dispatchEvent({ type: "click" });
+    });
+
+    function findCanvasHit(node, x, y) {
+      if (!node.visible) return null;
+      for (const child of [...node.children].reverse()) {
+        const hit = findCanvasHit(child, x, y);
+        if (hit) return hit;
+      }
+      if (!node.mouseEnabled || !node.hasEventListener("click")) return null;
+      const pt = node.localToGlobal(0, 0);
+      const halfW = Math.max(node.w, 28) / 2;
+      const halfH = Math.max(node.h, 28) / 2;
+      if (Math.abs(x - pt.x) <= halfW && Math.abs(y - pt.y) <= halfH) return node;
+      return null;
+    }
+
+    function clear() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      const grid = ctx.createLinearGradient(0, 0, 0, canvas.height);
+      grid.addColorStop(0, "#0d1c2b");
+      grid.addColorStop(1, "#08111b");
+      ctx.fillStyle = grid;
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      ctx.strokeStyle = "rgba(105, 147, 179, 0.13)";
+      ctx.lineWidth = 1;
+      for (let x = 40; x < canvas.width; x += 80) {
+        ctx.beginPath();
+        ctx.moveTo(x, 0);
+        ctx.lineTo(x, 640);
+        ctx.stroke();
+      }
+      for (let y = 40; y < 640; y += 80) {
+        ctx.beginPath();
+        ctx.moveTo(0, y);
+        ctx.lineTo(canvas.width, y);
+        ctx.stroke();
+      }
+
+      ctx.fillStyle = "#0b1722";
+      ctx.fillRect(0, 640, canvas.width, 120);
+      ctx.strokeStyle = "#284157";
+      ctx.beginPath();
+      ctx.moveTo(0, 640);
+      ctx.lineTo(canvas.width, 640);
+      ctx.stroke();
+    }
+
+    function title(text, subtitle) {
+      ctx.fillStyle = "#edf7ff";
+      ctx.font = "700 34px system-ui";
+      ctx.fillText(text, 54, 72);
+      ctx.fillStyle = "#9fb3c8";
+      ctx.font = "18px system-ui";
+      wrapText(subtitle, 56, 108, 760, 28);
+    }
+
+    function drawPill(x, y, w, h, label, options = {}) {
+      const done = options.done || false;
+      const subtle = options.subtle || false;
+      const active = options.active !== false;
+      ctx.save();
+      ctx.globalAlpha = active ? 1 : 0.42;
+      ctx.fillStyle = done ? "rgba(84, 213, 138, 0.22)" : subtle ? "rgba(255, 255, 255, 0.045)" : "rgba(255, 255, 255, 0.11)";
+      ctx.strokeStyle = done ? "#54d58a" : subtle ? "rgba(159, 179, 200, 0.22)" : "#47718f";
+      ctx.lineWidth = done ? 3 : 2;
+      roundRect(x, y, w, h, 16);
+      ctx.fill();
+      ctx.stroke();
+      ctx.fillStyle = done ? "#c6ffdc" : "#edf7ff";
+      ctx.font = "700 17px system-ui";
+      wrapText(label, x + 18, y + 30, w - 36, 24);
+      ctx.restore();
+    }
+
+    function drawNav(enabled) {
+      drawPill(1058, 690, 124, 46, enabled ? "Next" : "Next locked", { active: enabled });
+    }
+
+    function drawMessage() {
+      if (!state.message) return;
+      ctx.fillStyle = state.message.startsWith("Correct") || state.message.startsWith("Marked") ? "#54d58a" : "#ffc857";
+      ctx.font = "700 18px system-ui";
+      ctx.fillText(state.message, 56, 612);
+    }
+
+    function render() {
+      resetStage();
+      clear();
+      if (state.screen === 0) renderLaunch();
+      if (state.screen === 1) renderValve();
+      if (state.screen === 2) renderSweep();
+      if (state.screen === 3) renderQuiz();
+      if (state.screen === 4) renderFinalMark();
+      if (state.screen === 5) renderComplete();
+      drawMessage();
+      screenState.textContent = `Screen ${state.screen + 1}. ${statusText.textContent}. ${state.message}`;
+    }
+
+    function renderLaunch() {
+      statusText.textContent = "Awaiting launch";
+      title(
+        "Non-standard interface module",
+        "This module uses canvas hotspots instead of normal buttons. Click the amber seal to launch the inspection."
+      );
+      drawPanelMap();
+      pulse(205, 506, "#ffc857");
+      ctx.fillStyle = "#ffc857";
+      ctx.font = "700 18px system-ui";
+      ctx.fillText("Activation seal", 144, 565);
+      addHotspot({
+        name: "launch_training_btn",
+        x: 205,
+        y: 506,
+        w: 90,
+        h: 90,
+        text: "Amber launch seal",
+        onClick: () => setScreen(1),
+      });
+    }
+
+    function renderValve() {
+      statusText.textContent = "Inspection challenge";
+      title(
+        "Find the open coolant valve",
+        "The clickable target is not shaped like a button. Use the page evidence and select only the open valve."
+      );
+      drawValve(308, 294, "Locked pressure cap", false, "#ff7373");
+      drawValve(632, 382, "Red inactive switch", false, "#ffc857");
+      drawValve(958, 236, "Open coolant valve", true, "#54d58a");
+      addHotspot({
+        name: "locked_cap_btn",
+        x: 308,
+        y: 294,
+        w: 120,
+        h: 120,
+        text: "Locked pressure cap",
+        onClick: () => {
+          state.message = "That cap is locked. Look for the open valve.";
+          render();
+        },
+      });
+      addHotspot({
+        name: "inactive_switch_btn",
+        x: 632,
+        y: 382,
+        w: 150,
+        h: 80,
+        text: "Red inactive switch",
+        onClick: () => {
+          state.message = "That switch is inactive. The open coolant valve is elsewhere.";
+          render();
+        },
+      });
+      addHotspot({
+        name: "open_valve_btn",
+        x: 958,
+        y: 236,
+        w: 120,
+        h: 120,
+        text: "Open coolant valve",
+        onClick: () => {
+          state.valveSelected = true;
+          state.message = "Correct valve selected. Next is enabled.";
+          render();
+        },
+      });
+      drawNav(state.valveSelected);
+      addNext(state.valveSelected);
+    }
+
+    function renderSweep() {
+      statusText.textContent = "Evidence sweep";
+      title(
+        "Find three subtle clickable clues",
+        "Not every clickable item looks like a button. Mark the loose blue tag, the hairline crack, and the tiny reset pin."
+      );
+      drawEquipment();
+      clue("Loose blue tag", 186, 196, "#5cc8ff", state.found.has("tag"));
+      clue("Hairline crack", 724, 472, "#f3f7ff", state.found.has("crack"));
+      clue("Tiny reset pin", 1042, 155, "#ffc857", state.found.has("pin"));
+      for (const [key, label, x, y] of [
+        ["tag", "Loose blue tag", 186, 196],
+        ["crack", "Hairline crack", 724, 472],
+        ["pin", "Tiny reset pin", 1042, 155],
+      ]) {
+        addHotspot({
+          name: `${key}_clue_btn`,
+          x,
+          y,
+          w: 90,
+          h: 70,
+          text: label,
+          onClick: () => {
+            state.found.add(key);
+            state.message = `Marked ${label}. ${state.found.size} of 3 clues found.`;
+            render();
+          },
+        });
+      }
+      const ready = state.found.size === 3;
+      drawNav(ready);
+      addNext(ready);
+    }
+
+    function renderQuiz() {
+      statusText.textContent = "Knowledge check";
+      title(
+        "What proved the target was clickable?",
+        "Choose the best answer. The wrong options look plausible but do not describe the useful debugging signal."
+      );
+      const options = [
+        ["Large centered button labels", 104, 205, false],
+        ["Cursor changed and trace confirmed click", 488, 160, true],
+        ["A perfect screenshot alone", 396, 392, false],
+        ["The item was near the bottom nav", 812, 438, false],
+      ];
+      for (const [label, x, y, correct] of options) {
+        drawPill(x, y, 320, 92, label, { done: correct && state.quizPassed, subtle: !correct });
+        addHotspot({
+          name: `${slug(label)}_btn`,
+          x: x + 160,
+          y: y + 46,
+          w: 320,
+          h: 92,
+          text: label,
+          onClick: () => {
+            state.quizPassed = correct;
+            state.message = correct
+              ? "Correct. Trace evidence confirmed the interaction."
+              : "Not quite. The trace plus interaction evidence was the key signal.";
+            render();
+          },
+        });
+      }
+      drawNav(state.quizPassed);
+      addNext(state.quizPassed);
+    }
+
+    function renderFinalMark() {
+      statusText.textContent = "Final mark required";
+      title(
+        "Stamp the completion ledger",
+        "The module is not complete until this last canvas stamp is clicked. It is intentionally not styled as a normal button."
+      );
+      drawLedger();
+      drawPill(828, 428, 260, 74, "Stamp completion", { done: state.finalConfirmed });
+      addHotspot({
+        name: "stamp_completion_btn",
+        x: 958,
+        y: 465,
+        w: 260,
+        h: 74,
+        text: "Stamp completion",
+        onClick: () => {
+          state.finalConfirmed = true;
+          setScreen(5);
+        },
+      });
+    }
+
+    function renderComplete() {
+      statusText.textContent = "Complete";
+      title(
+        "Training complete",
+        "The canvas module is complete. This final screen is the only valid place to use task_complete."
+      );
+      ctx.fillStyle = "rgba(84, 213, 138, 0.16)";
+      ctx.strokeStyle = "#54d58a";
+      ctx.lineWidth = 4;
+      roundRect(420, 232, 400, 210, 28);
+      ctx.fill();
+      ctx.stroke();
+      ctx.fillStyle = "#54d58a";
+      ctx.font = "900 76px system-ui";
+      ctx.fillText("OK", 566, 354);
+      ctx.fillStyle = "#c6ffdc";
+      ctx.font = "700 23px system-ui";
+      ctx.fillText("Training complete", 512, 398);
+    }
+
+    function drawPanelMap() {
+      ctx.strokeStyle = "rgba(159, 179, 200, 0.28)";
+      ctx.lineWidth = 2;
+      for (const [x, y, w, h] of [[424, 190, 250, 120], [702, 260, 330, 150], [490, 452, 210, 90]]) {
+        roundRect(x, y, w, h, 18);
+        ctx.stroke();
+      }
+    }
+
+    function drawValve(x, y, label, open, color) {
+      ctx.strokeStyle = color;
+      ctx.fillStyle = open ? "rgba(84, 213, 138, 0.12)" : "rgba(255, 255, 255, 0.04)";
+      ctx.lineWidth = open ? 4 : 2;
+      ctx.beginPath();
+      ctx.arc(x, y, 48, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.stroke();
+      ctx.beginPath();
+      ctx.moveTo(x - 34, y);
+      ctx.lineTo(x + 34, y);
+      ctx.moveTo(x, y - 34);
+      ctx.lineTo(x, y + 34);
+      ctx.stroke();
+      ctx.fillStyle = "#d9eaff";
+      ctx.font = "15px system-ui";
+      ctx.fillText(label, x - 72, y + 76);
+    }
+
+    function drawEquipment() {
+      ctx.fillStyle = "rgba(255, 255, 255, 0.05)";
+      ctx.strokeStyle = "rgba(159, 179, 200, 0.30)";
+      ctx.lineWidth = 2;
+      roundRect(140, 158, 900, 380, 28);
+      ctx.fill();
+      ctx.stroke();
+      ctx.strokeStyle = "rgba(159, 179, 200, 0.20)";
+      for (let x = 220; x < 950; x += 130) {
+        ctx.beginPath();
+        ctx.moveTo(x, 172);
+        ctx.lineTo(x + 60, 520);
+        ctx.stroke();
+      }
+    }
+
+    function clue(label, x, y, color, done) {
+      ctx.save();
+      ctx.fillStyle = done ? "rgba(84, 213, 138, 0.36)" : color;
+      ctx.strokeStyle = done ? "#54d58a" : "rgba(255, 255, 255, 0.46)";
+      ctx.lineWidth = done ? 4 : 1.5;
+      ctx.beginPath();
+      ctx.arc(x, y, label === "Tiny reset pin" ? 10 : 18, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.stroke();
+      ctx.restore();
+    }
+
+    function drawLedger() {
+      ctx.fillStyle = "rgba(255, 255, 255, 0.06)";
+      ctx.strokeStyle = "rgba(159, 179, 200, 0.32)";
+      ctx.lineWidth = 2;
+      roundRect(188, 178, 620, 360, 22);
+      ctx.fill();
+      ctx.stroke();
+      ctx.fillStyle = "#9fb3c8";
+      ctx.font = "18px ui-monospace, SFMono-Regular, Menlo, monospace";
+      for (let i = 0; i < 7; i += 1) {
+        ctx.fillText(`entry_${String(i + 1).padStart(2, "0")}  verified`, 236, 238 + i * 38);
+      }
+    }
+
+    function pulse(x, y, color) {
+      ctx.fillStyle = "rgba(255, 200, 87, 0.10)";
+      ctx.beginPath();
+      ctx.arc(x, y, 74, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.fillStyle = color;
+      ctx.beginPath();
+      ctx.arc(x, y, 42, 0, Math.PI * 2);
+      ctx.fill();
+    }
+
+    function wrapText(text, x, y, maxWidth, lineHeight) {
+      const words = text.split(" ");
+      let line = "";
+      for (const word of words) {
+        const testLine = line ? `${line} ${word}` : word;
+        if (ctx.measureText(testLine).width > maxWidth && line) {
+          ctx.fillText(line, x, y);
+          line = word;
+          y += lineHeight;
+        } else {
+          line = testLine;
+        }
+      }
+      if (line) ctx.fillText(line, x, y);
+    }
+
+    function roundRect(x, y, w, h, radius) {
+      ctx.beginPath();
+      ctx.moveTo(x + radius, y);
+      ctx.lineTo(x + w - radius, y);
+      ctx.quadraticCurveTo(x + w, y, x + w, y + radius);
+      ctx.lineTo(x + w, y + h - radius);
+      ctx.quadraticCurveTo(x + w, y + h, x + w - radius, y + h);
+      ctx.lineTo(x + radius, y + h);
+      ctx.quadraticCurveTo(x, y + h, x, y + h - radius);
+      ctx.lineTo(x, y + radius);
+      ctx.quadraticCurveTo(x, y, x + radius, y);
+      ctx.closePath();
+    }
+
+    function slug(text) {
+      return text.toLowerCase().replace(/[^a-z0-9]+/g, "_").replace(/^_|_$/g, "");
+    }
+
+    render();
+  </script>
+</body>
+</html>
