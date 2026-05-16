@@ -85,13 +85,11 @@ Each run writes screenshots, the model reasoning, the prompt fed into the model 
 
 This trace was not just an audit log. It was the development tool. Early traces showed repeated clicks, malformed actions, stale pages, premature exits, and missing context. Those failures became parser repair, action history, stale-page detection, loading guards, seeded knowledge, navigation policies, and deeper model-server health checks.
 
-I started with a regular interface to navigate to iron out the setup issues. But it then navigated this consistently with ease. So the next step was to setup something much harder. You can try to complete this yourself by opening the module here.
+I started with a regular interface to navigate to iron out the setup issues. But it then navigated this consistently with ease. So the next step was to setup something much harder.
 
-This repository includes a small static training portal at `examples/holo_training_portal`. It deliberately exercises the patterns that shaped the agent: a launch button, persistent navigation, a disabled Next button, a timed media-like wait, quiz feedback, retry behavior, and a final completion screen.
+This repository includes a small static training portal at `examples/holo_training_portal`. It deliberately exercises the patterns that shaped the agent: a launch button, persistent navigation, a disabled Next button, a timed media-like wait, quiz feedback, retry behavior, and a final completion screen. You can [try the simple module here](/content/demos/holo-training-portal/).
 
-**TODO - fix the flow of the evolution of the basic tasks module, to the harder one. Also have a giphy for the completion of the easy one.
-
-There is also a second, less standard demo at `examples/holo_canvas_portal`. It is closer to the difficult interfaces that motivated the CreateJS path: canvas-rendered controls, subtle hotspots, decoys, disabled canvas navigation, and a final canvas completion action.
+There is also a second, less standard demo at `examples/holo_canvas_portal`. It is closer to the difficult interfaces that motivated the CreateJS path: canvas-rendered controls, subtle hotspots, decoys, disabled canvas navigation, and a final canvas completion action. You can [try the complex canvas module here](/content/demos/holo-canvas-portal/).
 
 ![Holo agent completing a canvas-based training module](/content/images/holo-agent/holo-canvas-agent-demo.gif)
 
@@ -136,6 +134,29 @@ Navigation controls:
 ```
 
 This changed the model's job from "estimate where to click from pixels" to "choose from grounded targets". The executor then snaps model coordinates or text targets back to those known interactives.
+
+## What Happened When I Removed The Grounding
+
+To make sure I was not accidentally over-claiming the VLM's visual ability, I added an observation-based mode. In that mode the model still gets the screenshot and the task, but it does not see the `Interactive elements detected...` list, CreateJS stage labels, navigation button state, or precomputed snap-to-target data.
+
+This made the simple module much harder. Holo3 often understood the right intent: launch the module, click checklist rows, start the media, answer the quiz, continue to confirmation. The problem was turning that intent into reliable browser actions. Once the SCORM and CreateJS clues were removed from the prompt, the harness had to do more work without reading DOM or canvas scene data ahead of time.
+
+Getting the visual-only path through the simple module required:
+
+- A shorter JSON action shape, because long optional schemas increased malformed output.
+- Coordinate repair for responses such as scalar `coordinate` values, missing brackets, and truncated JSON.
+- Device-pixel-ratio conversion, because screenshots and Playwright mouse input did not use the same coordinate space.
+- Screenshot-only colored-button targeting for visible controls such as `Launch`, `Next`, and `Start Media`.
+- Screenshot-only row detection for checklist-like controls.
+- Loop detection, stale-screen warnings, and final-completion policy when the model kept clicking after the page was already done.
+
+That result sharpened the lesson rather than disproving it. Holo3 can visually plan its way through a basic module, but the reliable system is still the VLM plus a compatibility layer around parsing, coordinates, clicking, state tracking, and completion policy.
+
+The trace is worth browsing because it shows the actual development texture: malformed coordinates being repaired, row clicks being recentered, the model reaching the final `Training complete` screen, and the last remaining mistake where it kept clicking instead of emitting `task_complete`. I have hosted that trace as a static artifact here: [visual-only simple module trace](/content/traces/holo-agent/20260511T131133Z-complete-this-training-module/).
+
+Then I ran the same visual-only mode against the harder canvas module without changing the harness again. That failed, which is the result I expected. The model launched the inspection, read the next task correctly, and repeatedly identified the green `Open coolant valve` as the right target. But the page did not advance. After 19 steps the loop guard stopped the run: Holo3 was visually right about the target, while the raw visual click path was not enough for that canvas interaction. That failure trace is here: [visual-only complex canvas trace](/content/traces/holo-agent/20260511T135749Z-complete-this-training-module/).
+
+So the comparison is useful: grounded mode with CreateJS/SCORM clues turns the problem into choosing known interactive targets; visual-only mode forces the model and harness to recover everything from pixels. On the simple module that can be made to work. On the harder canvas module it exposed why the grounded event-dispatch path exists.
 
 ## Treat Clicking As A Compatibility Layer
 
@@ -339,5 +360,7 @@ There is also a tension between generality and usefulness. A purely general agen
 The biggest lesson from `holo_agent` is that computer-use VLMs become useful when you stop treating the screenshot as the whole world.
 
 The browser knows things the screenshot does not: which controls are interactive, whether a button is disabled, whether a video is playing, whether the page is loading, and which object actually receives a click. The trace knows things the model forgot. Prior runs know things the current screenshot cannot show.
+
+The visual-only ablation made this concrete. It was not a question of whether Holo3 could understand the screenshot. Often it could. The harder question was whether that understanding survived JSON formatting, coordinate systems, canvas hit testing, disabled controls, state changes, and completion policy. The more of that hidden state the harness exposed, the less the VLM had to guess.
 
 The agent works by making that hidden state visible to the model, then enforcing the invariants the model should not be trusted to remember.
