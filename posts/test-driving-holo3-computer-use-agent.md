@@ -89,9 +89,15 @@ I started with a regular interface to navigate to iron out the setup issues. But
 
 This repository includes a small static training portal at `examples/holo_training_portal`. It deliberately exercises the patterns that shaped the agent: a launch button, persistent navigation, a disabled Next button, a timed media-like wait, quiz feedback, retry behavior, and a final completion screen. You can [try the simple module here](/content/demos/holo-training-portal/).
 
+![Holo agent completing the simple training module visually](/content/images/holo-agent/holo-simple-agent-visual-trace.gif)
+
+This was the easier progression point for the agent because it still looked like a normal training portal: rectangular buttons, visible text labels, checklist rows, a single obvious quiz answer, and a final completion screen. Even without the interactive-element list, the targets were visually legible and mostly shaped like the controls humans expect to click.
+
 There is also a second, less standard demo at `examples/holo_canvas_portal`. It is closer to the difficult interfaces that motivated the CreateJS path: canvas-rendered controls, subtle hotspots, decoys, disabled canvas navigation, and a final canvas completion action. You can [try the complex canvas module here](/content/demos/holo-canvas-portal/).
 
 ![Holo agent completing a canvas-based training module](/content/images/holo-agent/holo-canvas-agent-demo.gif)
+
+I later extended that canvas portal into an 8-step benchmark: valve selection, clue sweep, mirror target, dial lock, shutter latch, quiz, glyph lock, and route trace. In three grounded runs, Holo3 reached `6/8` each time. It cleared the first six tasks with the CreateJS element list, snapped coordinates, and JS-dispatched canvas clicks, then failed at the glyph lock before reaching the final route-tracing task. The struggle was not basic click grounding; it was visual symbol interpretation and maintaining the correct glyph sequence under repeated retries.
 
 
 ## Screenshots Alone Are Not Enough
