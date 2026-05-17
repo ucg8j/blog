@@ -18,23 +18,25 @@ Then, on March 31, [H Company](http://hcompany.ai/) a French AI Lab, [released H
 
 You might think, I can just just download Holo3, hit self-driving mode where all my computer work is on intelligent auto-pilot whilst I sit back and relax. Not quite. The useful agent emerged through repeated failures e.g. malformed JSON, screen coordinate issues, premature exits, stale browser tabs and steps that require remembering earlier content.
 
-This is a write-up of what I imaginatively named `holo_agent` a test spin of the 35B Holo3 model, that drives a browser by looking at screenshots, choosing the next action, and executing that action through [Playwright](https://playwright.dev/).
+This is a write-up of what I imaginatively named `holo_agent` a test spin of the `Holo3-35B-A3B` model, that drives a browser by looking at screenshots, choosing the next action, and executing that action through [Playwright](https://playwright.dev/).
 
-My `holo_agent` is [Ralph-loop-esque](https://ralphify.co/docs/how-it-works/#what-gets-re-read-vs-what-stays-fixed), but for browser use rather than coding. Instead of re-running tests and feeding results back to a coding agent, it captures a screenshot, scans browser state, asks the VLM for one action, executes it, records a trace, and uses the result of that action to shape the next step.
+The `holo_agent` is [Ralph-loop-esque](https://ralphify.co/docs/how-it-works/#what-gets-re-read-vs-what-stays-fixed), but for browser use rather than coding. Instead of re-running tests and feeding results back to a coding agent, it captures a screenshot, scans browser state, asks the VLM for one action, executes it, records a trace, and uses the result of that action to shape the next step.
 
-## My setup for `holo_agent`
+## My approach
 
-`holo_agent` is a browser automation harness for local computer-use models. Heavily vibe coded, a coding agent getting a computer use agent to work. It connects to an existing Chromium or Edge browser over CDP (how did I not know about [connect over CDP](https://playwright.dev/docs/api/class-browsertype#browser-type-connect-over-cdp) for existing session until now???), captures the current viewport, sends the screenshot plus structured context to my local Holo3 model running using [mlx-vlm](https://github.com/Blaizzy/mlx-vlm) (I've got to make use of my apple silicon), parses the model's JSON action, executes it, and records a trace of every step.
+My heavily vibe coded `holo_agent` is [the harness](https://www.theneuron.ai/explainer-articles/ai-harnesses-and-clis-explained-the-real-reason-everyones-talking-about-infrastructure/), a wrapper around, the model to enable feedback and action. It connects to an existing Chromium or Edge browser over CDP (how did I not know about [connect over CDP](https://playwright.dev/docs/api/class-browsertype#browser-type-connect-over-cdp) for existing session until now???), captures the current viewport, sends the screenshot plus structured context to my local Holo3 model being served by [mlx-vlm](https://github.com/Blaizzy/mlx-vlm) (I've got to make use of my apple silicon - M-series-maxxing), parses the model's JSON action, executes it, and records a trace of every step.
 
-The goal was deliberately generic. A narrow workflow script can be much more finite and controllable. `holo_agent` aims at the lofty goal of generically being able to take actions via interfaces. Ok but why wouldn't you just parse the webpage structure and avoid using VLM...
+**The goal was to see how well a VLM for 'computer use', running locally, is able to navigate interfaces.**
 
-## When Would You Use This?
+Ok but why wouldn't you just parse the webpage structure and avoid using a VLM...
+
+## When Would You Use a computer use agent?
 
 You would not reach for a computer-use VLM first:
 
-- If the system has an API, use the API.
+- If the system has an API, use the API. Computer use models can be [45x more expensive than using an API](https://reflex.dev/blog/computer-use-is-45x-more-expensive-than-structured-apis/)
 - If the page is ordinary HTML with stable DOM elements, parse and automate the DOM.
-- If the workflow is finite, known, and business-critical, write a deterministic script.
+- If the workflow is finite, and known, write a deterministic script.
 - If the task is mostly data transfer, validation, or form submission, avoid vision if you can.
 
 You'd use this when the graphical interface is the only practical option. For example,
@@ -43,9 +45,11 @@ You'd use this when the graphical interface is the only practical option. For ex
 - Canvas-rendered modules.
 - Screens where the important state is visual rather than available as inspectable DOM.
 
-Old enterprises have plenty of ancient systems with no modern APIs. Computer use agents are capable of controlling entire desktops with multiple applications. I didn't want to handover my real desktop and don't have the tokens or 8hrs of time to vibe an a simulated desktop ([see scenario 3 of the Glm5.1 release](https://z.ai/blog/glm-5.1)). So I restricted the interface to the browser, I got chatGPT5.5 to vibe up a Canvas based series of tasks. Using a canvas means buttons exist to be clicked, but can't be seen via parsing the webpage. Here's the preview if you want to inspect the elements.
+Old enterprises have plenty of ancient systems with no modern APIs. Computer use agents have the potential to control entire desktops with multiple applications. I didn't want to handover my real desktop and don't have the tokens or 8hrs of time to vibe an a simulated desktop ([see scenario 3 of the Glm5.1 release](https://z.ai/blog/glm-5.1)). So I restricted the interface to the browser, I got `GPT-5.5` to create an exercise for the model to complete - a web based series of tasks. 
+*TODO - do I talk about the simple task first, show this then move to the complicated canvas one with grounding + without grounding.*
+Using a canvas means buttons exist to be clicked, but can't be seen via parsing the webpage. Here's the preview if you want to inspect the elements.
 
-## My setup and lessons learned
+## My setup
 
 Start or open a browser with remote debugging enabled:
 
@@ -55,7 +59,7 @@ Start or open a browser with remote debugging enabled:
 
 CDP lets the agent operate in the same browser profile the user already trusts. It can reuse the live tab, preserve session storage, inherit browser extensions or enterprise policy, and avoid turning login into an automation problem.
 
-Then run:
+I run my `holo-agent` via:
 
 ```bash
 uv run holo-agent run "your goal is to complete this module" \
@@ -83,7 +87,7 @@ uv run holo-agent view artifacts/traces/<run-dir>
 
 Each run writes screenshots, the model reasoning, the prompt fed into the model and which step into `trace.jsonl`, rendered via a `trace.html` viewer, and, when the model records useful notes.
 
-This trace was not just an audit log. It was the development tool. Early traces showed repeated clicks, malformed actions, stale pages, premature exits, and missing context. Those failures became parser repair, action history, stale-page detection, loading guards, seeded knowledge, navigation policies, and deeper model-server health checks.
+This trace was not just an audit log. It was the development tool. Early traces showed repeated clicks, malformed actions, stale pages, premature exits, and missing context. Those failures became parser repair, action history, stale-page detection, seeded knowledge, navigation policies, and deeper model-server health checks.
 
 I started with a regular interface to navigate to iron out the setup issues. But it then navigated this consistently with ease. So the next step was to setup something much harder.
 
@@ -143,7 +147,7 @@ This changed the model's job from "estimate where to click from pixels" to "choo
 
 ## What Happened When I Removed The Grounding
 
-To make sure I was not accidentally over-claiming the VLM's visual ability, I added an observation-based mode. In that mode the model still gets the screenshot and the task, but it does not see the `Interactive elements detected...` list, CreateJS stage labels, navigation button state, or precomputed snap-to-target data.
+To make sure I was not accidentally over-claiming the VLM's visual ability, I added an observation-based mode. In that mode the model still gets the screenshot and the task, but it does not see the `Interactive elements detected...` list, [CreateJS](https://createjs.com/) stage labels, navigation button state, or precomputed snap-to-target data.
 
 This made the simple module much harder. Holo3 often understood the right intent: launch the module, click checklist rows, start the media, answer the quiz, continue to confirmation. The problem was turning that intent into reliable browser actions. Once the SCORM and CreateJS clues were removed from the prompt, the harness had to do more work without reading DOM or canvas scene data ahead of time.
 
@@ -197,7 +201,7 @@ This came directly from early demos. In one Google-search demo, the model knew w
 
 The early loop was too stateless. It would type a search query, take a new screenshot, and then type the same query again because the prompt did not tell it what had already happened.
 
-The agent now keeps recent action history and feeds it back to the model:
+The agent keeps recent action history and feeds it back to the model:
 
 ```text
 Recent actions:
@@ -209,88 +213,11 @@ Do NOT repeat these actions. Decide what to do NEXT.
 
 History is also used by the controller itself. Repeated action fingerprints trigger loop detection. Repeated screenshot hashes trigger stale-page warnings. Repeated waits with clickable elements produce stronger instructions to interact instead of waiting forever.
 
-The important distinction is that the model may explain its reasoning confidently even when nothing is changing. The harness has to measure effects.
-
-## Loading And Video Need Hard Guards
-
-Training modules exposed a recurring pattern: the browser shows something that looks clickable, but the underlying system is still loading, connecting, playing media, or waiting for an animation.
-
-The agent now scans for loading state and video state:
-
-- `LMS_CONNECTING`
-- `PAGE_LOADING`
-- `VIDEO_PLAYING`
-- `VIDEO_PAUSED`
-- `VIDEO_ENDED`
-
-Those states are included in the prompt, but some are also enforced in code. If the module is loading, the model's click can be overridden to `wait`. If a video is playing and Next is disabled, the agent waits. If a video is paused, it uses Play. If Next is active and no video is playing, waiting can be overridden to Next.
-
-This is a good general rule: if the browser can expose machine-readable state, do not make the model infer it from pixels.
-
-## Completion Is A Policy, Not A Feeling
-
-Computer-use models are eager to declare success. That is dangerous in multi-page workflows.
-
-The agent learned to treat completion as a policy:
-
-- Do not use `task_complete` just because the page looks stable.
-- Do not treat an Exit or Resources button as evidence of completion.
-- Do not use Save/Exit until a final completion, congratulations, summary, or certificate screen is visible.
-- If Next is still available, the task is probably not complete.
-- If too few content actions have happened, override premature completion.
-
-This is one of the places where the harness has to be more conservative than the model.
-
-## Quizzes Need Memory
-
-The model can answer many visible questions, but long modules often ask questions based on earlier slides. Some questions also provide feedback after a wrong answer. Losing that information causes repeated guessing.
-
-The agent asks the model to write notes on every step:
-
-- Facts and definitions from the current slide.
-- Quiz questions.
-- Correct answers.
-- Feedback after submission.
-- Evidence that an option was wrong.
-
-At the end of a run, those notes become `knowledge_summary.md`. On later runs for the same module, the agent loads relevant notes based on the module identifier and injects a small set into the prompt.
-
-The first version only kept notes from the current run. Later iterations added cross-run seeding. Then the seeding had to be filtered, because failed runs can contain bad guesses. The loader now prefers successful traces and ranks evidence-heavy notes such as "feedback", "incorrect answer", and "not considered".
-
-Memory is not just nice to have. It changes the agent from brute-force interaction to informed interaction.
-
-## Deterministic Fallbacks Are A Feature
-
-Some screens appeared often enough that calling the model every time was wasteful or brittle. The agent gained deterministic fallbacks for known states:
-
-- Launch Content.
-- Start or Resume Assessment.
-- Confirm dialogs.
-- Continue buttons.
-- Known loading screens.
-- Known multi-select patterns.
-- Reattempt flows after incorrect feedback.
-- Popup LMS connection errors.
-
-This is not a retreat from using a VLM. It is the correct layering. Let the model handle the open-ended visual reasoning. Let deterministic code handle repeated, high-confidence browser states.
+I found sometimes the model explain its reasoning confidently even when nothing is changing. The harness warning of stale pages helped the agent reason out of it's loop.
 
 ## Local Inference Is Operational Work
 
-Running Holo3 locally adds a small operations problem to the agent. These runs were on a 64 GB M4 Max, and the trace logs make the resource profile visible instead of anecdotal.
-
-In the successful canvas demo trace, the model reported about `46.3 GB` peak memory on each step. The prompts were small relative to the model context window: around `1.2K` to `1.5K` prompt tokens per step, with completion responses usually below `200` tokens. The run took `10` steps and about `100` seconds end to end. The slow part was inference, not clicking: individual model calls were usually several seconds, while click execution was typically single-digit milliseconds.
-
-Across the saved local traces, many Holo3 runs reported the same peak-memory band, roughly `46.3 GB`. That is a meaningful chunk of a 64 GB machine. It is workable on this hardware, but it is not something to treat like a small background service.
-
-The operational failure modes were also concrete:
-
-- First startup can take time because the model must load before the first useful action.
-- The server can bind a port but fail inference.
-- Interrupted runs can leave zombie listeners.
-- A simple `/v1/models` health check can pass while the next vision request hangs.
-- Vision requests are memory-heavy enough that failed health checks and duplicate servers matter.
-
-`agent.py` now owns more of this lifecycle. It checks the endpoint, probes inference, starts the server when needed, waits for readiness, handles ports, retries inference, and records token and peak-memory stats in traces.
+These runs were on a 64 GB M4 Max, and the trace logs make the resource profile visible instead of anecdotal. In the successful canvas demo trace, the model reported about `46.3 GB` peak memory on each step. The prompts were small relative to the model context window: around `1.2K` to `1.5K` prompt tokens per step, with completion responses usually below `200` tokens. The run took `10` steps and about `100` seconds end to end. The slow part was inference.
 
 The agent also downscales screenshots before inference while preserving full-resolution screenshots in the trace. That reduces image-token and memory pressure without sacrificing post-run debugging.
 
@@ -359,14 +286,4 @@ Each one removed a different source of fragility.
 
 Long web tasks remain brittle because the page can enter many states the model has never seen before. Quiz behavior is especially hard because visible UI state, prior slide content, and feedback from previous attempts all matter. Seeded knowledge helps, but only if the notes are high quality.
 
-There is also a tension between generality and usefulness. A purely general agent gets stuck more often. A heavily specialized harness works better, but accumulates domain assumptions. The current code chooses a pragmatic middle: generic loop, generic browser-state scanning, and a few domain-shaped policies where traces showed repeated failure.
-
-## The Takeaway
-
-The biggest lesson from `holo_agent` is that computer-use VLMs become useful when you stop treating the screenshot as the whole world.
-
-The browser knows things the screenshot does not: which controls are interactive, whether a button is disabled, whether a video is playing, whether the page is loading, and which object actually receives a click. The trace knows things the model forgot. Prior runs know things the current screenshot cannot show.
-
-The visual-only ablation made this concrete. It was not a question of whether Holo3 could understand the screenshot. Often it could. The harder question was whether that understanding survived JSON formatting, coordinate systems, canvas hit testing, disabled controls, state changes, and completion policy. The more of that hidden state the harness exposed, the less the VLM had to guess.
-
-The agent works by making that hidden state visible to the model, then enforcing the invariants the model should not be trusted to remember.
+There is also a tension between generality and usefulness. A purely general agent gets stuck more often. A heavily specialized harness works better, but accumulates domain and workflow assumptions.
