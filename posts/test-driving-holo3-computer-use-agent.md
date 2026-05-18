@@ -27,7 +27,7 @@ One might think, I can just just download Holo3, hit self-driving mode where all
   </figcaption>
 </figure>
 
-Not quite!
+Not quite! I couldn't find guidance from H Company on recommended approaches, so here's how I approached it. YMMV.
 
 ## My approach
 
@@ -79,17 +79,7 @@ Ok but why wouldn't you just parse the webpage structure and avoid using a VLM..
 
 ## When Would You Use a Computer Use Agent?
 
-You would not reach for a computer-use VLM first:
-
-- If the system has an API, use the API. Computer use models can be [45x more expensive than using an API.](https://reflex.dev/blog/computer-use-is-45x-more-expensive-than-structured-apis/)
-- If the page is ordinary HTML with stable DOM elements, parse and automate the DOM.
-- If the workflow is finite, and known, write a deterministic script.
-- If the task is mostly data transfer, validation, or form submission, avoid vision if you can.
-
-You'd use this when the graphical interface is the only practical option. For example,
-
-- Pure GUI interaction.
-- Screens where the important state is visual rather than available as inspectable DOM e.g. Canvas-rendered modules.
+Don't reach for a computer-use model if the system has an API, use the API. Computer use models can be [45x more expensive than using an API.](https://reflex.dev/blog/computer-use-is-45x-more-expensive-than-structured-apis/) You'd use this when the graphical interface is the only practical option.
 
 Old enterprises have plenty of ancient systems with no modern APIs. Computer use agents have the potential to control entire desktops with multiple applications. I didn't want to handover my real desktop. So I restricted the interface to the browser and got `GPT-5.5` to create an exercise for the model to complete - a web based series of tasks.
 
@@ -101,7 +91,16 @@ I started with a regular interface to navigate to iron out the setup issues. But
 
 You can [try the simple module here](/content/demos/holo-training-portal/).
 
-![Holo agent completing the simple training module visually](/content/images/holo-agent/holo-simple-agent-visual-trace.gif)
+<figure style="width: min(calc(100% + var(--post-media-overhang)), calc(100vw - var(--post-media-viewport-gutter)), var(--post-media-max-width)); margin: 2rem 0 2rem 50%; transform: translateX(-50%);">
+  <img
+    src="/content/images/holo-agent/holo-simple-agent-visual-trace.gif"
+    alt="Robot using a computer while a human relaxes"
+    style="display: block; width: 100%; max-width: none; height: auto; margin: 0; transform: none;"
+  >
+  <figcaption style="margin-top: 0.4rem; color: #6b7280; font-size: 0.9rem; line-height: 1.4;">
+    Holo agent completing the simple training module visually. Note it try many times on a disabled next/continue button.
+  </figcaption>
+</figure>
 
 This was the easier progression point for the agent because it still looked like a normal training portal: rectangular buttons, visible text labels, checklist rows, a single obvious quiz answer, and a final completion screen. Even without the interactive-element list, the targets were visually legible and mostly shaped like the controls humans expect to click.
 
@@ -117,11 +116,7 @@ That proved the model and local inference stack worked. It also exposed the limi
 - The model treated visible-but-disabled navigation as usable.
 - It tried to exit before a module was truly complete.
 
-That pushed the first round of fixes toward the boring edges of the loop: parsing, coordinates, action history, and the definition of done.
-
-## First Round Of Fixes
-
-The first fixes were not exotic. They were the small pieces needed to keep a long browser run alive when the model's intent was useful but the action was imperfect.
+That pushed the first round of fixes towards well less sexy things: parsing, coordinates, action history, and the definition of done. It reminded me of the [leaked source code of another harness that uses simple regexes](https://dev.to/toji_openclaw_fd3ff67586a/claude-knows-when-youre-mad-and-uses-regex-not-ai-2klc).
 
 ### Parse Model Output Like It Will Be Messy
 
@@ -135,7 +130,7 @@ The system prompt asks for strict JSON. The model still sometimes returns almost
 - Target lists as objects instead of strings.
 - Coordinates embedded in reasoning instead of the `coordinate` field.
 
-`actions.py` repairs common cases before giving up. This came directly from early simple attempts. My first working attempt, a simple 'do a google search of bags', the model knew what to do but produced malformed coordinates and lowercase key names.
+I have an `actions.py` repairs common cases before giving up. This came directly from early simple attempts. My first working attempt, a simple 'do a google search of bags', the model knew what to do but produced malformed coordinates and lowercase key names.
 
 ### History Prevents Repetition
 
