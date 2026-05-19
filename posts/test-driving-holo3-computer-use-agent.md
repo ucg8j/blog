@@ -83,7 +83,7 @@ Don't reach for a computer-use model if the system has an API, use the API. Comp
 
 Old enterprises have plenty of ancient systems with no modern APIs. Computer use agents have the potential to control entire desktops with multiple applications. I didn't want to handover my real desktop. So I restricted the interface to the browser and got `GPT-5.5` to create an exercise for the model to complete - a web based series of tasks.
 
-I tested this in two stages: first with a regular training module, then with a harder canvas-rendered module where buttons exist to be clicked, but can't be seen via parsing the webpage.
+I tested this in two stages: first with an easy module that had standard web patterns, then with a harder canvas-rendered module where buttons exist to be clicked, but can't be seen via parsing the webpage.
 
 ## The Simple Module
 
@@ -152,26 +152,29 @@ I found sometimes the model would explain its reasoning confidently even when no
 
 ### Coordinates Are Not Just Coordinates
 
-I also tested a stricter screenshot-only path on the simple module. Getting that visual-only path through the run required:
-
-- A shorter JSON action shape, because long optional schemas increased malformed output.
+A few of the problems:
 - Coordinate repair for responses such as scalar `coordinate` values, missing brackets, and truncated JSON.
 - Device-pixel-ratio conversion, because screenshots and Playwright mouse input did not use the same coordinate space.
-- Screenshot-only colored-button targeting for visible controls such as `Launch`, `Next`, and `Start Media`.
-- Screenshot-only row detection for checklist-like controls.
 - Loop detection, stale-screen warnings, and final-completion policy when the model kept clicking after the page was already done.
 
-That result sharpened the lesson rather than disproving it. Holo3 can visually plan its way through a basic module, but the reliable system is still the VLM plus a compatibility layer around parsing, coordinates, clicking, state tracking, and completion policy.
+The trace is worth browsing because it shows the actual development texture: malformed coordinates being repaired, row clicks being recentered, the model reaching the final `Training complete` screen, and the last remaining mistake where it kept clicking instead of emitting `task_complete`. I have hosted this trace below in an iframe as an example of how the agent recovers:
 
-The trace is worth browsing because it shows the actual development texture: malformed coordinates being repaired, row clicks being recentered, the model reaching the final `Training complete` screen, and the last remaining mistake where it kept clicking instead of emitting `task_complete`. I have hosted that trace as a static artifact here: [visual-only simple module trace](/content/traces/holo-agent/20260511T131133Z-complete-this-training-module/).
+<iframe
+  src="/content/traces/holo-agent/20260511T131133Z-complete-this-training-module/"
+  title="Visual-only simple module trace"
+  style="height: 720px; border: 1px solid var(--border); border-radius: 8px;"
+  loading="lazy"
+></iframe>
 
 ## The Canvas Module
 
-There is also a second, less standard demo at `examples/holo_canvas_portal`. It is closer to the difficult interfaces that motivated the CreateJS path: canvas-rendered controls, subtle hotspots, decoys, disabled canvas navigation, and a final canvas completion action. You can [try the complex canvas module here](/content/demos/holo-canvas-portal/).
+I wanted to challenge the agent. So a second non-standard module aimed to difficult interfaces that motivated the CreateJS path: canvas-rendered controls, subtle hotspots, decoys, disabled canvas navigation, and a final canvas completion action. You can [try the complex canvas module here](/content/demos/holo-canvas-portal/).
 
 ![Holo agent completing a canvas-based training module](/content/images/holo-agent/holo-canvas-agent-demo.gif)
 
 I later extended that canvas portal into an 8-step benchmark: valve selection, clue sweep, mirror target, dial lock, shutter latch, quiz, glyph lock, and route trace. In three grounded runs, Holo3 reached `6/8` each time. It cleared the first six tasks with the CreateJS element list, snapped coordinates, and JS-dispatched canvas clicks, then failed at the glyph lock before reaching the final route-tracing task. The struggle was not basic click grounding; it was visual symbol interpretation and maintaining the correct glyph sequence under repeated retries.
+
+![Holo agent reaching and repeatedly attempting the canvas glyph lock](/content/images/holo-agent/holo-canvas-agent-glyph-lock-full-trace.gif)
 
 ## Ground The Model In Page State
 
