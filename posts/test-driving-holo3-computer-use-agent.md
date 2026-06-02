@@ -31,19 +31,20 @@ Not quite! I couldn't find guidance from H Company on recommended approaches, so
 
 ## My approach
 
-My unimaginatively named and heavily vibe coded `holo_agent`, what the cool kids following tech twitter call ['the harness'](https://www.theneuron.ai/explainer-articles/ai-harnesses-and-clis-explained-the-real-reason-everyones-talking-about-infrastructure/), takes the `Holo3-35B-A3B` model for a test spin, it connects to an existing browser, captures the current viewport, sends the screenshot plus structured context to Holo3 served locally by [mlx-vlm](https://github.com/Blaizzy/mlx-vlm) (M-series-maxxing, I can be cool too!), parses the model's JSON action, executes it via [Playwright](https://playwright.dev/), and records a trace of every step. It's [Ralph-loop-esque](https://ralphify.co/docs/how-it-works/#what-gets-re-read-vs-what-stays-fixed), but for browser use rather than coding.
+**The goal was to see how well a VLM for 'computer use', running locally, is able to navigate interfaces.**
+
+My unimaginatively named and heavily vibe coded `holo_agent`, what the cool kids following tech twitter call ['the harness'](https://www.theneuron.ai/explainer-articles/ai-harnesses-and-clis-explained-the-real-reason-everyones-talking-about-infrastructure/), takes the `Holo3-35B-A3B` model for a test spin, it connects to an existing browser session, captures the current viewport, sends the screenshot plus structured context to Holo3 served locally by [mlx-vlm](https://github.com/Blaizzy/mlx-vlm) (M-series-maxxing, I can be cool too!), parses the model's JSON action, executes it via [Playwright](https://playwright.dev/), and records a trace of every step. It's [Ralph-loop-esque](https://ralphify.co/docs/how-it-works/#what-gets-re-read-vs-what-stays-fixed), but for browser use rather than coding.
 
 ![The agent loop](/content/images/holo-agent/holo-agent-loop.png)
-
-**The goal was to see how well a VLM for 'computer use', running locally, is able to navigate interfaces.**
 
 Start or open a browser with remote debugging enabled:
 
 ```bash
-/Applications/Microsoft\ Edge.app/Contents/MacOS/Microsoft\ Edge --remote-debugging-port=9222
+/Applications/Microsoft\ Edge.app/Contents/MacOS/Microsoft\ Edge \
+  --remote-debugging-port=9222
 ```
 
-CDP lets the agent operate in the same browser profile the user already trusts. It can reuse the live tab, preserve session storage, inherit browser extensions or enterprise policy, and avoid turning login into an automation problem. How did I not know about [connect over CDP](https://playwright.dev/docs/api/class-browsertype#browser-type-connect-over-cdp) for an existing session until now?!?
+CDP lets the agent operate in the same browser profile the user already trusts. It can reuse a live tab, preserve session storage, inherit browser extensions or enterprise policy, and avoid turning login into an automation problem. How did I not know about [connect over CDP](https://playwright.dev/docs/api/class-browsertype#browser-type-connect-over-cdp) for an existing session until now?!?
 
 I run my `holo-agent` via:
 
@@ -59,7 +60,9 @@ uv run holo-agent run "your goal is to complete this module" \
 The model server is checked automatically. If the configured endpoint is not healthy, the agent starts:
 
 ```bash
-uv run mlx_vlm.server --model mlx-community/Holo3-35B-A3B-8bit --port 8000
+uv run mlx_vlm.server \
+  --model mlx-community/Holo3-35B-A3B-8bit \
+  --port 8000
 ```
 
 The health check is intentionally deeper than a simple `/v1/models` ping. Earlier runs revealed that a server can keep its HTTP listener alive while inference itself is broken, so the startup path also probes a tiny completion before trusting an existing server.
@@ -71,7 +74,7 @@ uv run holo-agent list
 uv run holo-agent view artifacts/traces/<run-dir>
 ```
 
-Each run writes screenshots, the model reasoning, the prompt fed into the model, step data, and any useful notes into `trace.jsonl`, rendered via a `trace.html` viewer.
+Each run writes screenshots, the model reasoning, the prompt fed into the model, step data, and any useful notes into `trace.jsonl`, rendered via a `trace.html` viewer - an example of this is further is iframed below.
 
 The trace was my development tool. Early traces showed repeated clicks, malformed actions, stale pages, premature exits, and missing context. Those failures became parser repair, action history, stale-page detection, seeded knowledge, navigation policies, and deeper model-server health checks.
 
@@ -79,11 +82,11 @@ Ok but why wouldn't you just parse the webpage structure and avoid using a VLM..
 
 ## When Would You Use a Computer Use Agent?
 
-Don't reach for a computer-use model if the system has an API, use the API. Computer use models can be [45x more expensive than using an API.](https://reflex.dev/blog/computer-use-is-45x-more-expensive-than-structured-apis/) You'd use this when the graphical interface is the only practical option.
+Don't reach for a computer-use model if the system has an API, use the API. Computer use models can be [45x more expensive than using an API.](https://reflex.dev/blog/computer-use-is-45x-more-expensive-than-structured-apis/) You'd use this when graphical interfaces are the only practical option.
 
 Old enterprises have plenty of ancient systems with no modern APIs. Computer use agents have the potential to control entire desktops with multiple applications. I didn't want to handover my real desktop. So I restricted the interface to the browser and got `GPT-5.5` to create an exercise for the model to complete - a web based series of tasks.
 
-I tested this in two stages: first with an easy module that had standard web patterns, then with a harder canvas-rendered module where buttons exist to be clicked, but can't be seen via parsing the webpage.
+I tested this in two stages: first with an easy module that had standard web patterns, then with a harder canvas-rendered module where buttons exist to be clicked, but aren't parseable via the DOM.
 
 ## The Simple Module
 
@@ -153,6 +156,7 @@ I found sometimes the model would explain its reasoning confidently even when no
 ### Coordinates Are Not Just Coordinates
 
 A few of the problems:
+
 - Coordinate repair for responses such as scalar `coordinate` values, missing brackets, and truncated JSON.
 - Device-pixel-ratio conversion, because screenshots and Playwright mouse input did not use the same coordinate space.
 - Loop detection, stale-screen warnings, and final-completion policy when the model kept clicking after the page was already done.
@@ -174,7 +178,7 @@ I wanted to challenge the agent. So a second non-standard module aimed to diffic
 
 I later extended that canvas portal into an 8-step benchmark: valve selection, clue sweep, mirror target, dial lock, shutter latch, quiz, glyph lock, and route trace. In three grounded runs, Holo3 reached `6/8` each time. It cleared the first six tasks with the CreateJS element list, snapped coordinates, and JS-dispatched canvas clicks, then failed at the glyph lock before reaching the final route-tracing task. The struggle was not basic click grounding; it was visual symbol interpretation and maintaining the correct glyph sequence under repeated retries.
 
-![Holo agent reaching and repeatedly attempting the canvas glyph lock](/content/images/holo-agent/holo-canvas-agent-glyph-lock-full-trace.gif)
+![Holo agent repeatedly attempting the canvas glyph lock](/content/images/holo-agent/holo-canvas-agent-glyph-lock-trace.gif)
 
 ## Ground The Model In Page State
 
@@ -200,6 +204,77 @@ Navigation controls:
 ```
 
 This changed the model's job from "estimate where to click from pixels" to "choose from grounded targets". The executor then snaps model coordinates or text targets back to those known interactives.
+
+Here is the comparison across the repeated runs. The first three columns are the run configuration; the columns after the divider are results. The task-progress column is the average number of module tasks completed across the five runs, divided by the total available tasks in that module.
+
+<div style="width: min(calc(100% + var(--post-media-overhang)), calc(100vw - var(--post-media-viewport-gutter)), var(--post-media-max-width)); margin: 1.75rem 0 1.75rem 50%; transform: translateX(-50%); overflow-x: auto;">
+  <table style="width: 100%; min-width: 760px; border-collapse: separate; border-spacing: 0; line-height: 1.35; font-size: 0.9rem; margin: 0; border: 1px solid var(--border); border-radius: 12px; overflow: hidden;">
+    <thead>
+      <tr>
+        <th colspan="3" style="background: #eef4f0; color: #31543b; text-align: left; padding: 0.7rem 0.85rem; border-bottom: 1px solid var(--border);">Run configuration</th>
+        <th colspan="4" style="background: #f7f4ea; color: #6c5520; text-align: left; padding: 0.7rem 0.85rem; border-bottom: 1px solid var(--border); border-left: 2px solid var(--border);">Observed results</th>
+      </tr>
+      <tr>
+        <th style="background: #f8fbf9; text-align: left; padding: 0.65rem 0.85rem; border-bottom: 1px solid var(--border);">Benchmark</th>
+        <th style="background: #f8fbf9; text-align: left; padding: 0.65rem 0.85rem; border-bottom: 1px solid var(--border);">Mode</th>
+        <th style="background: #f8fbf9; text-align: right; padding: 0.65rem 0.85rem; border-bottom: 1px solid var(--border);">Temp</th>
+        <th style="background: #fffaf0; text-align: right; padding: 0.65rem 0.85rem; border-bottom: 1px solid var(--border); border-left: 2px solid var(--border);">Avg tasks done</th>
+        <th style="background: #fffaf0; text-align: right; padding: 0.65rem 0.85rem; border-bottom: 1px solid var(--border);">Avg steps</th>
+        <th style="background: #fffaf0; text-align: right; padding: 0.65rem 0.85rem; border-bottom: 1px solid var(--border);">Max steps</th>
+        <th style="background: #fffaf0; text-align: left; padding: 0.65rem 0.85rem; border-bottom: 1px solid var(--border);">Best actual progress</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td style="padding: 0.75rem 0.85rem; border-bottom: 1px solid var(--border);">Simple module</td>
+        <td style="padding: 0.75rem 0.85rem; border-bottom: 1px solid var(--border);">Visual-only</td>
+        <td style="padding: 0.75rem 0.85rem; border-bottom: 1px solid var(--border); text-align: right;">0</td>
+        <td style="padding: 0.75rem 0.85rem; border-bottom: 1px solid var(--border); border-left: 2px solid var(--border); text-align: right; font-weight: 700;">3.0/5</td>
+        <td style="padding: 0.75rem 0.85rem; border-bottom: 1px solid var(--border); text-align: right;">14.0</td>
+        <td style="padding: 0.75rem 0.85rem; border-bottom: 1px solid var(--border); text-align: right;">14</td>
+        <td style="padding: 0.75rem 0.85rem; border-bottom: 1px solid var(--border);">Reached task 4/5: final confirmation, then false success</td>
+      </tr>
+      <tr>
+        <td style="padding: 0.75rem 0.85rem; border-bottom: 1px solid var(--border);">Simple module</td>
+        <td style="padding: 0.75rem 0.85rem; border-bottom: 1px solid var(--border);">Visual-only</td>
+        <td style="padding: 0.75rem 0.85rem; border-bottom: 1px solid var(--border); text-align: right;">0.7</td>
+        <td style="padding: 0.75rem 0.85rem; border-bottom: 1px solid var(--border); border-left: 2px solid var(--border); text-align: right; font-weight: 700;">2.0/5</td>
+        <td style="padding: 0.75rem 0.85rem; border-bottom: 1px solid var(--border); text-align: right;">52.2</td>
+        <td style="padding: 0.75rem 0.85rem; border-bottom: 1px solid var(--border); text-align: right;">60</td>
+        <td style="padding: 0.75rem 0.85rem; border-bottom: 1px solid var(--border);">Reached task 4/5: final confirmation, then false success</td>
+      </tr>
+      <tr>
+        <td style="padding: 0.75rem 0.85rem; border-bottom: 1px solid var(--border);">Simple module</td>
+        <td style="padding: 0.75rem 0.85rem; border-bottom: 1px solid var(--border);">Grounded</td>
+        <td style="padding: 0.75rem 0.85rem; border-bottom: 1px solid var(--border); text-align: right;">0</td>
+        <td style="padding: 0.75rem 0.85rem; border-bottom: 1px solid var(--border); border-left: 2px solid var(--border); text-align: right; font-weight: 700;">5.0/5</td>
+        <td style="padding: 0.75rem 0.85rem; border-bottom: 1px solid var(--border); text-align: right;">11.0</td>
+        <td style="padding: 0.75rem 0.85rem; border-bottom: 1px solid var(--border); text-align: right;">11</td>
+        <td style="padding: 0.75rem 0.85rem; border-bottom: 1px solid var(--border);">Completed task 5/5</td>
+      </tr>
+      <tr>
+        <td style="padding: 0.75rem 0.85rem; border-bottom: 1px solid var(--border);">Hard canvas module</td>
+        <td style="padding: 0.75rem 0.85rem; border-bottom: 1px solid var(--border);">Visual-only</td>
+        <td style="padding: 0.75rem 0.85rem; border-bottom: 1px solid var(--border); text-align: right;">0</td>
+        <td style="padding: 0.75rem 0.85rem; border-bottom: 1px solid var(--border); border-left: 2px solid var(--border); text-align: right; font-weight: 700;">0.0/9</td>
+        <td style="padding: 0.75rem 0.85rem; border-bottom: 1px solid var(--border); text-align: right;">10.4</td>
+        <td style="padding: 0.75rem 0.85rem; border-bottom: 1px solid var(--border); text-align: right;">13</td>
+        <td style="padding: 0.75rem 0.85rem; border-bottom: 1px solid var(--border);">Reached task 1/9: open valve challenge</td>
+      </tr>
+      <tr>
+        <td style="padding: 0.75rem 0.85rem;">Hard canvas module</td>
+        <td style="padding: 0.75rem 0.85rem;">Grounded</td>
+        <td style="padding: 0.75rem 0.85rem; text-align: right;">0</td>
+        <td style="padding: 0.75rem 0.85rem; border-left: 2px solid var(--border); text-align: right; font-weight: 700;">4.2/9</td>
+        <td style="padding: 0.75rem 0.85rem; text-align: right;">47.0</td>
+        <td style="padding: 0.75rem 0.85rem; text-align: right;">100</td>
+        <td style="padding: 0.75rem 0.85rem;">Reached task 7/9: glyph lock</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+Step count only makes sense alongside progress. The longer `temperature=0.7` simple runs and grounded canvas runs spent more steps because they got stuck or looped; they were not better. The useful signal is task progress: grounding took the simple module from partial progress plus false success to `5.0/5` real task completion, and took the hard canvas module from failing on the first canvas task to averaging `4.2/9` tasks completed.
 
 ## When I Removed The Grounding
 
