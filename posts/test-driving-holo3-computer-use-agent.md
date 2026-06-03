@@ -172,7 +172,7 @@ The trace below is worth browsing it shows: malformed coordinates being repaired
 
 ## The Canvas Module
 
-I wanted to challenge the agent, so I built a second module around canvas-rendered controls, subtle hotspots, decoys, disabled canvas navigation, and a final canvas completion action. You can [try the complex canvas module here](/content/demos/holo-canvas-portal/).
+I wanted to challenge the agent, so I built a second module around canvas-rendered controls, subtle hotspots, decoys, disabled canvas navigation, and a final canvas completion action. You can [try the 9-task complex canvas module here](/content/demos/holo-canvas-portal/).
 
 ![Holo agent completing a canvas-based training module](/content/images/holo-agent/holo-canvas-agent-demo.gif)
 
