@@ -8,11 +8,11 @@ excerpt: Running Holo3-35B-A3B locally as a computer-use agent for canvas-heavy 
 layout: layouts/post.njk
 ---
 
-March 2026 was a threshold month for computer-use agents.
+March 2026 was a busy month for computer-use agents.
 
-On March 5, [OpenAI released GPT-5.4](https://openai.com/index/introducing-gpt-5-4/) and reported a `75.0%` score on [OSWorld-Verified](https://benchlm.ai/benchmarks/osWorldVerified), a benchmark for autonomous desktop task completion through screenshots, mouse actions, and keyboard actions. The reported human baseline is `72.4%`, so this was **the first time a general computer-use agent had crossed human-level performance on that evaluation**.
+On March 5, [OpenAI released GPT-5.4](https://openai.com/index/introducing-gpt-5-4/) and reported a `75.0%` score on [OSWorld-Verified](https://benchlm.ai/benchmarks/osWorldVerified), a benchmark for desktop tasks completed through screenshots, mouse actions, and keyboard actions. The reported human baseline is `72.4%`, so this was the first time a general computer-use agent had crossed that line on this evaluation.
 
-Then, on March 31, [H Company](http://hcompany.ai/) a French AI Lab, [released Holo3](https://hcompany.ai/holo3). The larger Holo3-122B-A10B model reported `78.85%` on OSWorld-Verified, while the smaller [Holo3-35B-A3B model](https://huggingface.co/Hcompany/Holo3-35B-A3B) reported `77.8%`. That smaller model is the interesting one for local experimentation: it is a sparse mixture-of-experts VLM with `35B` total parameters and `3B` active parameters, fine-tuned from `Qwen/Qwen3.5-35B-A3B`, and released under Apache 2.0.
+Then, on March 31, [H Company](http://hcompany.ai/), a French AI lab, [released Holo3](https://hcompany.ai/holo3). The larger Holo3-122B-A10B model reported `78.85%` on OSWorld-Verified, while the smaller [Holo3-35B-A3B model](https://huggingface.co/Hcompany/Holo3-35B-A3B) reported `77.8%`. The smaller model is the useful one for local experiments: a sparse mixture-of-experts VLM with `35B` total parameters, `3B` active parameters, fine-tuned from `Qwen/Qwen3.5-35B-A3B`, and released under Apache 2.0.
 
 One might think, I can just just download Holo3, hit self-driving mode where all my computer work is on intelligent auto-pilot whilst I sit back and relax.
 
@@ -27,13 +27,13 @@ One might think, I can just just download Holo3, hit self-driving mode where all
   </figcaption>
 </figure>
 
-Not quite! I couldn't find guidance from H Company on recommended approaches, so here's how I approached it. YMMV.
+Not quite. I couldn't find guidance from H Company on recommended approaches, so I built a small browser harness and tested it myself. YMMV.
 
 ## My approach
 
 **The goal was to see how well a VLM for 'computer use', running locally, is able to navigate interfaces.**
 
-My unimaginatively named and heavily vibe coded `holo_agent`, what the cool kids following tech twitter call ['the harness'](https://www.theneuron.ai/explainer-articles/ai-harnesses-and-clis-explained-the-real-reason-everyones-talking-about-infrastructure/), takes the `Holo3-35B-A3B` model for a test spin, it connects to an existing browser session, captures the current viewport, sends the screenshot plus structured context to Holo3 served locally by [mlx-vlm](https://github.com/Blaizzy/mlx-vlm) (M-series-maxxing, I can be cool too!), parses the model's JSON action, executes it via [Playwright](https://playwright.dev/), and records a trace of every step. It's [Ralph-loop-esque](https://ralphify.co/docs/how-it-works/#what-gets-re-read-vs-what-stays-fixed), but for browser use rather than coding.
+My unimaginatively named and heavily vibe coded `holo_agent` takes `Holo3-35B-A3B` for a spin. It connects to an existing browser session, captures the viewport, sends the screenshot plus structured context to Holo3 served locally by [mlx-vlm](https://github.com/Blaizzy/mlx-vlm), parses the model's JSON action, executes it with [Playwright](https://playwright.dev/), and records a trace of every step. It's [Ralph-loop-esque](https://ralphify.co/docs/how-it-works/#what-gets-re-read-vs-what-stays-fixed), but for browser use rather than coding.
 
 ![The agent loop](/content/images/holo-agent/holo-agent-loop.png)
 
@@ -44,7 +44,7 @@ Start or open a browser with remote debugging enabled:
   --remote-debugging-port=9222
 ```
 
-CDP lets the agent operate in the same browser profile the user already trusts. It can reuse a live tab, preserve session storage, inherit browser extensions or enterprise policy, and avoid turning login into an automation problem. How did I not know about [connect over CDP](https://playwright.dev/docs/api/class-browsertype#browser-type-connect-over-cdp) for an existing session until now?!?
+CDP lets the agent use the browser profile I already trust. It can reuse a live tab, keep session storage, inherit browser extensions or enterprise policy, and avoid turning login into an automation problem. How did I not know about [connect over CDP](https://playwright.dev/docs/api/class-browsertype#browser-type-connect-over-cdp) for an existing session until now?
 
 I run my `holo-agent` via:
 
@@ -74,7 +74,7 @@ uv run holo-agent list
 uv run holo-agent view artifacts/traces/<run-dir>
 ```
 
-Each run writes screenshots, the model reasoning, the prompt fed into the model, step data, and any useful notes into `trace.jsonl`, rendered via a `trace.html` viewer - an example of this is further is iframed below.
+Each run writes screenshots, model reasoning, prompts, parsed actions, timings, and notes into `trace.jsonl`, with a `trace.html` viewer for inspection.
 
 The trace was my development tool. Early traces showed repeated clicks, malformed actions, stale pages, premature exits, and missing context. Those failures became parser repair, action history, stale-page detection, seeded knowledge, navigation policies, and deeper model-server health checks.
 
@@ -82,15 +82,15 @@ Ok but why wouldn't you just parse the webpage structure and avoid using a VLM..
 
 ## When Would You Use a Computer Use Agent?
 
-Don't reach for a computer-use model if the system has an API, use the API. Computer use models can be [45x more expensive than using an API.](https://reflex.dev/blog/computer-use-is-45x-more-expensive-than-structured-apis/) You'd use this when graphical interfaces are the only practical option.
+Don't reach for a computer-use model if the system has an API. Use the API. Computer-use models can be [45x more expensive than using an API](https://reflex.dev/blog/computer-use-is-45x-more-expensive-than-structured-apis/). They make sense when the graphical interface is the only practical option.
 
-Old enterprises have plenty of ancient systems with no modern APIs. Computer use agents have the potential to control entire desktops with multiple applications. I didn't want to handover my real desktop. So I restricted the interface to the browser and got `GPT-5.5` to create an exercise for the model to complete - a web based series of tasks.
+Old enterprises have plenty of systems with no modern APIs. Computer-use agents can control entire desktops, but I did not want to hand over mine. I restricted the experiment to the browser and got `GPT-5.5` to create a small web training module for the model to complete.
 
 I tested this in two stages: first with an easy module that had standard web patterns, then with a harder canvas-rendered module where buttons exist to be clicked, but aren't parseable via the DOM.
 
 ## The Simple Module
 
-I started with a regular interface to navigate to iron out the setup issues. But it then navigated this consistently with ease. So the next step was to set up something much harder.
+I started with a regular web interface to iron out the setup issues. Once that worked, I made the task harder.
 
 You can [try the simple module here](/content/demos/holo-training-portal/).
 
@@ -101,11 +101,11 @@ You can [try the simple module here](/content/demos/holo-training-portal/).
     style="display: block; width: 100%; max-width: none; height: auto; margin: 0; transform: none;"
   >
   <figcaption style="margin-top: 0.4rem; color: #6b7280; font-size: 0.9rem; line-height: 1.4;">
-    Holo agent completing the simple training module visually. Note it try many times on a disabled next/continue button.
+    Holo agent attempting the simple training module visually. Note the repeated attempts on a disabled next/continue button.
   </figcaption>
 </figure>
 
-This was the easier progression point for the agent because it still looked like a normal training portal: rectangular buttons, visible text labels, checklist rows, a single obvious quiz answer, and a final completion screen. Even without the interactive-element list, the targets were visually legible and mostly shaped like the controls humans expect to click.
+This was the easy case: rectangular buttons, visible labels, checklist rows, one obvious quiz answer, and a final completion screen. Even without the interactive-element list, the targets looked like things humans expect to click. I'd expect the model to have seen plenty of similar UIs during training.
 
 ## Screenshots Alone Are Not Enough
 
@@ -119,7 +119,7 @@ That proved the model and local inference stack worked. It also exposed the limi
 - The model treated visible-but-disabled navigation as usable.
 - It tried to exit before a module was truly complete.
 
-That pushed the first round of fixes towards well less sexy things: parsing, coordinates, action history, and the definition of done. It reminded me of the [leaked source code of another harness that uses simple regexes](https://dev.to/toji_openclaw_fd3ff67586a/claude-knows-when-youre-mad-and-uses-regex-not-ai-2klc).
+That pushed the first fixes toward the boring parts: parsing, coordinates, action history, and the definition of done. It reminded me of the [leaked source code of another harness that uses simple regexes](https://dev.to/toji_openclaw_fd3ff67586a/claude-knows-when-youre-mad-and-uses-regex-not-ai-2klc).
 
 ### Parse Model Output Like It Will Be Messy
 
@@ -133,7 +133,7 @@ The system prompt asks for strict JSON. The model still sometimes returns almost
 - Target lists as objects instead of strings.
 - Coordinates embedded in reasoning instead of the `coordinate` field.
 
-I have an `actions.py` repairs common cases before giving up. This came directly from early simple attempts. My first working attempt, a simple 'do a google search of bags', the model knew what to do but produced malformed coordinates and lowercase key names.
+`actions.py` repairs common cases before giving up. This came directly from early attempts. In my first working run, a simple "do a google search of bags" task, the model knew what to do but produced malformed coordinates and lowercase key names.
 
 ### History Prevents Repetition
 
@@ -151,7 +151,7 @@ Do NOT repeat these actions. Decide what to do NEXT.
 
 History is also used by the controller itself. Repeated action fingerprints trigger loop detection. Repeated screenshot hashes trigger stale-page warnings. Repeated waits with clickable elements produce stronger instructions to interact instead of waiting forever.
 
-I found sometimes the model would explain its reasoning confidently even when nothing was changing. The harness warning of stale pages helped the agent reason out of its loop.
+Sometimes the model explained its reasoning confidently while nothing changed. The stale-page warning helped it reason out of that loop.
 
 ### Coordinates Are Not Just Coordinates
 
@@ -161,7 +161,7 @@ A few of the problems:
 - Device-pixel-ratio conversion, because screenshots and Playwright mouse input did not use the same coordinate space.
 - Loop detection, stale-screen warnings, and final-completion policy when the model kept clicking after the page was already done.
 
-The trace is worth browsing because it shows the actual development texture: malformed coordinates being repaired, row clicks being recentered, the model reaching the final `Training complete` screen, and the last remaining mistake where it kept clicking instead of emitting `task_complete`. I have hosted this trace below in an iframe as an example of how the agent recovers:
+The trace below is worth browsing it shows: malformed coordinates being repaired, row clicks being recentered, the model reaching the final `Training complete` screen, and one remaining mistake where it kept clicking instead of emitting `task_complete`.
 
 <iframe
   src="/content/traces/holo-agent/20260511T131133Z-complete-this-training-module/"
@@ -172,21 +172,17 @@ The trace is worth browsing because it shows the actual development texture: mal
 
 ## The Canvas Module
 
-I wanted to challenge the agent. So a second non-standard module aimed to difficult interfaces that motivated the CreateJS path: canvas-rendered controls, subtle hotspots, decoys, disabled canvas navigation, and a final canvas completion action. You can [try the complex canvas module here](/content/demos/holo-canvas-portal/).
+I wanted to challenge the agent, so I built a second module around canvas-rendered controls, subtle hotspots, decoys, disabled canvas navigation, and a final canvas completion action. You can [try the complex canvas module here](/content/demos/holo-canvas-portal/).
 
 ![Holo agent completing a canvas-based training module](/content/images/holo-agent/holo-canvas-agent-demo.gif)
 
-I later extended that canvas portal into an 8-step benchmark: valve selection, clue sweep, mirror target, dial lock, shutter latch, quiz, glyph lock, and route trace. In three grounded runs, Holo3 reached `6/8` each time. It cleared the first six tasks with the CreateJS element list, snapped coordinates, and JS-dispatched canvas clicks, then failed at the glyph lock before reaching the final route-tracing task. The struggle was not basic click grounding; it was visual symbol interpretation and maintaining the correct glyph sequence under repeated retries.
+I later extended that canvas portal into a 9-task benchmark: valve selection, clue sweep, mirror target, dial lock, shutter latch, quiz, glyph lock, route trace, and a final stamp. In the best grounded runs, Holo3 reached the glyph lock. The struggle was not basic click grounding. It was visual symbol interpretation and keeping the glyph sequence straight under repeated retries.
 
 ![Holo agent repeatedly attempting the canvas glyph lock](/content/images/holo-agent/holo-canvas-agent-glyph-lock-trace.gif)
 
 ## Ground The Model In Page State
 
-The agent now scans the page before every model call and includes an interactive-element list in the prompt.
-
-For ordinary DOM pages, the scanner looks for buttons, links, tabs, menu items, radio buttons, checkboxes, inputs, role-based controls, click handlers, and shadow roots.
-
-For canvas-based modules, it walks the CreateJS stage, extracts clickable display objects, resolves visible labels where possible, and records their viewport coordinates.
+The agent now scans the page before every model call and includes an interactive-element list in the prompt. For ordinary DOM pages, it looks for buttons, links, tabs, menu items, radio buttons, checkboxes, inputs, click handlers, and shadow roots. For canvas modules, it walks the CreateJS stage, extracts clickable display objects, resolves labels where it can, and records viewport coordinates.
 
 The model sees context like:
 
@@ -205,7 +201,7 @@ Navigation controls:
 
 This changed the model's job from "estimate where to click from pixels" to "choose from grounded targets". The executor then snaps model coordinates or text targets back to those known interactives.
 
-Here is the comparison across the repeated runs. The first three columns are the run configuration; the columns after the divider are results. The task-progress column is the average number of module tasks completed across the five runs, divided by the total available tasks in that module.
+Here is the comparison across the repeated runs. The task-progress column is the average number of module tasks completed across the five runs, divided by the total available tasks in that module. The hard canvas visual-only max-step count is low because the harness detected no-progress loops and stopped early.
 
 <div style="width: min(calc(100% + var(--post-media-overhang)), calc(100vw - var(--post-media-viewport-gutter)), var(--post-media-max-width)); margin: 1.75rem 0 1.75rem 50%; transform: translateX(-50%); overflow-x: auto;">
   <table style="width: 100%; min-width: 760px; border-collapse: separate; border-spacing: 0; line-height: 1.35; font-size: 0.9rem; margin: 0; border: 1px solid var(--border); border-radius: 12px; overflow: hidden;">
@@ -274,23 +270,23 @@ Here is the comparison across the repeated runs. The first three columns are the
   </table>
 </div>
 
-Step count only makes sense alongside progress. The longer `temperature=0.7` simple runs and grounded canvas runs spent more steps because they got stuck or looped; they were not better. The useful signal is task progress: grounding took the simple module from partial progress plus false success to `5.0/5` real task completion, and took the hard canvas module from failing on the first canvas task to averaging `4.2/9` tasks completed.
+Step count only makes sense alongside progress. The longer `temperature=0.7` simple runs and grounded canvas runs spent more steps because they got stuck or looped; they were not better. Grounding took the simple module from partial progress plus false success to `5.0/5` real task completion. On the hard canvas module, it moved the average from `0.0/9` to `4.2/9` tasks completed.
 
 ## When I Removed The Grounding
 
 To make sure I was not accidentally over-claiming the VLM's visual ability, I added an observation-based mode. In that mode the model still gets the screenshot and the task, but it does not see the `Interactive elements detected...` list, [CreateJS](https://createjs.com/) stage labels, navigation button state, or precomputed snap-to-target data.
 
-This made the simple module much harder. Holo3 often understood the right intent: launch the module, click checklist rows, start the media, answer the quiz, continue to confirmation. The problem was turning that intent into reliable browser actions. Once the SCORM and CreateJS clues were removed from the prompt, the harness had to do more work without reading DOM or canvas scene data ahead of time.
+This made the simple module much harder. Holo3 often understood the intent: launch the module, click checklist rows, start the media, answer the quiz, continue to confirmation. The problem was turning that intent into reliable browser actions.
 
-Then I ran the same visual-only mode against the harder canvas module without changing the harness again. That failed, which is the result I expected. The model launched the inspection, read the next task correctly, and repeatedly identified the green `Open coolant valve` as the right target. But the page did not advance. After 19 steps the loop guard stopped the run: Holo3 was visually right about the target, while the raw visual click path was not enough for that canvas interaction. That failure trace is here: [visual-only complex canvas trace](/content/traces/holo-agent/20260511T135749Z-complete-this-training-module/).
+Then I ran the same visual-only mode against the harder canvas module. It launched the inspection, read the next task correctly, and repeatedly identified the green `Open coolant valve` as the right target. But the page did not advance. Holo3 was visually right about the target, while the raw visual click path was not enough for that canvas interaction. That failure trace is here: [visual-only complex canvas trace](/content/traces/holo-agent/20260511T135749Z-complete-this-training-module/).
 
-So the comparison is useful: grounded mode with CreateJS/SCORM clues turns the problem into choosing known interactive targets; visual-only mode forces the model and harness to recover everything from pixels. On the simple module, that can be made to work. On the harder canvas module, it exposed why the grounded event-dispatch path exists.
+That comparison is useful. Grounded mode turns the problem into choosing known interactive targets. Visual-only mode forces the model and harness to recover everything from pixels. On the simple module, that can be made to work. On the harder canvas module, it exposed why the grounded event-dispatch path exists.
 
 ## Treat Clicking As A Compatibility Layer
 
-One of the biggest hurdles was that not all browser clicks are equal.
+Not all browser clicks are equal.
 
-For a normal DOM page, Playwright's `page.mouse.click(x, y)` is often fine. For canvas modules, that click can hit the canvas element without triggering the internal object that the learner would have clicked. The agent therefore dispatches events directly inside the page:
+For a normal DOM page, Playwright's `page.mouse.click(x, y)` is often fine. For canvas modules, that click can hit the canvas element without triggering the internal object the learner would have clicked. The agent therefore dispatches events directly inside the page:
 
 - Convert viewport coordinates to canvas/stage coordinates.
 - Find the nearest interactive CreateJS object.
@@ -299,13 +295,13 @@ For a normal DOM page, Playwright's `page.mouse.click(x, y)` is often fine. For 
 
 ## Local Inference
 
-These runs were on a 64 GB M4 Max, and the trace logs make the resource profile visible instead of anecdotal. In the successful canvas demo trace, the model reported about `46.3 GB` peak memory on each step. The prompts were small relative to the model context window: around `1.2K` to `1.5K` prompt tokens per step, with completion responses usually below `200` tokens. The run took `10` steps and about `100` seconds end to end. The slow part was inference.
+These runs were on a 64 GB M4 Max. In the successful canvas demo trace, the model reported about `46.3 GB` peak memory on each step. Prompts were small relative to the model context window: around `1.2K` to `1.5K` prompt tokens per step, with completions usually below `200` tokens. The run took `10` steps and about `100` seconds end to end. The slow part was inference.
 
 The harness downscales screenshots before inference while preserving full-resolution screenshots in the trace. That reduces image-token and memory pressure without sacrificing post-run debugging.
 
 ## Traces Are The Development Loop
 
-The trace system became the most valuable debugging tool.
+The trace system became the main debugging tool.
 
 Each step records:
 
@@ -322,24 +318,17 @@ Each step records:
 
 ![Trace viewer showing screenshots, reasoning, parsed actions, timings, tokens, and memory](/content/images/holo-agent/holo-trace-viewer-demo.gif)
 
-The HTML viewer makes this inspectable while a run is still live. Failed traces are especially valuable because they show exactly what the model saw, what it was told, what it returned, what the parser understood, and whether the page changed.
-
-This was the main observability surface. When the agent got into loops, the trace made the failure concrete: the screenshot stayed the same, the prompt history showed repeated actions, the raw model response explained why it thought the action was still sensible, and the parsed action showed whether the harness had repaired or overridden it. That combination is much more useful than logs alone because it lets you debug both sides of the loop: the model's visual reasoning and the controller's execution policy.
+The HTML viewer makes this inspectable while a run is still live. Failed traces are especially useful because they show what the model saw, what it was told, what it returned, what the parser understood, and whether the page changed.
 
 Most of the agent's current safeguards came from reading those traces and promoting repeated failures into code.
 
-## My Takeaways
+## Takeaways
 
-- CDP attachment to an existing browser, instead of launching a fresh unauthenticated one.
-- Interactive-element scanning, especially for canvas and custom controls.
-- JS-dispatched CreateJS events.
-- A semantic `nav_button` action.
-- Action history in the prompt.
-- JSON repair and key normalization.
-- Loop detection and screenshot-hash stale detection.
-- Loading/video state guards.
-- Cross-run knowledge summaries.
-- Deterministic fallbacks for repeated screens.
-- Live and final trace viewers.
-- Deep model-server health checks.
-- There is also a tension between generality and usefulness. A purely general agent gets stuck more often. A heavily specialized harness works better, but accumulates domain and workflow assumptions and would require customised deployment.
+- Attach to an existing browser with CDP rather than launching a fresh unauthenticated profile.
+- Ground the model with page state when the page can provide it, especially for canvas and custom controls.
+- For further investigation - In the traces, I included a visual dot overlay on the screenshot for my visual recognition. But what If the screenshot feedback to the visual only mode also had that previous click overlay - could the model reason relative to the previous click where it should click next? This would test a question I'm left with, can VLMs really see?
+- Treat clicking as a compatibility layer. DOM clicks, Playwright mouse clicks, and CreateJS event dispatch are not interchangeable.
+- Keep action history, stale-screen detection, loop guards, and JSON repair close to the agent loop.
+- Record traces that show screenshots, prompts, raw model output, parsed actions, timings, and final status.
+
+There is a trade-off. A purely general agent gets stuck more often. A specialised harness works best. If I were applying this in an organisation context, where I know what the steps are ahead of time - then I could have prescriptive workflows defined acting as guardrails for the agent.
