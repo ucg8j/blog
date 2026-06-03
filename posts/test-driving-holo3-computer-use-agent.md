@@ -316,9 +316,7 @@ Each step records:
 - The final run status.
 - Knowledge notes.
 
-![Trace viewer showing screenshots, reasoning, parsed actions, timings, tokens, and memory](/content/images/holo-agent/holo-trace-viewer-demo.gif)
-
-The HTML viewer makes this inspectable while a run is still live. Failed traces are especially useful because they show what the model saw, what it was told, what it returned, what the parser understood, and whether the page changed.
+The embedded HTML viewer above makes this inspectable while a run is still live. Failed traces are especially useful because they show what the model saw, what it was told, what it returned, what the parser understood, and whether the page changed.
 
 Most of the agent's current safeguards came from reading those traces and promoting repeated failures into code.
 
