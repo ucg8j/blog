@@ -3,18 +3,20 @@ layout: layouts/base.njk
 templateClass: tmpl-post
 ---
 <h1>{{ title }}</h1>
+{% if slug != 'about-me' %}
+<p class="post-meta"><time datetime="{{ page.date | htmlDateString }}">{{ page.date | postDate }}</time></p>
+{% endif %}
 
 {{ content | safe }}
 
-<hr>
+<hr class="post-end">
 {# buy me a coffee button #}
 <script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="6uRXFwMJD" data-color="#FFDD00" data-emoji=""  data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#000" data-font-color="#000" data-coffee-color="#fff" ></script>
-<br>
 
+<p class="post-suggest-edit">
 {% if slug == 'about-me' %}
   ✍️ Want to suggest an edit? <a href="https://github.com/ucg8j/blog/blob/master/about/index.md">Raise a PR or an issue on Github</a>
 {% else %}
   ✍️ Want to suggest an edit? <a href="https://github.com/ucg8j/blog/blob/master/posts/{{ slug }}.md">Raise a PR or an issue on Github</a>
 {% endif %}
-
-<hr>
+</p>

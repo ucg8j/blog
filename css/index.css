@@ -13,7 +13,7 @@
   --secondary: #525252;
   --accent: #4a7c59;
   --border: #e4e7e2;
-  --code-font-size: 12px;
+  --code-font-size: 13px;
   --post-media-max-width: 900px;
   --post-media-overhang: 12rem;
   --post-media-viewport-gutter: 2rem;
@@ -44,12 +44,16 @@ body {
   background-color: var(--bg);
   font-size: 16px;
 }
+h1 {
+  line-height: 1.2;
+}
+.tmpl-post h1 {
+  font-size: 2rem;
+  margin-bottom: 0.25rem;
+}
 h2 {
   margin-top: 1em;
   color: var(--text);
-}
-strong {
-  color: #555;
 }
 p:last-child {
   margin-bottom: 0;
@@ -91,12 +95,6 @@ img[src*="#thumbnail"] {
 a {
   color: var(--accent);
 }
-/* a[href] {
-  color: var(--blue);
-}
-a[href]:visited {
-  color: var(--navy);
-} */
 blockquote {
   margin: 0 0 1.5em;
   padding: 0 1.5em;
@@ -146,13 +144,13 @@ table {
   font-size: 85%;
   margin: 1em 0;
   border-collapse: collapse;
-  line-height: 0.9;
+  line-height: 1.4;
   margin-left: auto;
   margin-right: auto;
 }
 table tr {
   background: white;
-  border-bottom: 1px solid;
+  border-bottom: 1px solid var(--border);
 }
 table th,
 table td {
@@ -296,7 +294,6 @@ pre {
 .postlist-item {
   padding: 1.5rem 0;
   margin-bottom: 1.5rem;
-  padding-bottom: 1.5rem;
   background: transparent;
   border: none;
   border-bottom: 1px solid var(--border);
@@ -310,35 +307,11 @@ pre {
 .postlist-item:hover {
   border-bottom-color: var(--accent);
 }
-.postlist-item::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  border-left: 3px solid transparent;
-  transition: border-color 0.2s ease;
-  pointer-events: none;
-}
-.postlist-item:hover::before {
-  border-left-color: var(--accent);
-}
-.postlist-item:before {
-  display: none;
-}
-.postlist-item-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: baseline;
-  gap: 1rem;
-  margin-bottom: 0.5rem;
-}
 .postlist-date {
+  display: block;
   font-size: 0.8125rem;
   color: var(--secondary);
-  white-space: nowrap;
-  flex-shrink: 0;
+  margin-bottom: 0.25rem;
 }
 .postlist-link {
   display: block;
@@ -348,7 +321,7 @@ pre {
   font-weight: 600;
   line-height: 1.4;
   transition: color 0.2s ease;
-  flex: 1;
+  margin-bottom: 0.5rem;
 }
 .postlist-link::after {
   content: "";
@@ -512,4 +485,84 @@ Original aim: Force scrollbars on mobile for divs that overflow to always displa
 }
 .tmpl-post img:not(.lightbox-overlay img):hover {
   opacity: 0.9;
+}
+
+/* Post meta / end matter */
+.post-meta {
+  font-size: 0.875rem;
+  color: var(--secondary);
+  margin: 0 0 1.5rem 0;
+}
+.post-end {
+  margin-top: 3rem;
+  border: none;
+  border-top: 1px solid var(--border);
+}
+.post-suggest-edit {
+  font-size: 0.875rem;
+  color: var(--secondary);
+  margin-top: 1.5rem;
+}
+
+/* Subscribe */
+.subscribe-intro {
+  margin-top: 3rem;
+  margin-bottom: 0.5rem;
+  font-size: 0.9375rem;
+  color: var(--secondary);
+}
+.formkit-form .formkit-input:focus {
+  border-color: var(--accent) !important;
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+  :root {
+    --code-font-size: 14px;
+  }
+  header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+  .home h1 {
+    font-size: 1.35rem;
+    white-space: nowrap;
+  }
+  .nav {
+    padding-top: 0;
+  }
+  .tmpl-post h1 {
+    font-size: 1.6rem;
+  }
+  .postlist-link,
+  .tmpl-home .postlist-link {
+    font-size: 1.15rem;
+  }
+}
+
+/* Dark mode */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #1a1a1a;
+    --text: #e6e6e6;
+    --secondary: #a0a0a0;
+    --accent: #7fb08a;
+    --border: #333333;
+  }
+  code {
+    background-color: rgba(255, 255, 255, 0.1);
+  }
+  pre {
+    background-color: #272822;
+  }
+  table tr {
+    background: var(--bg);
+  }
+  ::-webkit-scrollbar-thumb {
+    border-color: var(--bg);
+  }
+  ::-webkit-scrollbar-track {
+    background-color: var(--bg);
+  }
 }

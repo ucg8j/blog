@@ -176,21 +176,6 @@ input[type="radio"]:checked ~ * {
   transform: translateY(0);
 }
 
-.btn-small {
-  padding: 0.25rem 0.75rem;
-  font-size: 0.75rem;
-  background: transparent;
-  border: 1px solid var(--border, #e4e7e2);
-  border-radius: 4px;
-  cursor: pointer;
-  margin-left: 0.5rem;
-}
-
-.btn-small:hover {
-  border-color: var(--accent, #4a7c59);
-  color: var(--accent, #4a7c59);
-}
-
 /* Exchange Rate Info */
 .exchange-rate-info {
   font-size: 0.875rem;
@@ -214,6 +199,16 @@ input[type="radio"]:checked ~ * {
 
 .result-card p {
   margin: 0;
+}
+
+.fix-list {
+  margin: 0.5rem 0 0 1.5rem;
+  padding: 0;
+}
+
+/* Housing fields */
+.housing-fields {
+  margin-top: 1rem;
 }
 
 .status-success {
