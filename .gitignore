@@ -1,11 +1,6 @@
 _site/
 node_modules/
 package-lock.json
-.lazyimages.json
-.lazyimages.json
+**/.lazyimages.json
+**/.DS_Store
 .vscode/settings.json
-.DS_Store
-content/.DS_Store
-content/images/.DS_Store
-content/.DS_Store
-.lazyimages.json
