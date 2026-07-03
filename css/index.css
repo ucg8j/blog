@@ -13,6 +13,8 @@
   --secondary: #525252;
   --accent: #4a7c59;
   --border: #e4e7e2;
+  --code-bg: rgba(27, 31, 35, 0.05);
+  --pre-bg: #f6f6f6;
   --code-font-size: 13px;
   --post-media-max-width: 900px;
   --post-media-overhang: 12rem;
@@ -105,9 +107,8 @@ blockquote {
 code {
   margin: 0;
   font-size: 85%;
-  background-color: var(--color-markdown-code-bg);
   border-radius: 6px;
-  background-color: rgba(27, 31, 35, 0.05);
+  background-color: var(--code-bg);
 }
 footer {
   margin-bottom: 2rem;
@@ -149,7 +150,7 @@ table {
   margin-right: auto;
 }
 table tr {
-  background: white;
+  background: var(--bg);
   border-bottom: 1px solid var(--border);
 }
 table th,
@@ -202,7 +203,7 @@ pre {
   hyphens: none;
   padding: 1em 1em;
   margin: 0.5em 0;
-  background-color: #f6f6f6;
+  background-color: var(--pre-bg);
 }
 .highlight-line {
   display: block;
@@ -267,7 +268,7 @@ pre {
   gap: 1.5rem;
   float: none;
   flex-shrink: 0;
-  align-items: baseline;
+  align-items: center;
   padding-top: 0.125rem;
 }
 .nav-item a {
@@ -283,6 +284,54 @@ pre {
 .nav-item-active a {
   color: var(--text);
   font-weight: 500;
+}
+
+/* Theme toggle */
+.nav-theme-toggle {
+  display: flex;
+  align-items: center;
+}
+.theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  margin: 0;
+  border: none;
+  background: none;
+  color: var(--secondary);
+  cursor: pointer;
+  line-height: 1;
+  transition: color 0.2s ease;
+}
+.theme-toggle:hover {
+  color: var(--accent);
+}
+.theme-toggle svg {
+  width: 1.15rem;
+  height: 1.15rem;
+  display: block;
+}
+/* Show the icon for the theme you can switch TO */
+.theme-toggle .icon-sun {
+  display: none;
+}
+.theme-toggle .icon-moon {
+  display: block;
+}
+:root[data-theme="dark"] .theme-toggle .icon-sun {
+  display: block;
+}
+:root[data-theme="dark"] .theme-toggle .icon-moon {
+  display: none;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .theme-toggle .icon-sun {
+    display: block;
+  }
+  :root:not([data-theme="light"]) .theme-toggle .icon-moon {
+    display: none;
+  }
 }
 
 /* Posts list */
@@ -419,11 +468,11 @@ Original aim: Force scrollbars on mobile for divs that overflow to always displa
 ::-webkit-scrollbar-thumb {
   -webkit-box-shadow: 0 0 1px rgba(255, 255, 255, 0.5);
   border-radius: 10px;
-  border: 2px solid #ffffff;
+  border: 2px solid var(--bg);
 }
 ::-webkit-scrollbar-track {
   border-radius: 10px;
-  background-color: #ffffff;
+  background-color: var(--bg);
 }
 
 /* Lightbox */
@@ -541,28 +590,33 @@ Original aim: Force scrollbars on mobile for divs that overflow to always displa
   }
 }
 
-/* Dark mode */
+/*
+Dark mode.
+Colours are driven entirely by the CSS variables below, so element rules
+(code, pre, tables, scrollbars) automatically follow the active theme.
+
+Resolution order:
+- No preference saved -> follow the OS via prefers-color-scheme.
+- data-theme="light"  -> force light, even if the OS prefers dark.
+- data-theme="dark"   -> force dark, even if the OS prefers light.
+*/
 @media (prefers-color-scheme: dark) {
-  :root {
+  :root:not([data-theme="light"]) {
     --bg: #1a1a1a;
     --text: #e6e6e6;
     --secondary: #a0a0a0;
     --accent: #7fb08a;
     --border: #333333;
+    --code-bg: rgba(255, 255, 255, 0.1);
+    --pre-bg: #272822;
   }
-  code {
-    background-color: rgba(255, 255, 255, 0.1);
-  }
-  pre {
-    background-color: #272822;
-  }
-  table tr {
-    background: var(--bg);
-  }
-  ::-webkit-scrollbar-thumb {
-    border-color: var(--bg);
-  }
-  ::-webkit-scrollbar-track {
-    background-color: var(--bg);
-  }
+}
+:root[data-theme="dark"] {
+  --bg: #1a1a1a;
+  --text: #e6e6e6;
+  --secondary: #a0a0a0;
+  --accent: #7fb08a;
+  --border: #333333;
+  --code-bg: rgba(255, 255, 255, 0.1);
+  --pre-bg: #272822;
 }
