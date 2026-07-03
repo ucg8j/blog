@@ -6,7 +6,7 @@ date_updated: 2019-03-08T14:01:28.000Z
 draft: true
 ---
 
-## Prerequsite
+## Prerequisite
 
 Ensure you have Java 8 or greater:
 

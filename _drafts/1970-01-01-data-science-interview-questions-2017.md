@@ -37,4 +37,4 @@ What project are you most proud of?
 - 
 What are you're weaknesses coming into this role?
 
-Great point, if you are changing industrys then industry specific knowledge.
+Great point, if you are changing industries then industry specific knowledge.

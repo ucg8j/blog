@@ -4,7 +4,7 @@ permalink: /pragmatic-programmer-review/
 slug: pragmatic-programmer-review
 date: 2020-12-28
 tags: book, review, software, management
-excerpt: A 2020 review of the classic software engineering management book.
+excerpt: A 2020 review of the classic software engineering book on pragmatic craftsmanship and best practices.
 layout: layouts/post.njk
 ---
 
@@ -16,18 +16,18 @@ layout: layouts/post.njk
 
 The Pragmatic Programmer is a very good book full of practical advice. It's written with little *Tip* boxes which are the tl:dr; of a particular section. Plus, there's a healthy sprinkling of Dad jokes throughout the book 😁.
 
-Unlike, a [Mythical Man Month](/mythical-man-month-review/), I would recommend this to seasoned professionals as well as newbies. Though this also has a lot of content for the seasoned professional, it is much easier to parse. Instead of having long anecdotes about long since dead technology to gleam the lesson, this book is to the point, with helpful tip boxes, exercises and the examples are mostly relevant to today.
+Unlike, a [Mythical Man Month](/mythical-man-month-review/), I would recommend this to seasoned professionals as well as newbies. Though this also has a lot of content for the seasoned professional, it is much easier to parse. Instead of having long anecdotes about long since dead technology to glean the lesson, this book is to the point, with helpful tip boxes, exercises and the examples are mostly relevant to today.
 
 ## ❗️ Some criticisms of the book:
 #### Tip 17: Program close to the problem domain
 Whilst I agree with the principle, the accompanying pages advocate for the creation of *mini languages* in order to get closer to the domain. The project manager senses in me (I am not a project manager) can see this quickly becoming a rabbit hole distraction where developers end up on an academic pursuit of these mini languages, the necessary language parsers, documentation etc. The suggestion to create languages for all makes me cringe,
 
->There's the end user, who understands the business rules and the requried outputs. There are also secondary users: operations staff, configuration and test managers, support and maintenance programmers, and future generations of developers. Each of these users has their own problem domain and you can generate mini-environments and languages for all of them.
+>There's the end user, who understands the business rules and the required outputs. There are also secondary users: operations staff, configuration and test managers, support and maintenance programmers, and future generations of developers. Each of these users has their own problem domain and you can generate mini-environments and languages for all of them.
 
 I've not observed anyone creating a mini-language during a project. What I think is more practical and occurs in real-world projects is creating packages of functions whose scope is limited to a particular domain. Such that the ontological representation, the digital recreation of real world concepts happens with a set of classes and/or functions that map to the domain.
 
 #### Chp 3 - The Basic Tools
-This chapter discusses tools that a pragmatic programmer should have in their tool kit. Inevitably the technological tools have changed in the intervening years. Well, eMacs and Vi are still around, but the recommended plugins etc. are out of date. If you don't have a good toolset already, I'd recommend going through MIT's [The Missing Semester of Your CS Education.](https://missing.csail.mit.edu/)
+This chapter discusses tools that a pragmatic programmer should have in their tool kit. Inevitably the technological tools have changed in the intervening years. Well, Emacs and Vi are still around, but the recommended plugins etc. are out of date. If you don't have a good toolset already, I'd recommend going through MIT's [The Missing Semester of Your CS Education.](https://missing.csail.mit.edu/)
 
 
 ## ✅ Major (Useful) Points of the Book
@@ -35,7 +35,7 @@ This chapter discusses tools that a pragmatic programmer should have in their to
 It's quite a common occurrence for technical people when asked by a stakeholder to feel anxious or pressured to provide an estimate of when something can be done on the spot. For a particular data request, this might mean involving the stakeholder in the tradeoff between how accurate vs how quick the deliverable's turnaround is.
 
 ### 🍸 DRY
-Don't repeat yourself (DRY) is a commonly held maxim of programming. The Pragramatic Programmer exposits the common causes for duplication. This can arise from multiple places, project requirements, multiple target platforms, multiple programming languages being used in one system, laziness etc. A programmer may have to duplicate the schema of a database table to represent it as a class in their program. Documentation in code as comments and as a separate accompanying document. But these can be duplicative of each other.
+Don't repeat yourself (DRY) is a commonly held maxim of programming. The Pragmatic Programmer exposits the common causes for duplication. This can arise from multiple places, project requirements, multiple target platforms, multiple programming languages being used in one system, laziness etc. A programmer may have to duplicate the schema of a database table to represent it as a class in their program. Documentation in code as comments and as a separate accompanying document. But these can be duplicative of each other.
 
 > good code has lots of comments
 
@@ -60,7 +60,7 @@ Better known these days as 'agile development', 'MVP' and 'iteration'. *Tracer B
 *Involve your users* and ask if they need high accuracy or a ballpark figure for the estimate. First understand the problem space, this will involve working with your user to understand not just what they are asking, but what their *actual problem* is. Then whiteboard what the system is you will build to solve it. If this is large enough a system, then estimate how long each component could take to build. Keep track of this estimate so you can track the accuracy of your estimates. As you go through each project iteration (sprint) update the estimate based on any change in delivery schedule that may now be apparent.
 
 A fun fact from a footnote:
->What is the value of π? "3"... if you are a legislator. In 1987, Indiana State Legislature House Bill No. 246 attempted to decree that henceforth π should have the value of "3".
+>What is the value of π? "3"... if you are a legislator. In 1897, Indiana State Legislature House Bill No. 246 attempted to decree that henceforth π should have the value of "3".
 
 Lastly, when asked for an estimate *you say, "I'll get back to you"*.
 
@@ -68,7 +68,7 @@ Lastly, when asked for an estimate *you say, "I'll get back to you"*.
 This is a good chapter and great if you're new to tech. *The first rule of debugging*:
 >Tip 25: Don't Panic
 
-I've done this, and seen others do it. But it really is counterproductive. Take a deep breathe 🧘‍♀️, and approach it with the Zen of a master. This will help avoid the myopia of jumping on fixes for the symptoms that you immediately see rather than taking a step back to assess the bigger picture here. This is something I usually call, *developing hypotheses* of the root causes or, what are the possible *solution paths* we could go down - it's best to get a range of options before jumping down one that could prove fruitless. Instead, rank the hypotheses in order of most likely, then proceed with the highest ranked hypothesis.
+I've done this, and seen others do it. But it really is counterproductive. Take a deep breath 🧘‍♀️, and approach it with the Zen of a master. This will help avoid the myopia of jumping on fixes for the symptoms that you immediately see rather than taking a step back to assess the bigger picture here. This is something I usually call, *developing hypotheses* of the root causes or, what are the possible *solution paths* we could go down - it's best to get a range of options before jumping down one that could prove fruitless. Instead, rank the hypotheses in order of most likely, then proceed with the highest ranked hypothesis.
 
 #### Various debugging tips
 - *Reproduce the bug* on your machine or a dev environment.
@@ -128,5 +128,5 @@ If you have the problem of too many requirements, then point out how much each s
 
 ## Notes
 - I'd recommend the entirety of chapter 6 *While you are coding* - particularly the 'How to program deliberately section'
-- One of the simplest explainations of O notation is in this book.
+- One of the simplest explanations of O notation is in this book.
 - There's a great section in Chp 8 Pragmatic Projects on team organisation advocating for teams to be organised around functionality which also reflects the decoupled principle.

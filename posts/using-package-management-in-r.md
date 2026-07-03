@@ -25,7 +25,7 @@ R scripts breaking over time is annoying for anyone, but it's worth highlighting
 
 ## Getting Started
 
-To get the RStudio niceties/integrations it seems neccessary to treat your project folder as an R Project. I've created a new project `/testpackrat2` and with the latest RStudio you should be able to select both `git` and `packrat` to be initialised. This runs the `packrat::init()` function to enter packrat mode, takes a snapshot of the package dependencies (of which there are currently none) and places the binaries in the project folder under `testpackrat2/packrat/src/`; finally `init()` runs `restore()` to apply the latest snapshot to the project folder. `R` will restart once this process is finished.
+To get the RStudio niceties/integrations it seems necessary to treat your project folder as an R Project. I've created a new project `/testpackrat2` and with the latest RStudio you should be able to select both `git` and `packrat` to be initialised. This runs the `packrat::init()` function to enter packrat mode, takes a snapshot of the package dependencies (of which there are currently none) and places the binaries in the project folder under `testpackrat2/packrat/src/`; finally `init()` runs `restore()` to apply the latest snapshot to the project folder. `R` will restart once this process is finished.
 
 ![New Packrat Project RStudio](/content/images/2016/11/Screen-Shot-2016-11-08-at-09-19-09.png)  
 To double check packrat has been initialised properly run:
@@ -148,7 +148,7 @@ Unfortunately there is not an option to `init` packrat as part the process. So..
 > packrat::init()
 Initializing packrat project in directory:
 - "~/Projects/testpackratOutofDatePackages"
-... (edited down the consolte printout)
+... (edited down the console printout)
 Fetching sources for htmlwidgets (0.6) ... OK (CRAN archived)
 Fetching sources for lubridate (1.5.6) ... OK (CRAN archived)
 ```

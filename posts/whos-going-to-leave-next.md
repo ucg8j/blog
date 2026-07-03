@@ -124,7 +124,7 @@ pplot = sns.pairplot(df_sample, hue="left")
 
 ![](/content/images/2017/07/pairwise.png)
 
-On the diagonal we can see the distribution of each variable, including the target variable of who has left (this visualises the balance). There are some interesting groupings of those who leave (Green dots) when looking at the plots of `satisfaction_level` by `last_evaluation` and by `average_montly_hours` - they look to be the same sub-populations. E.g. Low satisfaction but high evaluation and monthly hours, there's also a grouping of a high number of projects completed with low satisfaction levels by those who leave. Perhaps these are _high performers_ that easily leave when they are not satisfied by their job. There are other interesting groupings so it's worth spending some looking at this output examining these relationships. It's great to have these groupings, as our classifier should be able to differentiate between those who leave and those that remain. If there were no relationships revealed in this plot, we would face a very difficult problem and perhaps have to go back to examine what data we could collect to help predict the outcome.
+On the diagonal we can see the distribution of each variable, including the target variable of who has left (this visualises the balance). There are some interesting groupings of those who leave (Green dots) when looking at the plots of `satisfaction_level` by `last_evaluation` and by `average_montly_hours` - they look to be the same sub-populations. E.g. Low satisfaction but high evaluation and monthly hours, there's also a grouping of a high number of projects completed with low satisfaction levels by those who leave. Perhaps these are _high performers_ that easily leave when they are not satisfied by their job. There are other interesting groupings so it's worth spending some time looking at this output examining these relationships. It's great to have these groupings, as our classifier should be able to differentiate between those who leave and those that remain. If there were no relationships revealed in this plot, we would face a very difficult problem and perhaps have to go back to examine what data we could collect to help predict the outcome.
 
 Two variables were left out of the above plots, `Salary` and `Sales`. I need to deal with these separately prior to modelling, as our machine learning classifier will expect numbers to crunch rather than text.
 
@@ -221,7 +221,7 @@ x_validate = validate.drop(['left'], axis=1)
 0.24091565729525502
 ```
 
-Feature importance can be ascertained from a random forest, alternatively [Principle Components Analysis (PCA)](https://en.wikipedia.org/wiki/Principal_component_analysis) can be used.
+Feature importance can be ascertained from a random forest, alternatively [Principal Components Analysis (PCA)](https://en.wikipedia.org/wiki/Principal_component_analysis) can be used.
 
 ```python
 # Variable importance
@@ -253,7 +253,6 @@ x_validate = x_validate.drop(bottom_vars, axis=1)
 
 The formula for **accuracy** is:
 <math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mtext>Accuracy</mtext><mo>=</mo><mfrac><mrow><mi>T</mi><mi>P</mi><mo>+</mo><mi>T</mi><mi>N</mi></mrow><mrow><mi>T</mi><mi>P</mi><mo>+</mo><mi>T</mi><mi>N</mi><mo>+</mo><mi>F</mi><mi>P</mi><mo>+</mo><mi>F</mi><mi>N</mi></mrow></mfrac></math>
-</math>
 
 * **TP** is the number of true positives
 
@@ -271,12 +270,12 @@ The formula for **accuracy** is:
 
     _Predicted as remaining and they don't - eek!_
 
-As mentioned before, if we were aiming to predict those who remain (76%) then if we predicted 100%, we would have `(0 + 11428) / 14999` or 76% accurracy. As the [Accuracy Paradox wiki](https://en.wikipedia.org/wiki/Accuracy_paradox) states precision and recall are probably more appropriate evaluation metrics. Here's a really quick definition of sensitivity (AKA recall), specificity and precision:
+As mentioned before, if we were aiming to predict those who remain (76%) then if we predicted 100%, we would have `(0 + 11428) / 14999` or 76% accuracy. As the [Accuracy Paradox wiki](https://en.wikipedia.org/wiki/Accuracy_paradox) states precision and recall are probably more appropriate evaluation metrics. Here's a really quick definition of sensitivity (AKA recall), specificity and precision:
 
 * **Sensitivity/Recall** - `TP / (TP + FN)` how well the model _recalls_/identifies those that will leave. AKA the true positive rate.
 * **Specificity** - `TN / (TN + FP)` how well the model identifies those that will stay.
 * **Precision** `TP / (TP + FP)` how believable is the model? A low precision model will alarm you to those who are leaving that are actually staying.
-* **F1 score** `2 * (precision * recall)/(precision + recall)`is the harmonic mean betwen precision and recall or the _balance_.
+* **F1 score** `2 * (precision * recall)/(precision + recall)` is the harmonic mean between precision and recall or the _balance_.
 
 For this problem, we are perhaps most interested in knowing who is going to leave next. That way an organisation can respond with workforce planning and recruitment activities. Therefore, precision and recall will be the metrics we focus on.
 

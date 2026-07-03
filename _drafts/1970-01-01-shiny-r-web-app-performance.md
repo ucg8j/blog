@@ -12,7 +12,7 @@ draft: true
 
 [https://shiny.rstudio.com/articles/scaling-and-tuning.html](https://shiny.rstudio.com/articles/scaling-and-tuning.html)
 
-[good diagrams/overview of what is shared/excuted per process/connection](https://support.rstudio.com/hc/en-us/articles/220546267-Scaling-and-Performance-Tuning-Applications-in-Shiny-Server-Pro)
+[good diagrams/overview of what is shared/executed per process/connection](https://support.rstudio.com/hc/en-us/articles/220546267-Scaling-and-Performance-Tuning-Applications-in-Shiny-Server-Pro)
 
 ## Load Testing
 

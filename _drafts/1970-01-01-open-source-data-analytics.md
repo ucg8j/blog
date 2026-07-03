@@ -71,7 +71,7 @@ Airbnb's superset, now under the Apache Foundation
 Like Apache Superset
 [https://www.metabase.com/](https://www.metabase.com/)
 
-A client side (browser) app for users to dump spreadsheet data in and usea gui to create D3 viz
+A client side (browser) app for users to dump spreadsheet data in and use a gui to create D3 viz
 [https://github.com/rawgraphs/raw](https://github.com/rawgraphs/raw)
 
 A Contour ish app.

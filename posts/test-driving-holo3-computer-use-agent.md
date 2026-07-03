@@ -14,7 +14,7 @@ On March 5, [OpenAI released GPT-5.4](https://openai.com/index/introducing-gpt-5
 
 Then, on March 31, [H Company](http://hcompany.ai/), a French AI lab, [released Holo3](https://hcompany.ai/holo3). The larger Holo3-122B-A10B model reported `78.85%` on OSWorld-Verified, while the smaller [Holo3-35B-A3B model](https://huggingface.co/Hcompany/Holo3-35B-A3B) reported `77.8%`. The smaller model is the useful one for local experiments: a sparse mixture-of-experts VLM with `35B` total parameters, `3B` active parameters, fine-tuned from `Qwen/Qwen3.5-35B-A3B`, and released under Apache 2.0.
 
-One might think, I can just just download Holo3, hit self-driving mode where all my computer work is on intelligent auto-pilot whilst I sit back and relax.
+One might think, I can just download Holo3, hit self-driving mode where all my computer work is on intelligent auto-pilot whilst I sit back and relax.
 
 <figure style="width: min(calc(100% + var(--post-media-overhang)), calc(100vw - var(--post-media-viewport-gutter)), var(--post-media-max-width)); margin: 2rem 0 2rem 50%; transform: translateX(-50%);">
   <img
@@ -33,7 +33,7 @@ Not quite. I couldn't find guidance from H Company on recommended approaches, so
 
 **The goal was to see how well a VLM for 'computer use', running locally, is able to navigate interfaces.**
 
-My unimaginatively named and heavily vibe coded `holo_agent` takes `Holo3-35B-A3B` for a spin. It connects to an existing browser session, captures the viewport, sends the screenshot plus structured context to Holo3 served locally by [mlx-vlm](https://github.com/Blaizzy/mlx-vlm), parses the model's JSON action, executes it with [Playwright](https://playwright.dev/), and records a trace of every step. It's [Ralph-loop-esque](https://ralphify.co/docs/how-it-works/#what-gets-re-read-vs-what-stays-fixed), but for browser use rather than coding.
+My unimaginatively named and heavily vibe coded `holo_agent` takes `Holo3-35B-A3B` for a spin. It connects to an existing browser session, captures the viewport, sends the screenshot plus structured context to Holo3 served locally by [mlx-vlm](https://github.com/Blaizzy/mlx-vlm), parses the model's JSON action, executes it with [Playwright](https://playwright.dev/), and records a trace of every step. It's [Ralph-loop-esque](https://ralphify.co/), but for browser use rather than coding.
 
 ![The agent loop](/content/images/holo-agent/holo-agent-loop.png)
 
@@ -97,7 +97,7 @@ You can [try the simple module here](/content/demos/holo-training-portal/).
 <figure style="width: min(calc(100% + var(--post-media-overhang)), calc(100vw - var(--post-media-viewport-gutter)), var(--post-media-max-width)); margin: 2rem 0 2rem 50%; transform: translateX(-50%);">
   <img
     src="/content/images/holo-agent/holo-simple-agent-visual-trace.gif"
-    alt="Robot using a computer while a human relaxes"
+    alt="Holo agent attempting the simple training module, repeatedly clicking a disabled next button"
     style="display: block; width: 100%; max-width: none; height: auto; margin: 0; transform: none;"
   >
   <figcaption style="margin-top: 0.4rem; color: #6b7280; font-size: 0.9rem; line-height: 1.4;">
@@ -161,7 +161,7 @@ A few of the problems:
 - Device-pixel-ratio conversion, because screenshots and Playwright mouse input did not use the same coordinate space.
 - Loop detection, stale-screen warnings, and final-completion policy when the model kept clicking after the page was already done.
 
-The trace below is worth browsing it shows: malformed coordinates being repaired, row clicks being recentered, the model reaching the final `Training complete` screen, and one remaining mistake where it kept clicking instead of emitting `task_complete`.
+The trace below is worth browsing. It shows: malformed coordinates being repaired, row clicks being recentered, the model reaching the final `Training complete` screen, and one remaining mistake where it kept clicking instead of emitting `task_complete`.
 
 <iframe
   src="/content/traces/holo-agent/20260511T131133Z-complete-this-training-module/"

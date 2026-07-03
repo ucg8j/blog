@@ -62,14 +62,14 @@ inputs.forEach(node => node.addEventListener('mousemove', handleUpdate));
 
 ## 04 - array cardio day 1
 
-*Array methods map(), reduce(), reduce()  and  filter() are introduced.*
+*Array methods map(), reduce() and filter() are introduced.*
 
 - Log a table to the console, i.e. a list of objects
 ```js
 console.table(sorted);
 ```
 
-# 05 - Flex panels
+## 05 - Flex panels
 
 - Light touch on some flex panels (pretty foreign though, without much intro)
 - Pattern of applying some transforms and transitions css using js
@@ -138,7 +138,7 @@ ctx.strokeStyle = '#BBDA55';
 *Depending on how familiar one is with the dev tools, some very good tips to be had*
 
 - Various methods of `console`, e.g. `console.warn()` `console.info()`
-- Break on a paticular element action, inspect the element, right click on element in dev tools and add a 'break on' -> '*choose an option*'
+- Break on a particular element action, inspect the element, right click on element in dev tools and add a 'break on' -> '*choose an option*'
 - `console.groupCollapsed()` group a bunch console logs and display them by default as collapsed.
 ```js
 console.groupCollapsed('my group')
@@ -148,7 +148,7 @@ console.groupEnd('end of my group')
 ```
 
 - `console.count` will print the contents and also the count of how many times that content has been logged
-- `console.time('X operation took:)` put your code you want to time and end it with `console.timeEnd(X operation took:)`
+- `console.time('X operation took:')` put your code you want to time and end it with `console.timeEnd('X operation took:')`
 - *Covered in earlier episodes but very handy* display in the console in tabular form an array of objects `console.table(myArrayOfObjects)`
 
 ## 10 - Hold Shift and Check Checkboxes
@@ -343,7 +343,7 @@ text.style.textShadow = `${xWalk}px ${yWalk}px 0 rgba(255,0,255,0.7)`
 
 N.b. An 'article', being one of the grammatical articles. In this coding example, The definite article 'the' or the indefinite articles 'an' or 'a'.
 
-- Wes takes a really nice and succinct approach here utilising the [Array.prototype.sort()](Array.prototype.sort()). However I prefer the mdn docs approach which is a little more verbose:
+- Wes takes a really nice and succinct approach here utilising the [Array.prototype.sort()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort). However I prefer the mdn docs approach which is a little more verbose:
 ```js
 let sorted = bandsArray.sort((a,b) => {
   if (strip(a) > strip(b)) {
@@ -393,16 +393,16 @@ console.log(mins, ':', secs)
 
 *N.b. This was a slower start with a few issues to iron out cover in the first 3 bullet points...*
 
-- The files so far have been read locally into the browser, such that in the address bar you'll find the file path `file://` instead of `https://`. However the use of the webcam requires a server due to accessing the computer's camera and the security requirement that the website is a secure origin, `https` or `localhost`. Therefore we need to spin up a local server. If developing with [VSCode with the Live Server extension](#13-slide-in-on-scroll) this has already been done for you. I've used Python's ``http.server`` (used to be called ``SimpleHTTPServer``). [Browsersync](https://www.browsersync.io/)  seems like the JavaScript equilavent.
-- I got some intitial `404` errors where the html template pointed to a file that no longer exists. I fixed this by downloading a camera sound locally.
+- The files so far have been read locally into the browser, such that in the address bar you'll find the file path `file://` instead of `https://`. However the use of the webcam requires a server due to accessing the computer's camera and the security requirement that the website is a secure origin, `https` or `localhost`. Therefore we need to spin up a local server. If developing with VSCode and the Live Server extension (see lesson 13 above) this has already been done for you. I've used Python's ``http.server`` (used to be called ``SimpleHTTPServer``). [Browsersync](https://www.browsersync.io/)  seems like the JavaScript equivalent.
+- I got some initial `404` errors where the html template pointed to a file that no longer exists. I fixed this by downloading a camera sound locally.
 ```html
 <!-- 404 -->
 <audio class="snap" src="https://wesbos.com/demos/photobooth/snap.mp3" hidden></audio>
 <!-- replace with a local sound file -->
 <audio class="snap" src="camera_sound.mp3" hidden></audio>
 ```
-- The video tutorial for this instructs you to use [`createObjectURL` which has now been deprecated](https://developer.mozilla.org/en-US/docs/Web/API/URL/createObjectURL). I wasted some time here, checking I had done things correctly, searching for the error until I saw a note in the solution on this to use `[srcObject](https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement/srcObject)`.
-- To access a user's web camera use [`[navigator.mediaDevices.getUserMedia()](https://developer.mozilla.org/en-US/docs/Web/API/MediaDevices/getUserMedia)`](https://developer.mozilla.org/en-US/docs/Web/API/Navigator/mediaDevices/getUserMedia). This returns a [`Promise`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) that resolves to a [`MediaStream`](https://developer.mozilla.org/en-US/docs/Web/API/MediaStream) object.
+- The video tutorial for this instructs you to use [`createObjectURL` which has now been deprecated](https://developer.mozilla.org/en-US/docs/Web/API/URL/createObjectURL). I wasted some time here, checking I had done things correctly, searching for the error until I saw a note in the solution on this to use [`srcObject`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement/srcObject).
+- To access a user's web camera use [`navigator.mediaDevices.getUserMedia()`](https://developer.mozilla.org/en-US/docs/Web/API/MediaDevices/getUserMedia). This returns a [`Promise`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) that resolves to a [`MediaStream`](https://developer.mozilla.org/en-US/docs/Web/API/MediaStream) object.
 ```js
 function getVideo() {
   navigator.mediaDevices.getUserMedia({
@@ -418,7 +418,7 @@ function getVideo() {
     });
 }
 ```
-- [The Navigator interface](https://developer.mozilla.org/en-US/docs/Web/API/Navigator) enables you to query some interesting properties of the user e.g. `[geolocation](https://developer.mozilla.org/en-US/docs/Web/API/Navigator/geolocation)`, `[connection](https://developer.mozilla.org/en-US/docs/Web/API/Navigator/connection)`  and `[webdriver](https://developer.mozilla.org/en-US/docs/Web/API/Navigator/webdriver)`.
+- [The Navigator interface](https://developer.mozilla.org/en-US/docs/Web/API/Navigator) enables you to query some interesting properties of the user e.g. [`geolocation`](https://developer.mozilla.org/en-US/docs/Web/API/Navigator/geolocation), [`connection`](https://developer.mozilla.org/en-US/docs/Web/API/Navigator/connection) and [`webdriver`](https://developer.mozilla.org/en-US/docs/Web/API/Navigator/webdriver).
 - If you want to pause the execution and enter the debugger at a particular point of your code, just write `debugger`.
 ```js
 console.log(pixels);
@@ -459,7 +459,7 @@ recognition.start()
 
 ## 21 - Geolocation based Speedometer and Compass
 
-- This requires using Xcode to simulate someone using there phone whilst moving around.
+- This requires using Xcode to simulate someone using their phone whilst moving around.
 
 ![](/content/images/2020/05/Screen-Shot-2020-05-09-at-20.19.21.png)
 - Once the simulator boots you'll have an iphone on screen. Then turn on a 'City Run'.
@@ -495,13 +495,13 @@ triggers.forEach(a => {
     a.addEventListener('mouseenter', addHighlight)
 }
 ```
-- To get the coodinates and size of the current `a` div, use `[getBoundingClientRect()](https://developer.mozilla.org/en-US/docs/Web/API/Element/getBoundingClientRect)` in the callback.
+- To get the coordinates and size of the current `a` div, use [`getBoundingClientRect()`](https://developer.mozilla.org/en-US/docs/Web/API/Element/getBoundingClientRect) in the callback.
 ```js
 function addHighlight(e) {
     const domDimension = this.getBoundingClientRect();
 }
 ```
-- `[translate(Xpx, Ypx)](https://developer.mozilla.org/en-US/docs/Web/CSS/transform-function/translate)` - CSS function that repositions an element. Use this in the call back to transition the highlight element. Wes uses the `top` and `left` properties, but X and Y works just the same and makes more sense to me.
+- [`translate(Xpx, Ypx)`](https://developer.mozilla.org/en-US/docs/Web/CSS/transform-function/translate) - CSS function that repositions an element. Use this in the call back to transition the highlight element. Wes uses the `top` and `left` properties, but X and Y works just the same and makes more sense to me.
 ```js
 const highlight = document.createElement('span');
 highlight.classList.add('highlight');
@@ -519,7 +519,7 @@ function addHighlight(e) {
 N.b. - Firefox wasn't returning the voice objects from `speechSynthesis.getVoices()` at page load - switched to Chrome for this one.
 
 - Use the experimental [SpeechSynthesis API](https://developer.mozilla.org/en-US/docs/Web/API/SpeechSynthesis).
-- When filtering an array based on a singular user selection, I naturally wanted to [`filter()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter) however this returns an array which you will have to select an element from. However, [`find()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/find) will return the first element that meets the match critera.
+- When filtering an array based on a singular user selection, I naturally wanted to [`filter()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter) however this returns an array which you will have to select an element from. However, [`find()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/find) will return the first element that meets the match criteria.
 ```js
 msg.voice = voices.filter(v => v.name === this.value)[0]
 // vs find
@@ -530,7 +530,7 @@ msg.voice = voices.find(v => v.name === this.value)
 
 *Fix a navbar to the top as you scroll down.*
 
-- Add an event listenr on the navbar and for the callback place a control statement to detect when the *fixing* of the nav should apply.
+- Add an event listener on the navbar and for the callback place a control statement to detect when the *fixing* of the nav should apply.
 ```js
 const navbar = document.querySelector('#main');
 // top of navbar location
@@ -551,7 +551,7 @@ function moveNavBar(e) {
 
 document.addEventListener('scroll', _.debounce(moveNavBar, 10));
 ```
-- To find the hight of a DOM element there looks to be to properties you could use. Here's the [difference between clientHeight vs offsetHeight,](https://stackoverflow.com/a/4106585/3691003) go with offsetHeight.
+- To find the height of a DOM element there looks to be two properties you could use. Here's the [difference between clientHeight vs offsetHeight,](https://stackoverflow.com/a/4106585/3691003) go with offsetHeight.
 
 ## 25 - Event Capture, Propagation, Bubbling and Once
 

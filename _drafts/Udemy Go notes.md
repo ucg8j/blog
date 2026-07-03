@@ -28,7 +28,7 @@ The `go.mod` and `go.sum` files should be checked into the code repo, `go.mod` c
 ## Assignment
 - `:=` declares and assigns
 - `=` can be used to change the value of an already declared variable
-- `var y = 123` can also be used, or to declare variables without intialising *i.e. assign a value*. Plus you can do multiple at a time e.g. `var y, x, anothervar`
+- `var y = 123` can also be used, or to declare variables without initialising *i.e. assign a value*. Plus you can do multiple at a time e.g. `var y, x, anothervar`
 
 - Static language, declare a variable of a certain type, it never changes, it remains static.
 
@@ -419,14 +419,14 @@ fmt.Println("runes: ", chars)
 fmt.Printf("%U\n", chars)
 ```
 // what i learnt here... to look at lines from a string, you must get a slice of runes, don't think about it like it's python.
-// secondly, the reason the line dones't contain '\n' is because the read of the file uses a function that defines lines by the \n! I.e. it doesn't exist in the lines. Therefore, multiple new lines in my code should be defined by two consecutive lines with nothing in them.
+// secondly, the reason the line doesn't contain '\n' is because the read of the file uses a function that defines lines by the \n! I.e. it doesn't exist in the lines. Therefore, multiple new lines in my code should be defined by two consecutive lines with nothing in them.
 
-use as you need, dont rush into them unless you're doing it to learn them proper, most newcomers end up overusing concurrency. interfaces and pointers are not needed yet i dont imagine but as the project evolves here are some uses for types and concurrency:
+use as you need, don't rush into them unless you're doing it to learn them proper, most newcomers end up overusing concurrency. interfaces and pointers are not needed yet i don't imagine but as the project evolves here are some uses for types and concurrency:
 u can for example have a doc in a type,
 type document struct{
  original content []string 
 offendinglines []line
-suggestedChnages []line
+suggestedChanges []line
 // whatever metadata
 timechanged time
 }

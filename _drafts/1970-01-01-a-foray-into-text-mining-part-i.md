@@ -109,7 +109,7 @@ have a go on mac using the apis wrapped in this package
     #      terms = findFreqTerms(dtm, lowfreq = 40)[1:25],
     #      corThreshold = 0.2)
     
-    #Word Clustering Dendogram
+    #Word Clustering Dendrogram
     # tdmat <- as.matrix(
     #     removeSparseTerms(dtm, sparse = 0.8)
     # )
@@ -130,7 +130,7 @@ have a go on mac using the apis wrapped in this package
     {
         # Parameters
         # sentences: vector of text to score
-        # pos.words: vector of words of postive sentiment
+        # pos.words: vector of words of positive sentiment
         # neg.words: vector of words of negative sentiment
         # .progress: passed to laply() to control of progress bar
         

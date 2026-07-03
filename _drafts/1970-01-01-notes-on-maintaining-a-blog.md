@@ -14,7 +14,7 @@ Use Chrome's Page Audit tool to get a sense of where to get the biggest impact t
 
 `jpegoptim image.jpg` will losslessly compress an image and replace the file.
 
-Reach a target kilabyte size using the size parameter `jpegoptim image.jpg -S 128`.
+Reach a target kilobyte size using the size parameter `jpegoptim image.jpg -S 128`.
 
 [Further usage](http://ask.xmodulo.com/compress-jpeg-images-command-line-linux.html).
 
@@ -60,7 +60,7 @@ Reach a target kilabyte size using the size parameter `jpegoptim image.jpg -S 12
                 sudo usermod -aG docker $(whoami)
                 sudo apt-get -y install python-pip
                 docker pull ghost:1.26.2
-                fix before runnign https://stackoverflow.com/questions/55746291/oci-runtimecontainer-linux-go348-error-in-docker
+                fix before running https://stackoverflow.com/questions/55746291/oci-runtimecontainer-linux-go348-error-in-docker
             save and transfer image to vps? 
             deploy v1
             code highlighting not working

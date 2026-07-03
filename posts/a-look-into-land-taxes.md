@@ -32,7 +32,7 @@ By replacing stamp duties with an annually payable LVT land hoarding behaviour w
 
 The [Henry Review](http://taxreview.treasury.gov.au/content/finalreport.aspx?doc=html/publications/papers/final_report_part_1/chapter_6.htm) makes several important points in considering a land tax:
 
-- A land tax could encompass all property types such that the use of land is more likely to go that which is most productive, whether that be commercial, residential or industrial.
+- A land tax could encompass all property types such that the use of land is more likely to go to that which is most productive, whether that be commercial, residential or industrial.
 
 - Tax-free thresholds could apply to exempt low value land. Particularly of benefit to agricultural land holders.
 
@@ -54,7 +54,7 @@ Another administrative consideration is the difficulty in valuing land. However 
 
 **The biggest issue is political...**
 
-People don't like paying taxes. The issue with a land tax is that it is hard to avoid and an annually payable (or annually painful). It would be very easy to politically tar such a economically sound policy, as the *great big new tax grab*. This hasn't stopped up to [twenty countries having implemented or are considering](http://www.elibrary.imf.org/view/IMF001/20531-9781484369050/20531-9781484369050/20531-9781484369050.xml) implementing the policy at some level.
+People don't like paying taxes. The issue with a land tax is that it is hard to avoid and is annually payable (or annually painful). It would be very easy to politically tar such an economically sound policy, as the *great big new tax grab*. This hasn't stopped up to [twenty countries having implemented or are considering](http://www.elibrary.imf.org/view/IMF001/20531-9781484369050/20531-9781484369050/20531-9781484369050.xml) implementing the policy at some level.
 
 In Australia, the ACT introduced a land tax three years ago to replace stamp duties. This year, the South Australian government has removed stamp duties on business transfers and [will remove stamp duties on commercial property transfers in 2016](http://www.afr.com/news/sa-budget-2015-stamp-duty-on-commercial-property-to-go-20150618-ghqt4d). However, they have backed down on their [suggestion earlier this year](http://www.abc.net.au/news/2015-02-11/sa-government-releases-discussion-paper-on-tax-system/6085352) of replacing stamp duties with a land tax on residential properties for political reasons.
 

@@ -14,9 +14,9 @@ layout: layouts/post.njk
 **Conceptual Overview**
 ![](/content/images/2017/10/overview.png)
 
-This is a pretty significant piece of software. It renders [Shiny Server Pro](https://www.rstudio.com/products/shiny-server-pro/) redundant. As this solution, provides authentication, scalability, decreases maintenance ( containers) and enables any web app to be running behind the scenes. So you could have a [shiny](https://shiny.rstudio.com/gallery/) app, a [Django](https://www.djangoproject.com/) app, a [flask](http://flask.pocoo.org/) app, [Vue.js](https://vuejs.org/)... and the end-user will simply see a website, whilst the backend has a whole range of different web applications spinning up on demand.
+This is a pretty significant piece of software. It renders [Shiny Server Pro](https://www.rstudio.com/products/shiny-server-pro/) redundant. As this solution provides authentication, scalability, decreases maintenance (containers) and enables any web app to be running behind the scenes. So you could have a [shiny](https://shiny.rstudio.com/gallery/) app, a [Django](https://www.djangoproject.com/) app, a [flask](http://flask.pocoo.org/) app, [Vue.js](https://vuejs.org/)... and the end-user will simply see a website, whilst the backend has a whole range of different web applications spinning up on demand.
 
-I ran into some hurdles with [these instructions](https://www.shinyproxy.io/getting-started/#prerequisites). So I'm documenting what worked for me. **My setup:** I set this up once on a Dell XPS 13 with a fresh install of Ubuntu 16.04.3 LTS and a Ubuntu 16.04.03 Azure VM.
+I ran into some hurdles with [these instructions](https://www.shinyproxy.io/documentation/getting-started/#prerequisites). So I'm documenting what worked for me. **My setup:** I set this up once on a Dell XPS 13 with a fresh install of Ubuntu 16.04.3 LTS and a Ubuntu 16.04.03 Azure VM.
 
 ## Pre-requisites / Assumptions
 
@@ -63,7 +63,7 @@ $ sudo systemctl restart docker
 ```
 
 ### Java8
-Shinyproxy requires a minimum of [Java 8](http://www.oracle.com/technetwork/java/javase/overview/java8-2100321.html). I followed the advice per [shinyproxy.io](https://www.shinyproxy.io/getting-started/) and installed the OpenJDK [Zulu](http://zulu.org/). [This Quora answer from the product manager of Zulu](https://www.quora.com/What-is-it-like-to-use-Azul-Systems-Zulu-JVM/answer/Matt-Schuetze) gives some context behind this JDK.
+Shinyproxy requires a minimum of [Java 8](http://www.oracle.com/technetwork/java/javase/overview/java8-2100321.html). I followed the advice per [shinyproxy.io](https://www.shinyproxy.io/documentation/getting-started/) and installed the OpenJDK [Zulu](http://zulu.org/). [This Quora answer from the product manager of Zulu](https://www.quora.com/What-is-it-like-to-use-Azul-Systems-Zulu-JVM/answer/Matt-Schuetze) gives some context behind this JDK.
 
 Run the following at the command line:
 
@@ -148,7 +148,7 @@ And bingo we have a containerised and authenticated shiny environment.
 
 ## Adding Additional Shiny Apps
 
-[Shinyproxy docs](https://www.shinyproxy.io/deploying-apps/) provide a ready to go shiny application with a [dockerfile](https://docs.docker.com/engine/reference/builder/) to build the image. Of course, to use shinyproxy for your own custom shiny applications the dockerfile in the [shinyproxy-template repo](https://github.com/openanalytics/shinyproxy-template) acts as a template to follow. I'm going to go through the process of adding shinyproxy's pre-built shiny app.
+[Shinyproxy docs](https://www.shinyproxy.io/documentation/deployment/) provide a ready to go shiny application with a [dockerfile](https://docs.docker.com/engine/reference/builder/) to build the image. Of course, to use shinyproxy for your own custom shiny applications the dockerfile in the [shinyproxy-template repo](https://github.com/openanalytics/shinyproxy-template) acts as a template to follow. I'm going to go through the process of adding shinyproxy's pre-built shiny app.
 
 ```bash
 # Clone the shiny app repo
@@ -173,7 +173,7 @@ The new shiny app should now be running on [http://0.0.0.0:3838/](http://0.0.0.0
 
 ![additional-shiny-app](/content/images/2017/09/additional-shiny-app.png)
 
-Now we need to tell shinyproxy to include this additional shiny app by editing creating and editing a `application.yml` file.
+Now we need to tell shinyproxy to include this additional shiny app by creating and editing an `application.yml` file.
 
 ```bash
 # Ensure you are in the right directory
@@ -250,7 +250,7 @@ By default the authentication is setup to use a demo ldap server `ldap://ldap.fo
 
 ## Deploy on a cloud service (nginx config)
 
-At this point it would be nice to have this on the cloud. Using [nginx](https://nginx.org/en/) the following config worked for me which was an adaption of the config listed on the [shinyproxy site](https://www.shinyproxy.io/security/). The box I was using was an [Azure VM](https://azure.microsoft.com/en-gb/services/virtual-machines/).
+At this point it would be nice to have this on the cloud. Using [nginx](https://nginx.org/en/) the following config worked for me which was an adaption of the config listed on the [shinyproxy site](https://www.shinyproxy.io/documentation/security/). The box I was using was an [Azure VM](https://azure.microsoft.com/en-gb/services/virtual-machines/).
 
 ```nginx
 # Navigate into the nginx config
@@ -292,7 +292,7 @@ Once you have shinyproxy running on a cloud server, you may want to leave the ap
 nohup java -jar shinyproxy-1.0.0.jar &
 ```
 
-`nohup` is not a permanent solution. For instance, if your server goes down, shinyproxy will not automatically reboot. `nohup` did allow me to quickly get the app running in the background. Check the app, discover issues I needed to address then find the process by running `ps aux | grep java` kill that process... rinse and repeat until complete. To leave this permanently on a Ubuntu 16 server the [Spring documentation](https://spring.io/docs) has [a configuration guide for setting this as a system service](https://docs.spring.io/spring-boot/docs/current/reference/html/deployment-install.html#deployment-systemd-service). Additionally, [this SO post](https://stackoverflow.com/a/22121547/3691003) is also very helpful.
+`nohup` is not a permanent solution. For instance, if your server goes down, shinyproxy will not automatically reboot. `nohup` did allow me to quickly get the app running in the background. Check the app, discover issues I needed to address then find the process by running `ps aux | grep java` kill that process... rinse and repeat until complete. To leave this permanently on a Ubuntu 16 server the [Spring documentation](https://docs.spring.io/) has [a configuration guide for setting this as a system service](https://docs.spring.io/spring-boot/docs/current/reference/html/deployment-install.html#deployment-systemd-service). Additionally, [this SO post](https://stackoverflow.com/a/22121547/3691003) is also very helpful.
 
 ## Conclusion
 Shinyproxy is a great contribution to the R/Shiny community by the team at [openanalytics](https://www.openanalytics.eu/). So a big thank you to them! _Productionising_ shiny apps can be a bit of a pain considering the open source shiny server limitations (no authentication, no concurrency and no resource monitoring). Even accepting those limitations, [dependency management of R applications](/using-package-management-in-r/) is not widely practiced. Even when R applications use [packrat](https://rstudio.github.io/packrat/), language level dependency management doesn't prevent your software breaking due to different system level requirements. Hence, the generalisation of running a website that proxies to containerised applications _should_ be an incredibly reliable architecture.

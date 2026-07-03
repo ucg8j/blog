@@ -161,11 +161,11 @@ $ docker-compose up miniflux
 ```
 Firstly, the initial UI is *very* simple, whilst incredibly plain is very functional. Navigating the app is explicit with text whereas Stringer you had to poke around using icons without text descriptions.
 ![](/content/images/2020/05/Screen-Shot-2020-05-31-at-09.46.28.png)
-There are several integrations to apps like Pocket, Instapaper and Wallabag. And after changing the theme. the reader is quite nice. Albeit, I do notice the entire page refresh from the server side oriented app - but I have to tell myself that the simplicity philosophy trumps the complexity of introducing a frontend framework.
+There are several integrations to apps like Pocket, Instapaper and Wallabag. And after changing the theme. the reader is quite nice. Although, I do notice the entire page refresh from the server side oriented app - but I have to tell myself that the simplicity philosophy trumps the complexity of introducing a frontend framework.
 ![](/content/images/2020/05/Screen-Shot-2020-05-31-at-13.36.10.png)
 ⭐️ 8.5 / 10 - Whilst being minimalistic has all the features you need, dark theme and the most active development of them all with a clear software philosophy.
 
-## [Winds](https://getstream.io/winds/)
+### [Winds](https://getstream.io/winds/)
 
 The install is relatively long particularly with the external dependencies which include:
 

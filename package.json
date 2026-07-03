@@ -7,7 +7,11 @@
     "watch": "eleventy --watch",
     "serve": "eleventy --serve",
     "start": "eleventy --serve",
-    "debug": "DEBUG=* eleventy"
+    "debug": "DEBUG=* eleventy",
+    "spellcheck": "cspell --no-progress \"posts/**/*.md\" \"_drafts/**/*.md\"",
+    "linkcheck:internal": "eleventy && lychee --offline --include-fragments --root-dir \"$PWD/_site\" \"_site/**/*.html\"",
+    "linkcheck:external": "eleventy && lychee --no-progress --root-dir \"$PWD/_site\" \"_site/**/*.html\"",
+    "prepare": "git config core.hooksPath .githooks"
   },
   "repository": {
     "type": "git",
@@ -28,6 +32,7 @@
     "@11ty/eleventy-navigation": "^0.1.6",
     "@11ty/eleventy-plugin-rss": "^1.0.9",
     "@11ty/eleventy-plugin-syntaxhighlight": "^3.0.1",
+    "cspell": "^9.8.0",
     "eleventy-plugin-lazyimages": "^2.0.1",
     "luxon": "^1.21.3",
     "markdown-it": "^8.4.2",

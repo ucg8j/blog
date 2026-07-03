@@ -134,7 +134,7 @@ Take note of the IP address at the bottom of the print out next to`Pi-hole DNS (
 
 ## Step 6: Configure Your Router 💻
 
-If you haven't done much tinkering with routers or consumed a bunch networking content this can be a strange place full of foreign acronyms. Here's a simple explaination of the two most important for this exercise:
+If you haven't done much tinkering with routers or consumed a bunch of networking content this can be a strange place full of foreign acronyms. Here's a simple explanation of the three most important for this exercise:
 
 **IP address** - a device's unique identifier on a network.
 
@@ -144,20 +144,20 @@ If you haven't done much tinkering with routers or consumed a bunch networking c
 
 There are 3 options to get Pi-Hole working outlined in [more detail here](https://discourse.pi-hole.net/t/how-do-i-configure-my-devices-to-use-pi-hole-as-their-dns-server/245).
 
-1. **Configure the DNS to the static IP of the R Pi **-  I'd recommend putting in a secondary option of Cloudflare in case your R Pi doesn't work. This option means anyone who connects to your device will be ad free without thinking about it. However no amount of rebooting routers and devices, or forgetting my WiFi network and re-adding it managed to get this option to work for me. It should be as simple as setting this option:
+1. **Configure the DNS to the static IP of the R Pi** -  I'd recommend putting in a secondary option of Cloudflare in case your R Pi doesn't work. This option means anyone who connects to your device will be ad free without thinking about it. However no amount of rebooting routers and devices, or forgetting my WiFi network and re-adding it managed to get this option to work for me. It should be as simple as setting this option:
 
 ![](/content/images/2020/04/Screen-Shot-2020-04-26-at-22.18.25-1.png)
-2. **Let Pi-Hole takeover the DHCP side of things **- this worked easily. Turn off the DHCP setting on your router.
+2. **Let Pi-Hole takeover the DHCP side of things** - this worked easily. Turn off the DHCP setting on your router.
 ![](/content/images/2020/04/Screen-Shot-2020-04-26-at-22.36.07.png)
 Then turn it on in Settings in the Pi-Hole web interface.
 ![](/content/images/2020/04/Screen-Shot-2020-04-26-at-22.38.08-4.png)
 You will also need to assign a static IP for the R Pi. However, if your R Pi stops working, so too will your internet - so I went for the option I least wanted, option 3.
 
-**3. Manually enter your Pi-Hole DNS per device 'opt-in' **- It means that instead of everyone benefitting automatically without thinking about DNS config when they sign up to your WiFi - you have to manually put in the DNS config. For OSX that looks like this:
+**3. Manually enter your Pi-Hole DNS per device 'opt-in'** - It means that instead of everyone benefitting automatically without thinking about DNS config when they sign up to your WiFi - you have to manually put in the DNS config. For OSX that looks like this:
 ![](/content/images/2020/04/osx-enter-custom-dns.png)
 For Android. Go to WiFi networks > select 'Modify Network' > 'Advanced options' > Change 'IP settings' to 'Static' > Enter your R Pi IP address.
 
-Pretty instantly I ended up seeing lovely blocked results in myPi-Hole web interface.
+Pretty instantly I ended up seeing lovely blocked results in my Pi-Hole web interface.
 ![](/content/images/2020/04/Screen-Shot-2020-04-27-at-00.00.33.png)
 
 ## Reference 📚

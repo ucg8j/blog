@@ -108,7 +108,7 @@ If you want to insert an item into the middle of a list:
 - **Linked Lists** - only need one repoint of memory.
 
 **Deletions:**
->Unlike insertions, deletions will always work. Insertions can fail sometimes when there’s no space leſt in memory. But you can always delete an element... There are two different types of access: random access and sequential access. Sequential access means reading the elements one by one, starting at the first element. Linked lists can only do sequential access.
+>Unlike insertions, deletions will always work. Insertions can fail sometimes when there’s no space left in memory. But you can always delete an element... There are two different types of access: random access and sequential access. Sequential access means reading the elements one by one, starting at the first element. Linked lists can only do sequential access.
 
 |           | Arrays | Lists |
 | --------- | ------ | ----- |
@@ -174,7 +174,7 @@ def countdown(i):
 ```
 
 ## The Stack
-The *call stack* of computer is conceptually like stacking sticky notes on top of each other. This has it's own simple data structure, *the stack*. If a function, `greet()`, calls another function `how_are_you()`, the computer first allocates a slot in memory for the function call, then places variables used in that slot e.g. `Rowan`. Therefore, a call to `greet()` creates the first 'empty sticky note' in the call stack. It then get's filled with `Rowan`. The next sticky note to go onto the stack is when the call to `how_are_you()` is made.
+The *call stack* of a computer is conceptually like stacking sticky notes on top of each other. This has its own simple data structure, *the stack*. If a function, `greet()`, calls another function `how_are_you()`, the computer first allocates a slot in memory for the function call, then places variables used in that slot e.g. `Rowan`. Therefore, a call to `greet()` creates the first 'empty sticky note' in the call stack. It then gets filled with `Rowan`. The next sticky note to go onto the stack is when the call to `how_are_you()` is made.
 
 >when you call a function from another function, the calling function is paused in a partially completed state.
 
@@ -187,13 +187,13 @@ def fact(x):
   else:
     return x * fact(x-1)
 ```
-If you call `fact(3)`, each time the base case is not met, `fact()` will call itself, pausing the previous function call on the stack. The subsequent call of `fact()` until the base case is met. At which point each function called in the stack get's popped off i.e. resolves all the way back down the stack to the original call of `fact(3)`.
+If you call `fact(3)`, each time the base case is not met, `fact()` will call itself, pausing the previous function call on the stack. The subsequent call of `fact()` until the base case is met. At which point each function called in the stack gets popped off i.e. resolves all the way back down the stack to the original call of `fact(3)`.
 
 Stacks have two operations:
 - **`push()`** adds an element to the collection, and
 - **`pop()`** removes the most recently added element that has not yet been removed
 
-In the case where `fact(3)` is called. The first sticky note in the stack is `fact(3)`, the last is `fact(1)`. Before the final result are display the each result of `fact()` is multiplied by each of the copies of the function in the call stack with the variable x (per the logic of the function). E.g. 3x2x1 = 6.
+In the case where `fact(3)` is called. The first sticky note in the stack is `fact(3)`, the last is `fact(1)`. Before the final result is displayed, each result of `fact()` is multiplied by each of the copies of the function in the call stack with the variable x (per the logic of the function). E.g. 3x2x1 = 6.
 
 Using the call stack is convenient but can take lots of memory if the stack becomes too tall. Alternatively, you could rewrite your code as a loop or use tail recursion (not covered by book).
 
@@ -229,7 +229,7 @@ def sum(array):
     return 0
   else:
     # divide the problem up
-    return array[0] + sum([1:])
+    return array[0] + sum(array[1:])
 ```
 
 ## Quicksort
@@ -266,7 +266,7 @@ def quicksort(array):
     less = [i for i in array[1:] if i <= pivot]
     greater = [i for i in array[1:] if i > pivot]
 
-  return quicksort(less) + pivot + quicksort(greater)
+  return quicksort(less) + [pivot] + quicksort(greater)
 ```
 
 ## Big O Notation
@@ -305,10 +305,10 @@ It's extremely difficult to write a hash function that doesn't experience collis
 
 ## Performance
 Average case: O(1) constant time
-Worst case: 0(n) linear time
+Worst case: O(n) linear time
 
 To avoid worst case performance, collisions must be avoided. To avoid collisions:
-- Have a low load factor (number of items / total number of slots). When the items grow and hence the load factor, you should *resize* the hash table and increase the slots. Rule of thumb, when LF > .07
+- Have a low load factor (number of items / total number of slots). When the items grow and hence the load factor, you should *resize* the hash table and increase the slots. Rule of thumb, when LF > 0.7
 - a good hash function
 
 # 6. Breadth First Search (BFS)
@@ -392,7 +392,7 @@ bfs_search('you')
 ```
 
 ## Run Time
-Searching each vertice (V) plus adding a person (Edge) to a queue will take O(V+E).
+Searching each vertex (V) plus adding a person (Edge) to a queue will take O(V+E).
 
 
 # 7. Dijkstra's Algorithm
@@ -482,7 +482,7 @@ You are trying to maximise the value of the items one can place in a small bag 3
 - Laptop $2000 20lbs
 - Guitar $1500 15lbs
 
-The greedy strategy is to take the most expensive item. Buut the stereo leaves room for nothing else. $3000 get's pretty close to the optimal solution of $3500 (Laptop + Guitar).
+The greedy strategy is to take the most expensive item. But the stereo leaves room for nothing else. $3000 gets pretty close to the optimal solution of $3500 (Laptop + Guitar).
 
 ## The Set Covering Problem
 You want to broadcast a radio show in the USA and reach listeners in all states. To minimise cost you want to minimise the number of stations you have to pay whilst maximising the states they broadcast to.
@@ -501,20 +501,20 @@ An approximation algorithm is judged on speed and how close the optimal solution
 
 ### Python set operations
 ```py
->>> fruits = set([“avocado”, “tomato”, “banana”])
->>> vegetables = set([“beets”, “carrots”, “tomato”])
+>>> fruits = set(["avocado", "tomato", "banana"])
+>>> vegetables = set(["beets", "carrots", "tomato"])
 
 # This is a set union.
 >>> fruits | vegetables
-set([“avocado”, “beets”, “carrots”, “tomato”, “banana”])
+set(["avocado", "beets", "carrots", "tomato", "banana"])
 
 # This is a set intersection.
 >>> fruits & vegetables
-set([“tomato”])
+set(["tomato"])
 
 # This is a set difference.
->>> fruits – vegetables
-set([“avocado”, “banana”])
+>>> fruits - vegetables
+set(["avocado", "banana"])
 ```
 
 The greedy solution to the state problem:
@@ -623,7 +623,7 @@ With the Stereo, it can't fit in any bag smaller than 4kg. Therefore, we can tak
 
 </div>
 
-For the Laptop, it can't fit in any bag <3kg. So we drop down the values from the cell immediately above. At 3kg, taking the Laptop at $2000 is better than the cell value immediately above. Lastly, at 4kg *only* taking the laptop would be less than the value above of $3000. However, if we took the Laptop wit hthe 4kg bag, we would have 1kg left over. What's the best possible thing we could take at 1kg - a Guitar. Therefore, the optimal solution for 4kg is a Laptop + Guitar.
+For the Laptop, it can't fit in any bag <3kg. So we drop down the values from the cell immediately above. At 3kg, taking the Laptop at $2000 is better than the cell value immediately above. Lastly, at 4kg *only* taking the laptop would be less than the value above of $3000. However, if we took the Laptop with the 4kg bag, we would have 1kg left over. What's the best possible thing we could take at 1kg - a Guitar. Therefore, the optimal solution for 4kg is a Laptop + Guitar.
 
 <div class='twrap'>
 

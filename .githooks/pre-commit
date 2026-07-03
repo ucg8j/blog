@@ -1,0 +1,23 @@
+#!/bin/sh
+# Spell-check only staged markdown files under posts/ and _drafts/.
+# Bypass with: git commit --no-verify
+
+staged_md=$(git diff --cached --name-only --diff-filter=ACMR \
+  | grep -E '^(posts|_drafts)/.*\.md$' || true)
+
+if [ -z "$staged_md" ]; then
+  exit 0
+fi
+
+echo "Running spell-check on staged markdown files..."
+# shellcheck disable=SC2086
+npx cspell --no-progress --no-must-find-files $staged_md
+status=$?
+
+if [ "$status" -ne 0 ]; then
+  echo
+  echo "Spell-check failed. Fix the typos above, or add legitimate terms to cspell.json."
+  echo "To bypass (not recommended): git commit --no-verify"
+fi
+
+exit $status

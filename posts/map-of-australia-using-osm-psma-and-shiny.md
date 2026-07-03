@@ -2,13 +2,13 @@
 title: Map of Australia Using OpenStreetMaps, PSMA, R and Leaflet.js
 slug: map-of-australia-using-osm-psma-and-shiny
 permalink: "/map-of-australia-using-osm-psma-and-shiny/"
-excerpt: "Aim: To use GNAF (Geocoded National Address File) data to display the adminstrative boundaries (e.g. States) on top of Open Street Maps"
+excerpt: "Aim: To use GNAF (Geocoded National Address File) data to display the administrative boundaries (e.g. States) on top of Open Street Maps"
 date: 2016-08-10
 tags: r, viz, javascript, geospatial, leaflet.js
 layout: layouts/post.njk
 ---
 
-**Aim:** To use GNAF (Geocoded National Address File) data to display the adminstrative boundaries (e.g. States) on top of Open Street Maps. Additionally, I want the user when hovering over a state to see summary statistics. I want an Australian version of [this](#leaflet.js).
+**Aim:** To use GNAF (Geocoded National Address File) data to display the administrative boundaries (e.g. States) on top of Open Street Maps. Additionally, I want the user when hovering over a state to see summary statistics. I want an Australian version of [this](#leaflet.js).
 
 ## Data
 
@@ -27,7 +27,7 @@ I obtained [the shape file for Australian postcodes](http://www.abs.gov.au/AUSST
 $ ogr2ogr -f GeoJSON -t_srs crs:84 au-postcodes.geojson POA_2011_AUST.shp
 ```
 
-The resulting geojson is a whooping 201.1mb. There are two more processes to consider. Firstly, simplification of the polygons to reduce the load on the browser. The most popular algorithm to use for this is the [Ramer–Douglas–Peucker algorithm](https://en.wikipedia.org/wiki/Ramer%E2%80%93Douglas%E2%80%93Peucker_algorithm). In R have a look at [`gSimplify()`](http://www.inside-r.org/packages/cran/rgeos/docs/gSimplify) however I am going to use the [mapshaper command line tool](https://github.com/mbloch/mapshaper) as I prefer command line tools and mapshaper has a couple of implementations of Visvalingam's polygon simplification algorithm.
+The resulting geojson is a whopping 201.1mb. There are two more processes to consider. Firstly, simplification of the polygons to reduce the load on the browser. The most popular algorithm to use for this is the [Ramer–Douglas–Peucker algorithm](https://en.wikipedia.org/wiki/Ramer%E2%80%93Douglas%E2%80%93Peucker_algorithm). In R have a look at [`gSimplify()`](http://www.inside-r.org/packages/cran/rgeos/docs/gSimplify) however I am going to use the [mapshaper command line tool](https://github.com/mbloch/mapshaper) as I prefer command line tools and mapshaper has a couple of implementations of Visvalingam's polygon simplification algorithm.
 
 ```bash
 # Install package
@@ -168,7 +168,7 @@ The steps before fix the filling of the screen. So now we have variable screen f
 var map = L.map('map').setView([-27.833, 133.583], 4);
 ```
 
-If you imagine a box containing Australia, then draw a diagonal through that box, the latitude and longitude of the diagnoal line's endpoints are what the `fitBounds()` constructs as a container from. I picked a point at the south easter tip of Tasmania and the other to the north west of Western Australia. Here's the code:
+If you imagine a box containing Australia, then draw a diagonal through that box, the latitude and longitude of the diagonal line's endpoints are what the `fitBounds()` constructs as a container from. I picked a point at the south eastern tip of Tasmania and the other to the north west of Western Australia. Here's the code:
 
 ```js
 // set up the map

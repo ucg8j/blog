@@ -21,7 +21,7 @@ func split(mynumber int) (x, y int) {
 }
 
 func main() {
-	fmt.Println(split(17))myt
+	fmt.Println(split(17))
 }
 // This will print x and y:
 // 68 -51
@@ -213,7 +213,7 @@ n.b. In 3+6, 3 and 6 are operands. And the + is the operator.
 ```go
 i := 42
 p := &i // a pointer p=0xc00002c008
-z := p // 'dereferences the pointer. z=42
+z := *p // dereferences the pointer. z=42
 fmt.Println("i",i,"p",p, "z", z)
 // i 42 p 0xc00002c008 z 42
 ```
@@ -699,10 +699,6 @@ func main() {
 // hello
 // hello
 ```
-### ----------------------------------------------------------------------------------------------------------
-### 🚧 TODO - continue on here https://tour.golang.org/concurrency/2
-### ---------------------------------------------------------------------------------------------------------
-
 # Observations
 - unused variables are not allowed by the compiler - very cool
 

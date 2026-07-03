@@ -1,0 +1,17 @@
+# lychee link-checker config (shared by the linkcheck:internal and linkcheck:external npm scripts)
+
+# Clean URLs (e.g. /some-post/#anchor) resolve to /some-post/index.html on disk.
+# lychee's offline checker doesn't map directory links to index.html for fragment
+# checks, so remap them here. Only affects local file:// links, so it's a no-op
+# for the external check.
+remap = [
+  "file://(.*/_site/[A-Za-z0-9-]+)#(.*) file://$1/index.html#$2",
+]
+
+# Retry/timeout tuning for the (flaky, ~10 years of link rot) external check.
+max_retries = 2
+timeout = 20
+max_concurrency = 8
+
+# Treat these as success for the external check: some hosts return 403/429 to bots.
+accept = ["200..=299", "403", "429"]

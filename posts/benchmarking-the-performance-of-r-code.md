@@ -42,13 +42,13 @@ Unit: milliseconds
   read_csv.test  67.56371  71.28666  76.22763  74.19215  78.06555 105.8433    50
 ```
 
-Not the most impressive gain from the `readr` package, where the [documentation purports up to 10x faster reads](https://cran.r-project.org/web/packages/readr/README.html), but still substantial and worth implementing. For a simple guide on UX and the implications of lag check out this [stackexchange answer](https://ux.stackexchange.com/a/3836/78865). And if you want even faster read/write operations have a look at [data.table](https://cran.r-project.org/web/packages/data.table/vignettes/datatable-intro.html)'s `fread()` function.
+Not the most impressive gain from the `readr` package, where the [documentation purports up to 10x faster reads](https://readr.tidyverse.org/), but still substantial and worth implementing. For a simple guide on UX and the implications of lag check out this [stackexchange answer](https://ux.stackexchange.com/a/3836/78865). And if you want even faster read/write operations have a look at [data.table](https://cran.r-project.org/web/packages/data.table/vignettes/datatable-intro.html)'s `fread()` function.
 
 ## Examine the Distribution of Evaluations
 
 The [microbenchmark](https://cran.r-project.org/web/packages/microbenchmark/index.html) package includes a `boxplot()` function which is a really good idea to look at prior to implementing a particular change in your code base. Here's an example of a comparison between a custom function and the same function compiled using the `compiler::cmpfun()` function.
 
-Here's the a print out of the results:
+Here's a print out of the results:
 
 ```r
 print(results)

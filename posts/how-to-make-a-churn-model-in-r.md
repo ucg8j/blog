@@ -179,7 +179,7 @@ Could do more on exploratory but this is the easiest to cut back for this report
 
 ### Balance of the data
 
-The proportion of churn is 32.04%. Representing an imbalanced dataset. Accuracy is an inappropriate measure (I could get 67.96% accuracy predicting no businesses leave), so I will focus on recall and accuracy.
+The proportion of churn is 32.04%. Representing an imbalanced dataset. Accuracy is an inappropriate measure (I could get 67.96% accuracy predicting no businesses leave), so I will focus on recall and precision.
 
 ```r
 # Loyal vs Churn
@@ -330,7 +330,7 @@ forest.F1;
 ## 0.8515625
 ```
 
-Surprisingly, the logistic regression model performs the best, with the top precision score and equal recall score with that of the decision tree. With more time, I’d see if tweaks to the decision tree and random forest models could change this. Its also possible over/undersampling could help. From here on I will use the logistic regression model.
+Surprisingly, the logistic regression model performs the best, with the top precision score and equal recall score with that of the decision tree. With more time, I’d see if tweaks to the decision tree and random forest models could change this. It's also possible over/undersampling could help. From here on I will use the logistic regression model.
 
 ## Examine the incorporation of time information
 
@@ -487,8 +487,8 @@ final.model <- glm(churn ~ incorporation_time + vertical + leading_indicator,
 ## Recommendations for further investigation/Comments
 
 * The `lead_indicator` was a quick and dirty test, I’d spend more time looking at a better construction (e.g. moving avg)
-* If the cost of rentention activities vs losing a customer was known then an the optimal trade-off in terms of business cost could be found.
+* If the cost of retention activities vs losing a customer was known then the optimal trade-off in terms of business cost could be found.
 * Incorporating additional data, e.g. CRM data showing interactions. Potentially assessing sales/account staff.
 * If it were a production model prompting staff to do retention calls, evaluate the impact of such calls through modelling e.g. a/b testing
-* Test model performance with a change to balancing the classes e.g. under/oversampling, boostrap samples. This may explain the relative underperformance of tree based models in this exercise.
+* Test model performance with a change to balancing the classes e.g. under/oversampling, bootstrap samples. This may explain the relative underperformance of tree based models in this exercise.
 * Try other binary classifier models.

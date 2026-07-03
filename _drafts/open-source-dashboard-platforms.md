@@ -3,7 +3,7 @@
 Quickstart
 `docker run -d -p 3000:3000 --name metabase metabase/metabase`
 
-Has demo data and dashbaords.
+Has demo data and dashboards.
 
 Concept of asking a question
 http://localhost:3000/question/new
@@ -15,7 +15,7 @@ http://localhost:3000/question/new
 
 Once done with your question, save it.
 
-You can now search for this question in perpertuity building up org knowledge/analytics infrastructure.
+You can now search for this question in perpetuity building up org knowledge/analytics infrastructure.
 
 Good for both simple users and advanced analysts.
 
@@ -30,7 +30,7 @@ set up alerts / subscriptions - autodelivery
 
 Admin panel
   - define canonical metrics
-      - useful for ensureing some basics don't get broken
+      - useful for ensuring some basics don't get broken
   - auth
     - login/password
     - google

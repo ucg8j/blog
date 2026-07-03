@@ -108,7 +108,7 @@ df = pd.DataFrame(
 You will generally see lambdas used with higher order functions like `map()`, `reduce()` and `filter()`. E.g.
 
 ```python
-# Map a anonymous function against all elements of df['col1']
+# Map an anonymous function against all elements of df['col1']
 >>> map(lambda x: x + " doing stuff", df['col1'])
 ['element1 doing stuff', 'element2 doing stuff']
 ```

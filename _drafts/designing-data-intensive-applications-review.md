@@ -16,7 +16,7 @@ layout: layouts/post.njk
 
 # PART 1
 ## Chapter 1
-Walks through example of Twitter and the bootlenecks being faced. Tradeoff between work done at write vs read time. As the main demand is on twitter timelines (read), work to insert new tweets into Twitter timeline caches is done at write time.
+Walks through example of Twitter and the bottlenecks being faced. Tradeoff between work done at write vs read time. As the main demand is on twitter timelines (read), work to insert new tweets into Twitter timeline caches is done at write time.
 
 ### Notes
 3 concerns of the book
@@ -345,7 +345,7 @@ the bitwise AND and OR described previously, can be designed to operate on such 
 compressed column data directly. This technique is known as vectorized processing 
 
 
-## Chapter 4 - Enconding and Evolution
+## Chapter 4 - Encoding and Evolution
 
 ### Protocol Buffers (protobuf)
 - uses binary encoding

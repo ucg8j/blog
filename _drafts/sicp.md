@@ -1,7 +1,7 @@
 # CS 61A: Structure and Interpretation of Computer Programs
 # Raw Notes
 
-- Write a `program.py` and execute with `-i` to jump into an interactie session with the program.
+- Write a `program.py` and execute with `-i` to jump into an interactive session with the program.
 `python3 -i program.py`.
 
 - doctests are an easy way to express what a function does whilst also being tests in themselves.

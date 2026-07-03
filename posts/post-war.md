@@ -1,5 +1,5 @@
 ---
-title: Post War but not Post Confict
+title: Post War but not Post Conflict
 permalink: /post-war/
 slug: post-war
 excerpt: "What happened in Sri Lanka was a major Rwanda-like atrocity, in a different scale, where the West didn't care. There was plenty of early warning. This conflict has been going on for years and decades. Plenty of things could have been done to prevent it. But there was not enough interest"
@@ -10,7 +10,7 @@ layout: layouts/post.njk
 
 "*What happened in Sri Lanka was a major Rwanda-like atrocity, in a different scale, where the West didn't care. There was plenty of early warning. This [conflict] has been going on for years and decades. Plenty of things could have been done [to prevent it]. But there was not enough interest*." -N. Chomsky
 
-A bloody civil war that gripped the island nation of Sri Lanka for over a quarter of a century came to a horrific end in 2009. The Liberation Tigers of Tamil Eelam (LTTE) were overwhelmingly defeated by the state led Sinhalese majority government forces. The atrocities committed by the state to reach such a conclusion have been vastly underreported. Estimates of civilian deaths in the final five months of the war range between 9,000 and 75,000 ([BBC, 2013](http://www.bbc.co.uk/news/world-asia-21873551)). One United Nations report puts the number at 40,000; most recently they have reported that up to 70,000 civilians could have died in the final 5 months ([UN, 2011](http://www.un.org/News/dh/infocus/Sri_Lanka/POE_Report_Full.pdf), & [UN, 2012](http://www.un.org/News/dh/infocus/Sri_Lanka/The_Internal_Review_Panel_report_on_Sri_Lanka.pdf)). If this is true, as Frances Harrison of the Guardian states, the magnitude of the estimated civilian deaths is on ‘the scale of Syria but condensed in speed into 5-6 months whereas Syria has been going on for 18 months [to] two years.’ Former Norwegian diplomat Erik Solheim said ‘There were massive war crimes in the last phase which were probably the biggest bloodshed of the twenty first century.’
+A bloody civil war that gripped the island nation of Sri Lanka for over a quarter of a century came to a horrific end in 2009. The Liberation Tigers of Tamil Eelam (LTTE) were overwhelmingly defeated by the state led Sinhalese majority government forces. The atrocities committed by the state to reach such a conclusion have been vastly underreported. Estimates of civilian deaths in the final five months of the war range between 9,000 and 75,000 ([BBC, 2013](http://www.bbc.co.uk/news/world-asia-21873551)). One United Nations report puts the number at 40,000; most recently they have reported that up to 70,000 civilians could have died in the final 5 months ([UN, 2011](https://web.archive.org/web/20190810201052/https://www.un.org/News/dh/infocus/Sri_Lanka/POE_Report_Full.pdf), & [UN, 2012](http://www.un.org/News/dh/infocus/Sri_Lanka/The_Internal_Review_Panel_report_on_Sri_Lanka.pdf)). If this is true, as Frances Harrison of the Guardian states, the magnitude of the estimated civilian deaths is on ‘the scale of Syria but condensed in speed into 5-6 months whereas Syria has been going on for 18 months [to] two years.’ Former Norwegian diplomat Erik Solheim said ‘There were massive war crimes in the last phase which were probably the biggest bloodshed of the twenty first century.’
 
 A UN panel of experts reported that the government of Sri Lanka has engaged in:
 
@@ -32,7 +32,7 @@ For many progressives, the recent Labor asylum policy announcement borne out of 
 
 International pressure has been shown to be an effective tool in pressuring governments to do the right thing. The Sri Lankan government may not care about the Tamils but they do care about the Commonwealth. A boycott of CHOGM would make a good start. Apartheid is a good example of an international sporting boycott that raised awareness and pressured a nation towards corrective action. A boycott of Sri Lankan cricket, I believe, would mount enough pressure both internationally and domestically on the government to accept the calls for an independent investigation into the final stages of the war.
 
-If you would like to find out there are few links below:
+If you would like to find out more there are a few links below:
 
 **[Boycott CHOGM Petition](https://www.change.org/en-AU/petitions/prime-minister-reconsider-chogm-2013-in-sri-lanka)**
 

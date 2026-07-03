@@ -10,7 +10,7 @@ draft: true
 
 ## Why Signal?
 
-So you want to get out of the Faceboook Instagram Whatsapp...
+So you want to get out of the Facebook Instagram Whatsapp...
 
 Signal
 

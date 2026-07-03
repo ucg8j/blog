@@ -58,4 +58,4 @@ Write a spec/proposal document prior to commencing on the code. This outlines a 
 Brooks estimates that maintenance is '40 percent or more' than the initial cost of developing a system. The more users you have the greater the cost as more bugs are found by more users.
 
 ## Resources
-- [asciimath.org](http://asciimath.org/) - used to generate mathML mathjax forumula
+- [asciimath.org](http://asciimath.org/) - used to generate mathML mathjax formula

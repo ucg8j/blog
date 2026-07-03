@@ -24,8 +24,9 @@ At this point your app will launch, to get the shiny app code to execute, intera
 
 > Each block in the flame graph represents a call to a function, or possibly multiple calls to the same function. The width of the block is proportional to the amount of time spent in that function. When a function calls another function, another block is added on top of it in the flame graph.
 
-Source: [Profvis Overview](https://rstudio.github.io/profvis/)
+Source: [Profvis Overview](https://profvis.r-lib.org/)
 
+## Reload a Saved Profvis
 To reload the saved profvis profile:
 
 ```r
@@ -33,7 +34,7 @@ To reload the saved profvis profile:
 profvis(prof_input = '/path_to_save_output/file108f93bff877b.Rprof')
 ```
 
-## Reload a Saved Profvis
+## Save as a Webpage
 You can also save as a webpage using the following code:
 
 ```r
@@ -45,6 +46,6 @@ htmlwidgets::saveWidget(p, "/path_to_save_output/profile.html")
 ```
 
 ## Resources
-* [Video of Winstan Chang presenting ProfViz](https://www.rstudio.com/resources/videos/profiling-and-performance/)
+* [Video of Winston Chang presenting ProfViz](https://www.rstudio.com/resources/videos/profiling-and-performance/)
 
 * [Profiling code integrated into RStudio IDE, great for non-shiny code](https://blog.rstudio.com/2016/05/23/profiling-with-rstudio-and-profvis/)

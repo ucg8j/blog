@@ -18,14 +18,14 @@ Telegram is for profit 💰. I want the reassurance that the profit motive isn't
 ## 3. Signal's Code Is Completely Open Source 🔍
 [Here is Signal's code](https://github.com/signalapp) - the fact that it is publicly available is important for scrutiny to occur. Telegram's code is only partially open source. Most importantly, Telegram's server software - where your valuable messages get sent - is not open source. How can we trust what we can't see?
 
-## 4. Signals E2E Is The Best 🥇
+## 4. Signal's E2E Is The Best 🥇
 Signal's end-to-end encryption protocol is [regarded as best in class](https://www.wired.com/story/signal-encryption-protocol-hacker-lexicon/), and is widely regarded as far superior to Telegram's. The [security industry has heavily criticised Telegram's encryption model](https://security.stackexchange.com/a/49802/115711).
 
 ## 5. Signal Protects You By Default 🔒
 All of Signal's messages and content are encrypted by default. Not the case for Telegram.
 
 ## 6. Signal Is Independently Verified ✅
-Telegram does not have a great reputation when it comes to independent audits.  In contrast, Signal's protocol has been [inspected by industry experts and given the thumbs-up](https://threatpost.com/signal-audit-reveals-protocol-cryptographically-sound/121892/) 👍.
+Telegram does not have a great reputation when it comes to independent audits.  In contrast, Signal's protocol has been [inspected by industry experts and given the thumbs-up](https://eprint.iacr.org/2016/1013) 👍.
 
 ## 7. Signal's Growth Is Outpacing The Alternatives 📈
 The [network effect](https://en.wikipedia.org/wiki/Network_effect) is incredibly important for a messaging app. In terms of the absolute number of users, I'd like to say that Signal wins, but it's unknown exactly which is larger. Signal doesn't publish its user numbers, maybe because it doesn't have a profit motive to do so. As far as I can see on the app stores I've looked at, [Signal was downloaded more than Telegram](../goodbye-whatsapp/#💬-but-my-network%2Fgroup-chats-are-on-whatsapp). Signal '[ranks at the top on App Store in 40 countries and on Google Play Store in 18 countries](https://techcrunch.com/2021/01/12/signal-brian-acton-talks-about-exploding-growth-monetization-and-whatsapp-data-sharing-outrage/)'. The pace of download growth is staggering; +5,923% - any tech team would struggle to handle that explosion in growth in that amount of time 🤯.

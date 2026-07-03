@@ -14,7 +14,7 @@ I recently rooted my Oneplus 3T phone on Android 7.1.1. Finding the right inform
 
 a. If you haven't already done so, you will need to enable `Developer Options` on your phone by tapping 7x on the `Build Number` found in your phone under `Settings > About Phone > Build Number`. Once enabled, navigate to `Settings > Developer Options > USB debugging` and ensure this is toggled to ON.
 
-b. You will now need the to obtain the [Android Software Development Kit to run commands on your phone from your computer terminal](https://dl.google.com/android/android-sdk_r24.4.1-macosx.zip). This provides several tools you will use including [Android Development Bridge (ADB)](https://developer.android.com/studio/command-line/adb.html) and [Fastboot](https://www.androidcentral.com/android-z-what-fastboot). Once downloaded, unzip and place the files in a place where you can find them. Then navigate to the folder and launch the Android SDK manager by double clicking on `android-sdk-macosx/tools/android`. This will provide a GUI to install the tools needed as per the following screenshot.
+b. You will now need to obtain the [Android Software Development Kit to run commands on your phone from your computer terminal](https://dl.google.com/android/android-sdk_r24.4.1-macosx.zip). This provides several tools you will use including [Android Development Bridge (ADB)](https://developer.android.com/studio/command-line/adb.html) and [Fastboot](https://www.androidcentral.com/android-z-what-fastboot). Once downloaded, unzip and place the files in a place where you can find them. Then navigate to the folder and launch the Android SDK manager by double clicking on `android-sdk-macosx/tools/android`. This will provide a GUI to install the tools needed as per the following screenshot.
 
 ![](/content/images/2017/07/Screen-Shot-2017-07-05-at-14-16-57.png)
 
@@ -56,7 +56,7 @@ If you haven't already [download Android File Transfer](https://www.android.com/
 
 ### One Small Hiccup
 
-I encountered one issue in this process. SuperSu was not intalling from the TWRP menu. I stopped the above process in between Step 2 and Step 3 as I had to go to bed for work the next day. On booting my phone for the day, I let my android install apps associated with my google account. Normally a great feature when signing into a new phone or one that has been formatted. However, the phone must be freshly wiped to be able to install SuperSu. So I had to separately wipe the phone again using the following commands found on this [SO answer](https://stackoverflow.com/a/39357553/3691003):
+I encountered one issue in this process. SuperSu was not installing from the TWRP menu. I stopped the above process in between Step 2 and Step 3 as I had to go to bed for work the next day. On booting my phone for the day, I let my android install apps associated with my google account. Normally a great feature when signing into a new phone or one that has been formatted. However, the phone must be freshly wiped to be able to install SuperSu. So I had to separately wipe the phone again using the following commands found on this [SO answer](https://stackoverflow.com/a/39357553/3691003):
 
 ```bash
 $ ./adb reboot bootloader

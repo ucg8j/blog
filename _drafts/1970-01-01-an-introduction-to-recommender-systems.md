@@ -15,13 +15,13 @@ draft: true
 
 Is a technique to improve the learning of a recommender system by taking items with lower relevancy scores and bringing them up the ranking. As users generally don't frequently go beyond the first few results we won't have feedback data on these recommendations. E.g. click through rates on search results almost never go past the first page of results.
 
-> As a result, the recommendation engine mostly gets feedback on re‐ sults that it already knows about and gets very little feedback on results at the edge of current knowledge. This limitation causes the recom‐ mendation engine to stagnate at or near the initial performance level. It does not continue to learn.
+> As a result, the recommendation engine mostly gets feedback on results that it already knows about and gets very little feedback on results at the edge of current knowledge. This limitation causes the recommendation engine to stagnate at or near the initial performance level. It does not continue to learn.
 
 Source: p39 Practical Machine Learning: Innovations in Recommendation
 
 ## Anti-Flood
 
-> It is much better to avoid monotony in the user experience by pro‐ viding diversity in recommendations with no more than a few of each kind of results.
+> It is much better to avoid monotony in the user experience by providing diversity in recommendations with no more than a few of each kind of results.
 
 > ...our experience has been that it is much easier to ruin an otherwise good recommendation engine than it is to get diverse results out of the engine while maintaining overall quality... As a precaution, it is much easier to simply reorder the recommendations
 

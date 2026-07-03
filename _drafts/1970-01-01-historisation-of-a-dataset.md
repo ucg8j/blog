@@ -9,11 +9,11 @@ draft: true
 ### HDFS
 
 - *Name node* knows where things go on the *data nodes
-- *There is a *replication factor*, so if a data node goes down data is still available. So when data goes to a data node, the name node sends intructions of which data nodes the recieving data node should replicate to.
+- *There is a *replication factor*, so if a data node goes down data is still available. So when data goes to a data node, the name node sends instructions of which data nodes the receiving data node should replicate to.
 - how does the Name Node know where everything is? Firstly it has a FS image where everything is. And an edit log of changes that have been made.
 - if the name node went down you wouldn’t know where to put/get things from HDFS. So there are two name nodes an active and a backup/passive one.
 
-- on the name node, run hdfs balancer after pruning to try and recover nodes i.e. reudce them below 85% where they start to fail. Can also run this with different thresholds  and this [http://www.informit.com/articles/article.aspx?p=2755708&seqNum=5](http://www.informit.com/articles/article.aspx?p=2755708&amp;seqNum=5)
+- on the name node, run hdfs balancer after pruning to try and recover nodes i.e. reduce them below 85% where they start to fail. Can also run this with different thresholds  and this [http://www.informit.com/articles/article.aspx?p=2755708&seqNum=5](http://www.informit.com/articles/article.aspx?p=2755708&amp;seqNum=5)
 
 * you can increase bandwidth whilst (though why not before) hdfs balancer is running: ./hdfs dfsadmin -setBalancerBandwidth 104857760
 
@@ -50,7 +50,7 @@ Colleague asked about solution on filling nulls in from last known good value. [
 
 historicisation of a dataset that has a changing schema
 
-- serialise all cols into a dataset containing one col blob (e.g json) then deserialise in a third datset
+- serialise all cols into a dataset containing one col blob (e.g json) then deserialise in a third dataset
 
     def get_all_fieldnames(a_list_of_dfs):
         '''Return two sets:

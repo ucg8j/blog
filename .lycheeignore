@@ -1,0 +1,18 @@
+# Domains/URLs to skip in the external link check (one regex per line).
+# These are known-flaky or bot-hostile hosts that produce false failures.
+
+# Social / login-walled hosts that block automated requests
+^https?://(www\.)?linkedin\.com/
+^https?://(www\.)?facebook\.com/
+^https?://(www\.)?instagram\.com/
+^https?://(www\.)?twitter\.com/
+^https?://x\.com/
+^https?://t\.me/
+
+# Frequently rate-limits or 999s automated checkers
+^https?://(www\.)?reddit\.com/
+
+# Local dev-server addresses used illustratively / by embedded demos (not real links)
+^https?://0\.0\.0\.0
+^https?://localhost
+^https?://127\.0\.0\.1

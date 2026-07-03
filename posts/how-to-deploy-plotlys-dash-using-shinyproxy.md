@@ -9,7 +9,7 @@ tags: python, docker, dash.py, shinyproxy
 layout: layouts/post.njk
 ---
 
-In a [previous post](/shiny-containers-with-shinyproxy/#addingadditionalnonshinyapps) I established that I could easily deploy a 'Hello World' [flask.py](http://flask.pocoo.org/) web application using [Shinyproxy](https://www.shinyproxy.io/). Therefore, I thought it would be straightforward to deploy a [Dash](https://plot.ly/dash/) app which is built on top of [flask.py](http://flask.pocoo.org/). However, it proved to be a little more difficult than that. This blog post runs through the errors and eventual solution to deploying a Dash app on Shinyproxy.
+In a [previous post](/shiny-containers-with-shinyproxy/#adding-additional-non-shiny-apps) I established that I could easily deploy a 'Hello World' [flask.py](http://flask.pocoo.org/) web application using [Shinyproxy](https://www.shinyproxy.io/). Therefore, I thought it would be straightforward to deploy a [Dash](https://plot.ly/dash/) app which is built on top of [flask.py](http://flask.pocoo.org/). However, it proved to be a little more difficult than that. This blog post runs through the errors and eventual solution to deploying a Dash app on Shinyproxy.
 
 ### The Issue
 
@@ -62,7 +62,7 @@ Essentially it doesn't matter if you configure Dash to serve static files locall
 
 I started scouring the Shinyproxy Java code base. I found the construction of the `containerPath` in [Shinyproxy's AppController.java](https://github.com/openanalytics/shinyproxy/blob/f934f108573f1ed1d24a719d9e0815012240e11f/src/main/java/eu/openanalytics/controllers/AppController.java#L74). But since I am not a Java developer I decided that this would probably not be the best allocation of my efforts. However, what the `containerPath` does show is the construction of the path begins with `'/'`.
 
-Another approach I thought of was obtaining the container name from within the Dash application and appending that to the GET URL requests initiated Dash. Alas, Docker doesn't allow that. You can access the ContainerID but not the ContainerName. There is a [3 year old open issue regarding this](https://github.com/moby/moby/issues/8427). I then started looking for an easy way to pass into the container the containerName but I couldn't find a non-hacky way to do that either.
+Another approach I thought of was obtaining the container name from within the Dash application and appending that to the GET URL requests initiated by Dash. Alas, Docker doesn't allow that. You can access the ContainerID but not the ContainerName. There is a [3 year old open issue regarding this](https://github.com/moby/moby/issues/8427). I then started looking for an easy way to pass into the container the containerName but I couldn't find a non-hacky way to do that either.
 
 **Sidenote** - I was wondering what the logic was on the container name generation e.g. `adorin_raman`. If you look at the docker source code you will find [some go-lang code called `names-generator.go`.](https://github.com/moby/moby/blob/master/pkg/namesgenerator/names-generator.go) This contains two lists, a list of adjectives and a list of "notable scientists and hackers". The function that randomly combines these into a container name formatted as "adjective\_surname" has one funny exception:
 
@@ -117,7 +117,7 @@ class Dash(object):
     ):
 ```
 
-As Frederick said, the request should not have the `'/'` prefix in the GET request. Unsurprisingly, having `'//'` in your request paths is not good practice (see this [SO answer](https://stackoverflow.com/a/20524044/3691003) and [this one](https://stackoverflow.com/a/10161264/3691003)) as it can cause problems depending on how requests are handled. The [software layers of Shinyproxy](/shiny-containers-with-shinyproxy/#post-content) are reasonably complex with requests being handled my multiple technologies. The best solution after this trouble-shooting exercise is to use the following code in your Dash app.
+As Frederick said, the request should not have the `'/'` prefix in the GET request. Unsurprisingly, having `'//'` in your request paths is not good practice (see this [SO answer](https://stackoverflow.com/a/20524044/3691003) and [this one](https://stackoverflow.com/a/10161264/3691003)) as it can cause problems depending on how requests are handled. The [software layers of Shinyproxy](/shiny-containers-with-shinyproxy/) are reasonably complex with requests being handled by multiple technologies. The best solution after this trouble-shooting exercise is to use the following code in your Dash app.
 
 ```python
 # In order to work on shinyproxy (and perhaps other middleware)

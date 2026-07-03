@@ -64,7 +64,7 @@ Any time that you call this.setState(), this.setState() AUTOMATICALLY calls .ren
 
 That is why you can't call this.setState() from inside of the .render() method! this.setState() automatically calls .render(). If .render() calls this.setState(), then an infinite loop is created.
 
-Source: Codeadamemy
+Source: Codecademy
 
 ## constructors
 

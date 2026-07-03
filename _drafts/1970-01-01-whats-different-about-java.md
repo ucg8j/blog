@@ -6,7 +6,7 @@ date_updated: 2018-03-09T09:45:02.000Z
 draft: true
 ---
 
-Ternery -
+Ternary -
 
 Constructors -
 
